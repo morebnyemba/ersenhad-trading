@@ -1,24 +1,19 @@
 import Link from "next/link";
-import { TbArrowRight, TbArrowUpRight, TbAward, TbCalendarCheck, TbFileInvoice, TbHammer, TbRulerMeasure, TbShieldCheck, TbTruckDelivery } from "react-icons/tb";
+import { TbArrowRight, TbAward, TbCalendarCheck, TbFileInvoice, TbHammer, TbRulerMeasure, TbShieldCheck, TbTruckDelivery } from "react-icons/tb";
 import { FaWhatsapp } from "react-icons/fa";
-import { Spotlight } from "@/components/aceternity/spotlight";
+import { Hero } from "@/components/home/hero";
 import { FeaturedCarousel } from "@/components/gallery/featured-carousel";
-import { BorderBeam } from "@/components/magicui/border-beam";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Marquee } from "@/components/magicui/marquee";
 import { NumberTicker } from "@/components/magicui/number-ticker";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProductIcon } from "@/components/site/product-icon";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
-import { TypedText } from "@/components/site/typed-text";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
-import { site, whatsappLink } from "@/lib/site";
-
-const typed = ["car shade ports.", "rubber floor tiles.", "seamless gutters."];
+import { site } from "@/lib/site";
 
 const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Playgrounds", "Warehouses", "Hotels & lodges", "Retail centres"];
 
@@ -43,69 +38,14 @@ const featured = ["shade-residential-carport", "tiles-home-gym", "gutter-white-d
 export default function Home() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative isolate overflow-hidden bg-ink text-white">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageSrc("shade-residential-carport")} alt="" fetchPriority="high" className="absolute inset-0 -z-20 size-full object-cover opacity-30" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-ink via-ink/90 to-brand/35" />
-        <DotPattern className="-z-10 text-white/[0.07] [mask-image:radial-gradient(ellipse_at_top_left,black_20%,transparent_70%)]" />
-        <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="var(--color-sky)" />
-
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 pt-20 pb-24 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:pt-28 lg:pb-32">
-          <Reveal>
-            <Badge variant="outline" className="h-7 gap-2 rounded-full border-white/20 bg-white/5 px-3 text-white/80 backdrop-blur">
-              <span className="size-1.5 rounded-full bg-highlight" /> Supply &amp; installation · {site.address.city}
-            </Badge>
-            <h1 className="mt-6 font-heading text-4xl leading-[1.08] font-extrabold tracking-tight text-balance sm:text-6xl">
-              We design &amp; install premium
-              <TypedText strings={typed} className="block bg-gradient-to-r from-highlight via-aqua to-sky bg-clip-text text-transparent [&_.typed-cursor]:text-highlight" />
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 text-pretty">{site.description}</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base text-ink hover:bg-highlight/90">
-                <a href="#quote">
-                  Get a free quote <TbArrowRight />
-                </a>
-              </Button>
-              <Button asChild variant="outline" className="h-12 rounded-full border-white/25 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
-                <a href={whatsappLink(`Hi ${site.name}, I have a question.`)} target="_blank" rel="noopener">
-                  <FaWhatsapp /> WhatsApp us
-                </a>
-              </Button>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15} className="relative rounded-3xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-md">
-            <BorderBeam size={220} duration={9} />
-            <ul className="grid gap-3">
-              {products.map((p) => (
-                <li key={p.slug}>
-                  <Link href={`/products/${p.slug}/`} className="group flex items-center gap-4 rounded-2xl p-3 transition-colors hover:bg-white/[0.06]">
-                    <span className="relative size-20 shrink-0 overflow-hidden rounded-xl">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imageSrc(p.cover, "sm")} alt="" className="size-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="flex items-center gap-2 font-semibold">
-                        <ProductIcon icon={p.icon} className="size-4 text-highlight" /> {p.name}
-                      </span>
-                      <span className="mt-1 line-clamp-2 block text-sm text-white/60">{p.short}</span>
-                    </span>
-                    <TbArrowUpRight className="size-5 shrink-0 text-white/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-highlight" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
+      <Hero />
 
       {/* SECTORS MARQUEE */}
       <section aria-label="Sectors we serve" className="border-b bg-muted/40 py-5">
         <Marquee pauseOnHover className="[--duration:45s] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           {sectors.map((s) => (
             <span key={s} className="flex items-center gap-3 px-4 text-sm font-medium whitespace-nowrap text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-sky" /> {s}
+              <span className="size-1.5 rounded-full bg-magenta" /> {s}
             </span>
           ))}
         </Marquee>

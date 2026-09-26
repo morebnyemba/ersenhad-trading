@@ -37,7 +37,7 @@ export default function About() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-brand/35" />
         <DotPattern className="-z-10 text-white/[0.06]" />
         <Reveal className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
-          <p className="text-sm font-semibold tracking-[0.18em] text-highlight uppercase">About us</p>
+          <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-highlight uppercase"><span aria-hidden className="h-0.5 w-6 rounded-full bg-magenta" />About us</p>
           <h1 className="mt-4 max-w-3xl font-heading text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
             Practical solutions that protect, pave and drain.
           </h1>
