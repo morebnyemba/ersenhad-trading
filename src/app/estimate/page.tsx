@@ -27,7 +27,7 @@ export default function EstimatePage() {
         <Estimator />
       </section>
       <FaqSection faqs={estimatorFaqs} title="About the planner" className="border-t" />
-      <CtaBand title="Prefer to talk it through?" body="Message us with photos and rough sizes — we'll send a free, itemised quotation." />
+      <CtaBand title="Prefer to talk it through?" body="Message us with photos and rough sizes — we'll send a free, itemised quotation." primary={{ href: "/contact/", label: "Contact us" }} />
     </>
   );
 }

@@ -4,14 +4,17 @@ import { TbArrowRight } from "react-icons/tb";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
+import { quoteHref } from "@/lib/links";
 import { site, whatsappLink } from "@/lib/site";
 
 export function CtaBand({
   title = "Ready to start your project?",
   body = "Get a free, itemised quotation — with no obligation to go ahead.",
+  primary = { href: quoteHref(), label: "Get a free quote" },
 }: {
   title?: string;
   body?: string;
+  primary?: { href: string; label: string };
 }) {
   return (
     <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6">
@@ -26,7 +29,7 @@ export function CtaBand({
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base font-semibold text-ink hover:bg-highlight/90">
-              <Link href="/contact/#quote">Get a free quote <TbArrowRight /></Link>
+              <Link href={primary.href}>{primary.label} <TbArrowRight /></Link>
             </Button>
             <Button asChild variant="outline" className="h-12 rounded-full border-white/20 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
               <a href={whatsappLink(`Hi ${site.name}, I'd like a quote.`)} target="_blank" rel="noopener">

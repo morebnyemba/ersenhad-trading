@@ -1,30 +1,21 @@
 import Link from "next/link";
-import { TbArrowRight, TbAward, TbCalendarCheck, TbShieldCheck, TbTruckDelivery } from "react-icons/tb";
+import { TbArrowRight } from "react-icons/tb";
 import { Hero } from "@/components/home/hero";
 import { FeaturedCarousel } from "@/components/gallery/featured-carousel";
 import { Marquee } from "@/components/magicui/marquee";
 import { Button } from "@/components/ui/button";
 import { ProductIcon } from "@/components/site/product-icon";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCta } from "@/components/site/quote-cta";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { FaqSection } from "@/components/site/faq-section";
-import { PlannerTeaser } from "@/components/site/planner-teaser";
 import { Process } from "@/components/site/process";
 import { Specs } from "@/components/site/specs";
 import { generalFaqs } from "@/lib/faqs";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
-import { site } from "@/lib/site";
 
 const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Playgrounds", "Warehouses", "Hotels & lodges", "Retail centres"];
-
-const reasons = [
-  { icon: TbTruckDelivery, title: "Supply & install", body: "Measuring, fabrication and installation by one accountable team." },
-  { icon: TbShieldCheck, title: "Workmanship guarantee", body: "Every installation is backed by our written workmanship guarantee." },
-  { icon: TbAward, title: "Quality materials", body: "Galvanised steel, UV-stabilised fabrics, recycled rubber, pre-painted aluminium." },
-  { icon: TbCalendarCheck, title: "Clean, on-time finish", body: "Agreed dates, tidy sites and a proper hand-over when we're done." },
-];
 
 const featured = ["shade-residential-carport", "tiles-home-gym", "gutter-white-downpipe", "shade-sails-blue", "tiles-playground-red", "gutter-metal-roof"].map(
   (id) => gallery.find((g) => g.id === id)!,
@@ -82,7 +73,6 @@ export default function Home() {
 
       <Specs />
 
-      <PlannerTeaser />
 
       {/* FEATURED WORK */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
@@ -101,28 +91,7 @@ export default function Home() {
 
       <Process />
 
-      {/* WHY US + QUOTE */}
-      <section id="quote" className="mx-auto grid max-w-7xl scroll-mt-20 gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
-        <div>
-          <SectionHeading eyebrow={`Why ${site.name}`} title="Get a free, no-obligation quote" description="Tell us what you need and where. We'll arrange a site visit and send you a clear, itemised quotation." />
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-            {reasons.map((r, i) => (
-              <Reveal as="li" key={r.title} delay={i * 0.06} className="flex gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-                    <r.icon className="size-5" />
-                  </span>
-                  <div>
-                    <p className="font-semibold text-ink">{r.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{r.body}</p>
-                  </div>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-        <Reveal delay={0.1}>
-          <QuoteForm />
-        </Reveal>
-      </section>
+      <QuoteCta className="border-t" />
 
       <FaqSection faqs={generalFaqs} title="Questions we're often asked" />
     </>

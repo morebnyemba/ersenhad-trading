@@ -20,14 +20,14 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTi
 import { Logo } from "@/components/site/logo";
 import { ProductIcon } from "@/components/site/product-icon";
 import { imageSrc } from "@/lib/gallery";
+import { quoteHref } from "@/lib/links";
 import { products } from "@/lib/products";
 import { site, telHref, whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-const QUOTE_HREF = "/contact/#quote";
+const QUOTE_HREF = quoteHref();
 const links = [
   { href: "/gallery/", label: "Gallery" },
-  { href: "/estimate/", label: "Estimate" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
 ];
