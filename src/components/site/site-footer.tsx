@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { TbClock, TbMail, TbMapPin, TbPhone } from "react-icons/tb";
 import { Logo } from "@/components/site/logo";
 import { products } from "@/lib/products";
 import { site, telHref } from "@/lib/site";
@@ -29,10 +29,10 @@ export function SiteFooter() {
         <div>
           <p className="text-sm font-semibold tracking-wide text-white">Get in touch</p>
           <ul className="mt-4 space-y-3 text-sm">
-            <li className="flex gap-3"><Phone className="mt-0.5 size-4 shrink-0 text-highlight" /><a href={telHref} className="hover:text-white">{site.phone}</a></li>
-            <li className="flex gap-3"><Mail className="mt-0.5 size-4 shrink-0 text-highlight" /><a href={`mailto:${site.email}`} className="break-all hover:text-white">{site.email}</a></li>
-            <li className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0 text-highlight" />{site.address.street}, {site.address.city}</li>
-            <li className="flex gap-3"><Clock className="mt-0.5 size-4 shrink-0 text-highlight" />{site.hours}</li>
+            <li className="flex gap-3"><TbPhone className="mt-0.5 size-4 shrink-0 text-highlight" /><a href={telHref} className="hover:text-white">{site.phone}</a></li>
+            <li className="flex gap-3"><TbMail className="mt-0.5 size-4 shrink-0 text-highlight" /><a href={`mailto:${site.email}`} className="break-all hover:text-white">{site.email}</a></li>
+            <li className="flex gap-3"><TbMapPin className="mt-0.5 size-4 shrink-0 text-highlight" />{site.address.street}, {site.address.city}</li>
+            <li className="flex gap-3"><TbClock className="mt-0.5 size-4 shrink-0 text-highlight" />{site.hours}</li>
           </ul>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, CheckCircle2, ClipboardList, Hammer, MessageCircle, Ruler, ShieldCheck, Sparkles } from "lucide-react";
+import { TbArrowRight, TbArrowUpRight, TbAward, TbCalendarCheck, TbFileInvoice, TbHammer, TbRulerMeasure, TbShieldCheck, TbTruckDelivery } from "react-icons/tb";
+import { FaWhatsapp } from "react-icons/fa";
 import { Spotlight } from "@/components/aceternity/spotlight";
 import { FeaturedCarousel } from "@/components/gallery/featured-carousel";
 import { BorderBeam } from "@/components/magicui/border-beam";
@@ -22,17 +23,17 @@ const typed = ["car shade ports.", "rubber floor tiles.", "seamless gutters."];
 const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Playgrounds", "Warehouses", "Hotels & lodges", "Retail centres"];
 
 const steps = [
-  { icon: MessageCircle, title: "Tell us about the job", body: "Send a WhatsApp or fill in the quote form — photos of the site help." },
-  { icon: Ruler, title: "Free site visit", body: "We measure on site and advise on materials, colours and layout." },
-  { icon: ClipboardList, title: "Itemised quotation", body: "A clear, written quote with no hidden extras and a firm timeline." },
-  { icon: Hammer, title: "Install & hand-over", body: "Our own team installs, cleans up and walks you through the finished job." },
+  { icon: FaWhatsapp, title: "Tell us about the job", body: "Send a WhatsApp or fill in the quote form — photos of the site help." },
+  { icon: TbRulerMeasure, title: "Free site visit", body: "We measure on site and advise on materials, colours and layout." },
+  { icon: TbFileInvoice, title: "Itemised quotation", body: "A clear, written quote with no hidden extras and a firm timeline." },
+  { icon: TbHammer, title: "Install & hand-over", body: "Our own team installs, cleans up and walks you through the finished job." },
 ];
 
 const reasons = [
-  { icon: Hammer, title: "Supply & install", body: "Measuring, fabrication and installation by one accountable team." },
-  { icon: ShieldCheck, title: "Workmanship guarantee", body: "Every installation is backed by our written workmanship guarantee." },
-  { icon: Sparkles, title: "Quality materials", body: "Galvanised steel, UV-stabilised fabrics, recycled rubber, pre-painted aluminium." },
-  { icon: CheckCircle2, title: "Clean, on-time finish", body: "Agreed dates, tidy sites and a proper hand-over when we're done." },
+  { icon: TbTruckDelivery, title: "Supply & install", body: "Measuring, fabrication and installation by one accountable team." },
+  { icon: TbShieldCheck, title: "Workmanship guarantee", body: "Every installation is backed by our written workmanship guarantee." },
+  { icon: TbAward, title: "Quality materials", body: "Galvanised steel, UV-stabilised fabrics, recycled rubber, pre-painted aluminium." },
+  { icon: TbCalendarCheck, title: "Clean, on-time finish", body: "Agreed dates, tidy sites and a proper hand-over when we're done." },
 ];
 
 const featured = ["shade-residential-carport", "tiles-home-gym", "gutter-white-downpipe", "shade-sails-blue", "tiles-playground-red", "gutter-metal-roof"].map(
@@ -63,12 +64,12 @@ export default function Home() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base text-ink hover:bg-highlight/90">
                 <a href="#quote">
-                  Get a free quote <ArrowRight />
+                  Get a free quote <TbArrowRight />
                 </a>
               </Button>
               <Button asChild variant="outline" className="h-12 rounded-full border-white/25 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
                 <a href={whatsappLink(`Hi ${site.name}, I have a question.`)} target="_blank" rel="noopener">
-                  <MessageCircle /> WhatsApp us
+                  <FaWhatsapp /> WhatsApp us
                 </a>
               </Button>
             </div>
@@ -90,7 +91,7 @@ export default function Home() {
                       </span>
                       <span className="mt-1 line-clamp-2 block text-sm text-white/60">{p.short}</span>
                     </span>
-                    <ArrowUpRight className="size-5 shrink-0 text-white/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-highlight" />
+                    <TbArrowUpRight className="size-5 shrink-0 text-white/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-highlight" />
                   </Link>
                 </li>
               ))}
@@ -135,7 +136,7 @@ export default function Home() {
                     ))}
                   </div>
                   <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-highlight">
-                    Explore {p.name.toLowerCase()} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                    Explore {p.name.toLowerCase()} <TbArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
@@ -173,7 +174,7 @@ export default function Home() {
           <SectionHeading eyebrow="Our work" title="Recent installations" description="A look at the kind of projects we deliver across homes, schools and businesses." />
           <Button asChild variant="outline" className="h-11 shrink-0 self-start rounded-full px-5 md:self-auto">
             <Link href="/gallery/">
-              View full gallery <ArrowRight />
+              View full gallery <TbArrowRight />
             </Link>
           </Button>
         </div>

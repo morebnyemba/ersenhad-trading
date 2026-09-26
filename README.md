@@ -12,6 +12,7 @@ Next.js 16 (App Router, TypeScript) + Tailwind v4 + shadcn/ui, statically export
 | Magic UI | Marquee, NumberTicker, BorderBeam, DotPattern — `src/components/magicui` |
 | Aceternity UI | Hero Spotlight — `src/components/aceternity` |
 | typed.js | Rotating hero headline (first phrase is server-rendered for SEO/no-JS) |
+| react-icons | All icons. **Tabler (`react-icons/tb`) only**, for one consistent stroke style; brand logos (WhatsApp) from `react-icons/fa`. Service icons live in `src/components/site/product-icon.tsx` |
 
 ## Develop
 
@@ -31,6 +32,8 @@ npm run build    # static site in ./out
 | Brand colours | `src/app/globals.css` (`--primary`, `--color-highlight`, `--color-ink`) |
 
 Adding a product = one entry in `products.ts`; its page, nav link, sitemap entry and quote-form fields are generated from it.
+
+> **Adding shadcn components:** the CLI generates icon imports for its configured library. After `npx shadcn add …`, swap any generated icon imports to their `react-icons/tb` equivalents, and remove the `cn` package if the CLI re-adds it (`cn` lives in `src/lib/utils.ts`).
 
 ## Quotes
 

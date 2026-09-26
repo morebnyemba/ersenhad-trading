@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MessageCircle } from "lucide-react";
+import { TbMail } from "react-icons/tb";
+import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -82,10 +83,10 @@ export function QuoteForm({ defaultProduct = "car-shades" }: { defaultProduct?: 
       </div>
       <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row">
         <Button type="submit" className="h-12 flex-1 rounded-full bg-[#25D366] text-base text-white hover:bg-[#1fb957]">
-          <MessageCircle className="size-5" /> Send via WhatsApp
+          <FaWhatsapp className="size-5" /> Send via WhatsApp
         </Button>
         <Button type="button" variant="outline" onClick={onEmail} className="h-12 flex-1 rounded-full text-base">
-          <Mail className="size-5" /> Send via email
+          <TbMail className="size-5" /> Send via email
         </Button>
       </div>
       <p className="text-center text-xs text-muted-foreground sm:col-span-2">

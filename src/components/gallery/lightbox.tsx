@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { TbX } from "react-icons/tb";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { imageSrc, type GalleryImage } from "@/lib/gallery";
 import { productName } from "@/lib/products";
 
@@ -31,11 +32,18 @@ export function Lightbox({
   return (
     <Dialog open={index !== null} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
+        showCloseButton={false}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") api?.scrollNext();
           else if (e.key === "ArrowLeft") api?.scrollPrev();
         }}
         className="w-[calc(100%-2rem)] max-w-5xl gap-0 overflow-hidden border-none bg-ink p-0 text-white sm:max-w-5xl">
+        <DialogClose
+          aria-label="Close"
+          className="absolute top-3 right-3 z-10 grid size-10 place-items-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur transition-colors hover:bg-black/75 focus-visible:ring-3 focus-visible:ring-white/50 focus-visible:outline-none"
+        >
+          <TbX className="size-5" />
+        </DialogClose>
         {index !== null && (
           <Carousel setApi={setApi} opts={{ startIndex: index, loop: true }} className="w-full">
             <CarouselContent className="ml-0">

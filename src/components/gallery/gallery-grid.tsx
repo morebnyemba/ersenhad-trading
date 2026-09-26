@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Expand } from "lucide-react";
+import { TbArrowsMaximize } from "react-icons/tb";
 import { Lightbox } from "@/components/gallery/lightbox";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { products, type ProductSlug } from "@/lib/products";
@@ -76,7 +76,7 @@ export function GalleryGrid({ initial = "all" }: { initial?: Filter }) {
                   <p className="mt-1 font-semibold">{g.title}</p>
                 </div>
                 <span className="grid size-9 shrink-0 translate-y-2 place-items-center rounded-full bg-white/15 opacity-0 backdrop-blur transition-all group-hover:translate-y-0 group-hover:opacity-100">
-                  <Expand className="size-4" />
+                  <TbArrowsMaximize className="size-4" />
                 </span>
               </div>
             </motion.button>

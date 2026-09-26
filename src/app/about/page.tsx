@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Handshake, HardHat, Leaf, ShieldCheck, Target, Users } from "lucide-react";
+import { TbArrowRight, TbContract, TbRecycle, TbShieldCheck, TbTarget, TbTrafficCone, TbUsersGroup } from "react-icons/tb";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Button } from "@/components/ui/button";
 import { ProductIcon } from "@/components/site/product-icon";
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
 // TODO(owner): add verifiable facts only — year founded, number of projects, team size,
 // certifications, notable clients. Keep claims here true; customers do check.
 const values = [
-  { icon: Target, title: "Specialists, not generalists", body: "We focus on three product lines and know them inside out — from materials and fixings to the details that make an installation last." },
-  { icon: Users, title: "One accountable team", body: "The people who measure your site are the people who install it. No subcontractor hand-offs, no finger-pointing." },
-  { icon: Handshake, title: "Straight-talking quotes", body: "Itemised, written quotations with clear timelines. If a cheaper option will do the job, we'll tell you." },
-  { icon: ShieldCheck, title: "Workmanship guarantee", body: "We stand behind every installation with a written workmanship guarantee." },
-  { icon: HardHat, title: "Safe, tidy sites", body: "Proper equipment, careful work around your property and a clean site at hand-over." },
-  { icon: Leaf, title: "Built to last", body: "Durable, weather-appropriate materials — including rubber tiles made from recycled tyres." },
+  { icon: TbTarget, title: "Specialists, not generalists", body: "We focus on three product lines and know them inside out — from materials and fixings to the details that make an installation last." },
+  { icon: TbUsersGroup, title: "One accountable team", body: "The people who measure your site are the people who install it. No subcontractor hand-offs, no finger-pointing." },
+  { icon: TbContract, title: "Straight-talking quotes", body: "Itemised, written quotations with clear timelines. If a cheaper option will do the job, we'll tell you." },
+  { icon: TbShieldCheck, title: "Workmanship guarantee", body: "We stand behind every installation with a written workmanship guarantee." },
+  { icon: TbTrafficCone, title: "Safe, tidy sites", body: "Proper equipment, careful work around your property and a clean site at hand-over." },
+  { icon: TbRecycle, title: "Built to last", body: "Durable, weather-appropriate materials — including rubber tiles made from recycled tyres." },
 ];
 
 export default function About() {
@@ -105,7 +105,7 @@ export default function About() {
               <p className="mt-3 max-w-xl text-lg text-white/80">Book a free site visit and we&apos;ll send you a clear, itemised quotation.</p>
             </div>
             <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base text-ink hover:bg-highlight/90">
-              <Link href="/contact/#quote">Get a free quote <ArrowRight /></Link>
+              <Link href="/contact/#quote">Get a free quote <TbArrowRight /></Link>
             </Button>
           </div>
         </div>
