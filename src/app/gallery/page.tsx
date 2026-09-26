@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Suspense } from "react";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
+import { GallerySynced } from "@/components/gallery/gallery-synced";
 import { CtaBand } from "@/components/site/cta-band";
 import { FaqSection } from "@/components/site/faq-section";
 import { PageHero } from "@/components/site/page-hero";
@@ -28,19 +31,27 @@ export default function GalleryPage() {
       >
         <ul className="flex flex-wrap gap-3">
           {products.map((p) => (
-            <li key={p.slug} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1.5 pr-4 pl-1.5 text-sm backdrop-blur">
-              <span className="grid size-7 place-items-center rounded-full bg-white/10 text-highlight">
-                <ProductIcon icon={p.icon} className="size-4" />
-              </span>
-              {p.name}
-              <span className="text-white/50">{gallery.filter((g) => g.category === p.slug).length}</span>
+            <li key={p.slug}>
+              <Link
+                href={`/gallery/?service=${p.slug}#projects`}
+                className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1.5 pr-4 pl-1.5 text-sm backdrop-blur transition-colors hover:border-highlight/50 hover:bg-white/10"
+              >
+                <span className="grid size-7 place-items-center rounded-full bg-white/10 text-highlight">
+                  <ProductIcon icon={p.icon} className="size-4" />
+                </span>
+                {p.name}
+                <span className="text-white/50">{gallery.filter((g) => g.category === p.slug).length}</span>
+              </Link>
             </li>
           ))}
         </ul>
       </PageHero>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <GalleryGrid />
+      <section id="projects" className="mx-auto max-w-7xl scroll-mt-16 px-4 pt-4 pb-16 sm:px-6 lg:scroll-mt-[72px]">
+        {/* Static export: the prerendered HTML shows every project; the URL filter applies on hydration. */}
+        <Suspense fallback={<GalleryGrid sticky />}>
+          <GallerySynced />
+        </Suspense>
       </section>
 
       <FaqSection faqs={galleryFaqs} title="Planning something similar?" className="border-t" />

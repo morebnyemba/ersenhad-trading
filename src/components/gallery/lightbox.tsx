@@ -2,10 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { TbX } from "react-icons/tb";
+import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
+import { TbArrowRight, TbX } from "react-icons/tb";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { imageSrc, type GalleryImage } from "@/lib/gallery";
 import { productName } from "@/lib/products";
+import { site, whatsappLink } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export function Lightbox({
   images,
@@ -49,7 +53,7 @@ export function Lightbox({
             <CarouselContent className="ml-0">
               {images.map((g) => (
                 <CarouselItem key={g.id} className="pl-0">
-                  <div className="grid h-[70vh] place-items-center bg-black">
+                  <div className="grid h-[52vh] place-items-center bg-black sm:h-[60vh]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imageSrc(g.id)} alt={g.caption} className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
@@ -61,16 +65,55 @@ export function Lightbox({
           </Carousel>
         )}
         {img && (
-          <div className="flex items-start justify-between gap-4 p-4 sm:p-5">
-            <div>
-              <DialogTitle className="text-base font-semibold text-white">{img.title}</DialogTitle>
-              <DialogDescription className="text-sm text-white/60">
+          <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+            <div className="min-w-0">
+              <DialogTitle className="flex items-center gap-3 text-base font-semibold text-white">
+                {img.title}
+                <span className="text-sm font-normal tabular-nums text-white/45">
+                  {current + 1} / {images.length}
+                </span>
+              </DialogTitle>
+              <DialogDescription className="mt-0.5 text-sm text-white/60">
                 {productName(img.category)} · {img.caption}
               </DialogDescription>
             </div>
-            <span className="shrink-0 text-sm tabular-nums text-white/50">
-              {current + 1} / {images.length}
-            </span>
+            <div className="flex shrink-0 gap-2">
+              <a
+                href={whatsappLink(`Hi ${site.name}, I saw "${img.title}" (${productName(img.category)}) on your website and I'd like a quote for something similar.`)}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-[#25D366] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#1fb957]"
+              >
+                <FaWhatsapp className="size-4" /> Ask about this
+              </a>
+              <Link
+                href={`/products/${img.category}/`}
+                className="inline-flex h-10 items-center gap-1.5 rounded-full border border-white/20 px-4 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              >
+                {productName(img.category)} <TbArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+        )}
+        {images.length > 1 && (
+          <div className="flex gap-2 overflow-x-auto border-t border-white/10 px-4 py-3 [scrollbar-width:thin] sm:px-5" aria-label="Thumbnails">
+            {images.map((g, i) => (
+              <button
+                key={g.id}
+                ref={i === current ? (el) => el?.scrollIntoView({ block: "nearest", inline: "nearest" }) : undefined}
+                type="button"
+                onClick={() => api?.scrollTo(i)}
+                aria-label={`Show ${g.title}`}
+                aria-current={i === current}
+                className={cn(
+                  "relative h-14 w-20 shrink-0 overflow-hidden rounded-lg transition-all",
+                  i === current ? "ring-2 ring-highlight ring-offset-2 ring-offset-ink" : "opacity-50 hover:opacity-100",
+                )}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={imageSrc(g.id, "sm")} alt="" loading="lazy" className="size-full object-cover" />
+              </button>
+            ))}
           </div>
         )}
       </DialogContent>

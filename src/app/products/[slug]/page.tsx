@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { TbArrowRight, TbCheck } from "react-icons/tb";
+import { TbArrowRight, TbCalculator, TbCheck } from "react-icons/tb";
 import { FaWhatsapp } from "react-icons/fa";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
 import { DotPattern } from "@/components/magicui/dot-pattern";
@@ -54,6 +54,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <a href={whatsappLink(`Hi ${site.name}, I'm interested in ${p.name.toLowerCase()}.`)} target="_blank" rel="noopener">
               <FaWhatsapp className="text-[#25D366]" /> WhatsApp us
             </a>
+          </Button>
+          <Button asChild variant="ghost" className="h-12 rounded-full px-5 text-base text-white/80 hover:bg-white/10 hover:text-white">
+            <Link href={`/estimate/?service=${p.slug}`}>
+              <TbCalculator /> Estimate your project
+            </Link>
           </Button>
         </div>
         <dl className="mt-10 flex gap-10 border-t border-white/10 pt-8">
@@ -119,6 +124,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <SectionHeading eyebrow="Gallery" title={`${p.name} projects`} />
           <div className="mt-10">
             <GalleryGrid initial={p.slug} />
+          </div>
+          <div className="mt-6 text-center">
+            <Button asChild variant="outline" className="h-11 rounded-full px-6">
+              <Link href={`/gallery/?service=${p.slug}#projects`}>
+                Open in full gallery <TbArrowRight />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

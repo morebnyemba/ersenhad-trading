@@ -9,6 +9,7 @@ import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { FaqSection } from "@/components/site/faq-section";
+import { PlannerTeaser } from "@/components/site/planner-teaser";
 import { Process } from "@/components/site/process";
 import { Specs } from "@/components/site/specs";
 import { generalFaqs } from "@/lib/faqs";
@@ -80,6 +81,8 @@ export default function Home() {
       </section>
 
       <Specs />
+
+      <PlannerTeaser />
 
       {/* FEATURED WORK */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">

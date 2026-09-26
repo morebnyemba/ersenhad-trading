@@ -1,7 +1,12 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { site, whatsappLink } from "@/lib/site";
 
 // Floating WhatsApp button — mobile only, where most enquiries start.
 export function WhatsAppFab() {
+  // The planner has its own mobile bar with a WhatsApp action; avoid stacking two.
+  if (usePathname().startsWith("/estimate")) return null;
   return (
     <a
       href={whatsappLink(`Hi ${site.name}, I'd like a quote.`)}

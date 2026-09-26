@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 const QUOTE_HREF = "/contact/#quote";
 const links = [
   { href: "/gallery/", label: "Gallery" },
+  { href: "/estimate/", label: "Estimate" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
 ];

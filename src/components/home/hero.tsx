@@ -76,7 +76,7 @@ export function Hero() {
         </Reveal>
 
         {/* ── Desktop only: photo carousel. Hidden (and never downloaded) on mobile. ── */}
-        <div className="hidden lg:block lg:pr-6 lg:pl-8">
+        <div className="hidden lg:block lg:pl-6">
           <HeroCarousel />
         </div>
       </div>
