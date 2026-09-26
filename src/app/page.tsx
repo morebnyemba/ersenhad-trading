@@ -1,28 +1,22 @@
 import Link from "next/link";
-import { TbArrowRight, TbAward, TbCalendarCheck, TbFileInvoice, TbHammer, TbRulerMeasure, TbShieldCheck, TbTruckDelivery } from "react-icons/tb";
-import { FaWhatsapp } from "react-icons/fa";
+import { TbArrowRight, TbAward, TbCalendarCheck, TbShieldCheck, TbTruckDelivery } from "react-icons/tb";
 import { Hero } from "@/components/home/hero";
 import { FeaturedCarousel } from "@/components/gallery/featured-carousel";
-import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Marquee } from "@/components/magicui/marquee";
-import { NumberTicker } from "@/components/magicui/number-ticker";
 import { Button } from "@/components/ui/button";
 import { ProductIcon } from "@/components/site/product-icon";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
+import { FaqSection } from "@/components/site/faq-section";
+import { Process } from "@/components/site/process";
+import { Specs } from "@/components/site/specs";
+import { generalFaqs } from "@/lib/faqs";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
 import { site } from "@/lib/site";
 
 const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Playgrounds", "Warehouses", "Hotels & lodges", "Retail centres"];
-
-const steps = [
-  { icon: FaWhatsapp, title: "Tell us about the job", body: "Send a WhatsApp or fill in the quote form — photos of the site help." },
-  { icon: TbRulerMeasure, title: "Free site visit", body: "We measure on site and advise on materials, colours and layout." },
-  { icon: TbFileInvoice, title: "Itemised quotation", body: "A clear, written quote with no hidden extras and a firm timeline." },
-  { icon: TbHammer, title: "Install & hand-over", body: "Our own team installs, cleans up and walks you through the finished job." },
-];
 
 const reasons = [
   { icon: TbTruckDelivery, title: "Supply & install", body: "Measuring, fabrication and installation by one accountable team." },
@@ -85,28 +79,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NUMBERS */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-brand-dark via-brand to-sky text-primary-foreground">
-        <DotPattern className="text-white/10" />
-        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:grid-cols-3 sm:px-6">
-          {products.map((p) => (
-            <Reveal key={p.slug} className="border-white/20 sm:border-l sm:pl-8 first:sm:border-l-0 first:sm:pl-0">
-              <p className="text-sm font-medium text-white/70">{p.name}</p>
-              <div className="mt-3 flex gap-8">
-                {p.highlights.map((h) => (
-                  <div key={h.label}>
-                    <p className="font-heading text-4xl font-extrabold">
-                      <NumberTicker value={h.value} />
-                      {h.suffix}
-                    </p>
-                    <p className="mt-1 text-sm text-white/70">{h.label}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <Specs />
 
       {/* FEATURED WORK */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
@@ -123,25 +96,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* PROCESS */}
-      <section className="relative overflow-hidden bg-ink py-24 text-white">
-        <DotPattern className="text-white/[0.05]" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionHeading inverted align="center" eyebrow="How it works" title="From enquiry to installed in four steps" />
-          <ol className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <Reveal as="li" key={s.title} delay={i * 0.1} className="relative h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
-                  <span className="font-heading text-6xl font-extrabold text-white/[0.06]">0{i + 1}</span>
-                  <span className="absolute top-7 right-7 grid size-11 place-items-center rounded-xl bg-brand/25 text-highlight ring-1 ring-brand/50">
-                    <s.icon className="size-5" />
-                  </span>
-                  <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
-                  <p className="mt-2 text-sm text-white/60">{s.body}</p>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <Process />
 
       {/* WHY US + QUOTE */}
       <section id="quote" className="mx-auto grid max-w-7xl scroll-mt-20 gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
@@ -165,6 +120,8 @@ export default function Home() {
           <QuoteForm />
         </Reveal>
       </section>
+
+      <FaqSection faqs={generalFaqs} title="Questions we're often asked" />
     </>
   );
 }

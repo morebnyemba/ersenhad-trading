@@ -90,7 +90,7 @@ export function QuoteForm({ defaultProduct = "car-shades" }: { defaultProduct?: 
         </Button>
       </div>
       <p className="text-center text-xs text-muted-foreground sm:col-span-2">
-        Free site visit and itemised quotation. We usually reply within one business day.
+        Free, no-obligation quotation. We usually reply within one business day.
       </p>
     </form>
   );

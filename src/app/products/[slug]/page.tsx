@@ -3,13 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TbArrowRight, TbCheck } from "react-icons/tb";
 import { FaWhatsapp } from "react-icons/fa";
-import { Spotlight } from "@/components/aceternity/spotlight";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NumberTicker } from "@/components/magicui/number-ticker";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ProductIcon } from "@/components/site/product-icon";
+import { FaqSection } from "@/components/site/faq-section";
+import { PageHero } from "@/components/site/page-hero";
+import { Process } from "@/components/site/process";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
@@ -35,57 +35,39 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!p) notFound();
   const others = products.filter((o) => o.slug !== p.slug);
 
-  const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: p.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-  };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      {/* HERO */}
-      <section className="relative isolate overflow-hidden bg-ink text-white">
-        {/* Decorative backdrop as a CSS background: an <img> here gets preloaded by React
-            whenever this route is prefetched, i.e. on every page that links to it. */}
-        <div aria-hidden className="absolute inset-0 -z-20 bg-cover bg-center opacity-35" style={{ backgroundImage: `url(${imageSrc(p.cover)})` }} />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
-        <Spotlight className="-top-40 left-0 md:-top-20 md:left-40" fill="var(--color-sky)" />
-        <div className="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:pt-24 lg:pb-28">
-          <Reveal className="max-w-2xl">
-            <nav aria-label="Breadcrumb" className="text-sm text-white/50">
-              <Link href="/" className="hover:text-white">Home</Link> <span className="mx-1.5">/</span> <span className="text-white/80">{p.name}</span>
-            </nav>
-            <span className="mt-8 grid size-14 place-items-center rounded-2xl bg-white/10 text-highlight ring-1 ring-white/20 backdrop-blur">
-              <ProductIcon icon={p.icon} className="size-7" />
-            </span>
-            <h1 className="mt-6 font-heading text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">{p.name}</h1>
-            <p className="mt-6 text-lg text-white/75 text-pretty">{p.intro}</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base text-ink hover:bg-highlight/90">
-                <a href="#quote">Get a free quote <TbArrowRight /></a>
-              </Button>
-              <Button asChild variant="outline" className="h-12 rounded-full border-white/25 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
-                <a href={whatsappLink(`Hi ${site.name}, I'm interested in ${p.name.toLowerCase()}.`)} target="_blank" rel="noopener">
-                  <FaWhatsapp /> WhatsApp us
-                </a>
-              </Button>
-            </div>
-            <dl className="mt-12 flex gap-10 border-t border-white/10 pt-8">
-              {p.highlights.map((h) => (
-                <div key={h.label}>
-                  <dt className="text-sm text-white/60">{h.label}</dt>
-                  <dd className="mt-1 font-heading text-3xl font-extrabold">
-                    <NumberTicker value={h.value} />
-                    {h.suffix}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
+      <PageHero
+        eyebrow="Supply & installation"
+        title={p.name}
+        description={p.intro}
+        image={imageSrc(p.cover)}
+        crumbs={[{ href: "/", label: "Home" }, { href: "/#services", label: "Services" }, { label: p.name }]}
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base font-semibold text-ink hover:bg-highlight/90">
+            <a href="#quote">Get a free quote <TbArrowRight /></a>
+          </Button>
+          <Button asChild variant="outline" className="h-12 rounded-full border-white/20 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
+            <a href={whatsappLink(`Hi ${site.name}, I'm interested in ${p.name.toLowerCase()}.`)} target="_blank" rel="noopener">
+              <FaWhatsapp className="text-[#25D366]" /> WhatsApp us
+            </a>
+          </Button>
         </div>
-      </section>
+        <dl className="mt-10 flex gap-10 border-t border-white/10 pt-8">
+          {p.highlights.map((h) => (
+            <div key={h.label} className="flex flex-col-reverse">
+              <dt className="mt-1 text-sm text-white/60">{h.label}</dt>
+              <dd className="font-heading text-3xl font-extrabold">
+                <NumberTicker value={h.value} />
+                {h.suffix}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </PageHero>
 
       {/* FEATURES */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
@@ -124,34 +106,44 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      <Process
+        tone="light"
+        eyebrow="How it works"
+        title={`How your ${p.name.toLowerCase()} project runs`}
+        description="The same five steps on every job — so you know exactly what happens, and when."
+      />
+
       {/* GALLERY */}
-      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Gallery" title={`${p.name} projects`} />
-        <div className="mt-10">
-          <GalleryGrid initial={p.slug} />
+      <section className="bg-muted/40">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+          <SectionHeading eyebrow="Gallery" title={`${p.name} projects`} />
+          <div className="mt-10">
+            <GalleryGrid initial={p.slug} />
+          </div>
         </div>
       </section>
 
-      {/* FAQ + QUOTE */}
-      <section id="quote" className="scroll-mt-20 border-t bg-muted/30">
-        <div className="mx-auto grid max-w-7xl gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <SectionHeading eyebrow="FAQ" title="Questions we're often asked" />
-            <Accordion type="single" collapsible className="mt-8">
-              {p.faqs.map((f, i) => (
-                <AccordionItem key={f.q} value={`faq-${i}`}>
-                  <AccordionTrigger className="py-5 text-base">{f.q}</AccordionTrigger>
-                  <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-          <Reveal delay={0.1}>
-            <h2 className="mb-6 font-heading text-2xl font-bold text-ink">Request a {p.name.toLowerCase()} quote</h2>
-            <QuoteForm defaultProduct={p.slug} />
-          </Reveal>
+      {/* QUOTE */}
+      <section id="quote" className="mx-auto grid max-w-7xl scroll-mt-20 gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.3fr]">
+        <div>
+          <SectionHeading eyebrow="Free quote" title={`Request a ${p.name.toLowerCase()} quote`} description="Tell us a little about the job and we'll send you a free, written, itemised quotation." />
+          <ul className="mt-8 grid gap-4">
+            {["Free, no-obligation quotation", "Accurate measurement before we quote", "Advice on materials, colours and layout", "Workmanship guarantee on installation"].map((t) => (
+              <Reveal as="li" key={t} className="flex items-center gap-3">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                  <TbCheck className="size-4" />
+                </span>
+                <span className="text-ink">{t}</span>
+              </Reveal>
+            ))}
+          </ul>
         </div>
+        <Reveal delay={0.1}>
+          <QuoteForm defaultProduct={p.slug} />
+        </Reveal>
       </section>
+
+      <FaqSection faqs={p.faqs} title={`${p.name}: your questions answered`} className="border-t" />
 
       {/* CROSS-SELL */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">

@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { TbArrowRight, TbContract, TbRecycle, TbShieldCheck, TbTarget, TbTrafficCone, TbUsersGroup } from "react-icons/tb";
+import { TbContract, TbRecycle, TbShieldCheck, TbTarget, TbTrafficCone, TbUsersGroup } from "react-icons/tb";
 import { DotPattern } from "@/components/magicui/dot-pattern";
-import { Button } from "@/components/ui/button";
 import { ProductIcon } from "@/components/site/product-icon";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
+import { CtaBand } from "@/components/site/cta-band";
+import { FaqSection } from "@/components/site/faq-section";
+import { PageHero } from "@/components/site/page-hero";
+import { Process } from "@/components/site/process";
+import { aboutFaqs } from "@/lib/faqs";
 import { imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
 import { pageMeta } from "@/lib/seo";
@@ -31,22 +35,13 @@ const values = [
 export default function About() {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-ink text-white">
-        {/* Decorative backdrop as a CSS background so route prefetches don't preload it. */}
-        <div aria-hidden className="absolute inset-0 -z-20 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(${imageSrc("shade-4x4-bay")})` }} />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-brand/35" />
-        <DotPattern className="-z-10 text-white/[0.06]" />
-        <Reveal className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
-          <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-highlight uppercase"><span aria-hidden className="h-0.5 w-6 rounded-full bg-magenta" />About us</p>
-          <h1 className="mt-4 max-w-3xl font-heading text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
-            Practical solutions that protect, pave and drain.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-white/75 text-pretty">
-            {site.name} supplies and installs car shade ports, interlocking rubber floor tiles and seamless gutters for homes,
-            businesses, schools and institutions in {site.address.city} and beyond.
-          </p>
-        </Reveal>
-      </section>
+      <PageHero
+        eyebrow="About us"
+        title="Practical solutions that protect, pave and drain."
+        description={`${site.name} supplies and installs car shade ports, interlocking rubber floor tiles and seamless gutters for homes, businesses, schools and institutions in ${site.address.city} and beyond.`}
+        image={imageSrc("shade-4x4-bay")}
+        crumbs={[{ href: "/", label: "Home" }, { label: "About" }]}
+      />
 
       <section className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 lg:grid-cols-2">
         <div>
@@ -97,20 +92,11 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-dark via-brand to-sky p-10 text-white sm:p-14">
-          <DotPattern className="text-white/10" />
-          <div className="relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-            <div>
-              <h2 className="font-heading text-3xl font-bold sm:text-4xl">Have a project in mind?</h2>
-              <p className="mt-3 max-w-xl text-lg text-white/80">Book a free site visit and we&apos;ll send you a clear, itemised quotation.</p>
-            </div>
-            <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base text-ink hover:bg-highlight/90">
-              <Link href="/contact/#quote">Get a free quote <TbArrowRight /></Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <Process />
+
+      <FaqSection faqs={aboutFaqs} title="About working with us" />
+
+      <CtaBand title="Have a project in mind?" body="Get a free, itemised quotation — with no obligation to go ahead." />
     </>
   );
 }

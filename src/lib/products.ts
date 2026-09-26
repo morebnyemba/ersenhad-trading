@@ -37,6 +37,8 @@ export const products: Product[] = [
       { q: "How long does installation take?", a: "Most residential carports are installed in 1–2 days once the frame is fabricated." },
       { q: "Shade net or PVC?", a: "Shade net is cooler and lets rain through; PVC is fully waterproof. We'll advise based on your site." },
       { q: "Do you need to dig foundations?", a: "Yes — columns are set in concrete footings sized for the wind load of each design." },
+      { q: "Can you build shade for commercial car parks?", a: "Yes. We build everything from single-bay carports to multi-bay commercial parking structures for offices, retail, schools and dealerships." },
+      { q: "What colours are available?", a: "Shade net and PVC membranes come in a range of colours, and frames are powder-coated — we'll match your property and can show you samples before you decide." },
     ],
     quoteFields: [
       { label: "Number of vehicles", placeholder: "e.g. 2" },
@@ -64,6 +66,8 @@ export const products: Product[] = [
       { q: "What base do the tiles need?", a: "A level concrete, paving or compacted gravel base. We can prepare the base as part of the job." },
       { q: "Which thickness should I choose?", a: "20–25mm suits gyms and walkways; 30–40mm is recommended under play equipment for fall protection." },
       { q: "Are they suitable outdoors?", a: "Yes — they are UV and weather resistant and allow water to drain through the joints." },
+      { q: "Can I buy the tiles without installation?", a: "Yes. Rubber tiles are available supply-only, with edge ramps and corner pieces, or as a full supply-and-install job." },
+      { q: "How do I clean and maintain them?", a: "Sweep regularly and hose down when needed; a mild detergent handles stubborn marks. Damaged tiles can be unclipped and replaced individually." },
     ],
     quoteFields: [
       { label: "Area (m²)", placeholder: "e.g. 60" },
@@ -91,6 +95,8 @@ export const products: Product[] = [
       { q: "How are seamless gutters priced?", a: "Per metre, including downpipes and fittings. Send us your roofline length or plans for a quote." },
       { q: "Can you replace my existing gutters?", a: "Yes — we remove old gutters and fascia fixings before installing the new system." },
       { q: "How long does installation take?", a: "A typical house is completed in a single day." },
+      { q: "Do you fit leaf guards?", a: "Yes. Leaf guards can be added to keep gutters clear, which is especially useful near trees." },
+      { q: "Can the gutters feed a rainwater tank?", a: "Yes. We can route downpipes to rainwater tanks as part of the installation." },
     ],
     quoteFields: [
       { label: "Approx. gutter length (m)", placeholder: "e.g. 45" },
