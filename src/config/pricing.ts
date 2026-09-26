@@ -18,7 +18,7 @@ export type Pricing = {
   status: PricingStatus;
   currency: string;
   spread: number;
-  carShades: { perM2: Record<"net" | "pvc", Rate> };
+  carShades: { perM2: Record<"standard" | "cantilever", Record<"chromadek" | "net" | "pvc", Rate>> };
   rubberTiles: { perM2: Record<15 | 20 | 25 | 30 | 40, Rate>; perRamp: Rate; perCorner: Rate };
   gutters: { perMetre: Record<125 | 150, Rate>; downpipePerMetre: Rate; perCorner: Rate; perEndCap: Rate };
 };
@@ -30,8 +30,12 @@ export const pricing: Pricing = {
   spread: 0.15,
 
   carShades: {
-    /** per m² of covered area, including frame, posts and footings */
-    perM2: { net: 35, pvc: 55 },
+    /** per m² of covered area by structure style × roof type, incl. frame, posts and footings.
+     *  Cantilever frames use heavier steel, so they're priced separately. */
+    perM2: {
+      standard: { chromadek: 48, net: 35, pvc: 55 },
+      cantilever: { chromadek: 56, net: 42, pvc: 64 },
+    },
   },
 
   rubberTiles: {

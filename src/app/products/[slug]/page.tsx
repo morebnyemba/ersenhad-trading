@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { TbArrowRight, TbCalculator, TbCheck } from "react-icons/tb";
+import { TbArrowRight, TbCheck } from "react-icons/tb";
 import { FaWhatsapp } from "react-icons/fa";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
 import { DotPattern } from "@/components/magicui/dot-pattern";
@@ -10,10 +10,11 @@ import { Button } from "@/components/ui/button";
 import { FaqSection } from "@/components/site/faq-section";
 import { PageHero } from "@/components/site/page-hero";
 import { Process } from "@/components/site/process";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCta } from "@/components/site/quote-cta";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { imageSrc } from "@/lib/gallery";
+import { quoteHref } from "@/lib/links";
 import { getProduct, products } from "@/lib/products";
 import { pageMeta } from "@/lib/seo";
 import { site, whatsappLink } from "@/lib/site";
@@ -48,17 +49,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base font-semibold text-ink hover:bg-highlight/90">
-            <a href="#quote">Get a free quote <TbArrowRight /></a>
+            <Link href={quoteHref(p.slug)}>Get a free quote <TbArrowRight /></Link>
           </Button>
           <Button asChild variant="outline" className="h-12 rounded-full border-white/20 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
             <a href={whatsappLink(`Hi ${site.name}, I'm interested in ${p.name.toLowerCase()}.`)} target="_blank" rel="noopener">
               <FaWhatsapp className="text-[#25D366]" /> WhatsApp us
             </a>
-          </Button>
-          <Button asChild variant="ghost" className="h-12 rounded-full px-5 text-base text-white/80 hover:bg-white/10 hover:text-white">
-            <Link href={`/estimate/?service=${p.slug}`}>
-              <TbCalculator /> Estimate your project
-            </Link>
           </Button>
         </div>
         <dl className="mt-10 flex gap-10 border-t border-white/10 pt-8">
@@ -135,25 +131,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* QUOTE */}
-      <section id="quote" className="mx-auto grid max-w-7xl scroll-mt-20 gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.3fr]">
-        <div>
-          <SectionHeading eyebrow="Free quote" title={`Request a ${p.name.toLowerCase()} quote`} description="Tell us a little about the job and we'll send you a free, written, itemised quotation." />
-          <ul className="mt-8 grid gap-4">
-            {["Free, no-obligation quotation", "Accurate measurement before we quote", "Advice on materials, colours and layout", "Workmanship guarantee on installation"].map((t) => (
-              <Reveal as="li" key={t} className="flex items-center gap-3">
-                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-                  <TbCheck className="size-4" />
-                </span>
-                <span className="text-ink">{t}</span>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-        <Reveal delay={0.1}>
-          <QuoteForm defaultProduct={p.slug} />
-        </Reveal>
-      </section>
+      <QuoteCta service={p.slug} className="border-t" />
 
       <FaqSection faqs={p.faqs} title={`${p.name}: your questions answered`} className="border-t" />
 

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FaqSection } from "@/components/site/faq-section";
 import { PageHero } from "@/components/site/page-hero";
 import { Process } from "@/components/site/process";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCta } from "@/components/site/quote-cta";
 import { Reveal } from "@/components/site/reveal";
 import { contactFaqs } from "@/lib/faqs";
 import { imageSrc } from "@/lib/gallery";
@@ -49,9 +49,8 @@ export default function Contact() {
         </div>
       </PageHero>
 
-      <section className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.4fr]">
-        <div className="grid content-start gap-4">
-          <ul className="grid gap-4">
+      <section className="mx-auto grid max-w-7xl gap-4 px-4 py-20 sm:px-6 lg:grid-cols-[1.6fr_1fr]">
+          <ul className="grid gap-4 sm:grid-cols-2">
             {cards.map((c, i) => (
               <Reveal as="li" key={c.label} delay={i * 0.06}>
                 <a
@@ -83,11 +82,9 @@ export default function Contact() {
               {site.address.city} and surrounding areas — ask us about projects further afield.
             </p>
           </Reveal>
-        </div>
-        <Reveal id="quote" delay={0.1} className="scroll-mt-28">
-          <QuoteForm />
-        </Reveal>
       </section>
+
+      <QuoteCta className="border-t" />
 
       <Process
         tone="light"

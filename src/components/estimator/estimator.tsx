@@ -15,6 +15,7 @@ import {
   fallHeights,
   formatPrice,
   roofTypes,
+  shadeCovers,
   tileUses,
   vehicleBays,
   type FallHeight,
@@ -52,7 +53,7 @@ export function Estimator() {
   const [vehicles, setVehicles] = useState(2);
   const [vType, setVType] = useState<VehicleType>("sedan");
   const [style, setStyle] = useState<ShadeStyle>("standard");
-  const [cover, setCover] = useState<ShadeCover>("net");
+  const [cover, setCover] = useState<ShadeCover>("chromadek");
   // tiles
   const [tLen, setTLen] = useState(6);
   const [tWid, setTWid] = useState(4);
@@ -75,15 +76,15 @@ export function Estimator() {
         { label: "Overall size", value: `${r.width} m × ${r.depth} m` },
         { label: "Covered area", value: fmt(r.area, " m²"), strong: true },
         { label: "Support posts", value: `≈ ${r.posts}` },
-        { label: "Cover", value: cover === "net" ? "Shade net (80–95% UV block)" : "PVC membrane (waterproof)" },
+        { label: "Roof", value: shadeCovers[cover].detail },
       ];
       const summary = [
         `Vehicles: ${r.vehicles} × ${vehicleBays[vType].label}`,
         `Style: ${style === "standard" ? "Standard (posts both sides)" : "Cantilever (posts one side)"}`,
-        `Cover: ${cover === "net" ? "Shade net" : "PVC membrane"}`,
+        `Roof: ${shadeCovers[cover].label}`,
         `Est. size: ${r.width} m × ${r.depth} m (${r.area} m²), ${r.layout.toLowerCase()}, ≈${r.posts} posts`,
       ];
-      return { rows, summary, key: { label: "Covered area", value: fmt(r.area, " m²") }, price: r.price, visual: <CarportVisual rows={r.rows} baysPerRow={r.baysPerRow} style={style} />, note: null as string | null };
+      return { rows, summary, key: { label: "Covered area", value: fmt(r.area, " m²") }, price: r.price, visual: <CarportVisual rows={r.rows} baysPerRow={r.baysPerRow} style={style} cover={cover} />, note: null as string | null };
     }
     if (service === "rubber-tiles") {
       const r = estimateTiles({ length: tLen, width: tWid, use, fall, edges });
@@ -157,11 +158,11 @@ export function Estimator() {
                 <Field label="Vehicle type" hint="Sets the bay size">
                   <Choice name="vehicle-type" columns={3} value={vType} onChange={setVType} options={(Object.keys(vehicleBays) as VehicleType[]).map((k) => ({ value: k, label: vehicleBays[k].label, hint: vehicleBays[k].hint }))} />
                 </Field>
-                <Field label="Structure style">
-                  <Choice name="shade-style" value={style} onChange={setStyle} options={[{ value: "standard", label: "Standard", hint: "Posts on both sides" }, { value: "cantilever", label: "Cantilever", hint: "Posts on one side — easier parking" }]} />
+                <Field label="Roof type" hint="Three options — any can be standard or cantilever">
+                  <Choice name="shade-cover" columns={3} value={cover} onChange={setCover} options={(Object.keys(shadeCovers) as ShadeCover[]).map((k) => ({ value: k, label: shadeCovers[k].label, hint: shadeCovers[k].hint }))} />
                 </Field>
-                <Field label="Cover">
-                  <Choice name="shade-cover" value={cover} onChange={setCover} options={[{ value: "net", label: "Shade net", hint: "Cooler, lets rain through" }, { value: "pvc", label: "PVC membrane", hint: "Fully waterproof" }]} />
+                <Field label="Structure style" hint="Works with any roof type">
+                  <Choice name="shade-style" value={style} onChange={setStyle} options={[{ value: "standard", label: "Standard", hint: "Posts on both sides" }, { value: "cantilever", label: "Cantilever", hint: "Posts on one side — easier parking" }]} />
                 </Field>
               </>
             )}

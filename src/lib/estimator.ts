@@ -31,7 +31,13 @@ export const formatPrice = (p: PriceEstimate, pricing: Pricing = defaultPricing)
 
 export type VehicleType = "sedan" | "suv" | "large";
 export type ShadeStyle = "standard" | "cantilever";
-export type ShadeCover = "net" | "pvc";
+export type ShadeCover = "chromadek" | "net" | "pvc";
+
+export const shadeCovers: Record<ShadeCover, { label: string; hint: string; detail: string }> = {
+  chromadek: { label: "Chromadek", hint: "Steel roof sheeting — waterproof & hail-proof", detail: "Chromadek steel sheeting (waterproof)" },
+  net: { label: "Shade net", hint: "Cooler, lets rain through", detail: "Shade net (80–95% UV block)" },
+  pvc: { label: "PVC membrane", hint: "Waterproof, smooth fabric finish", detail: "PVC membrane (waterproof)" },
+};
 
 export const vehicleBays: Record<VehicleType, { label: string; hint: string; width: number; depth: number }> = {
   sedan: { label: "Sedan / hatchback", hint: "Most family cars", width: 2.7, depth: 5.0 },
@@ -57,7 +63,7 @@ export function estimateCarShade(i: { vehicles: number; type: VehicleType; style
     rows === 1
       ? `Single row of ${baysPerRow} bay${baysPerRow > 1 ? "s" : ""}`
       : `Two facing rows of ${baysPerRow} bays${i.style === "cantilever" ? " (double cantilever)" : ""}`;
-  const price = priceRange(cost([pricing.carShades.perM2[i.cover], area]), pricing);
+  const price = priceRange(cost([pricing.carShades.perM2[i.style][i.cover], area]), pricing);
   return { vehicles, rows, baysPerRow, width, depth, area, posts, layout, bay, price };
 }
 

@@ -10,7 +10,7 @@ type Step = { icon: IconType; title: string; body: string };
 
 // Only commitments the site already makes elsewhere — no invented timelines.
 export const processSteps: Step[] = [
-  { icon: FaWhatsapp, title: "Enquire", body: "WhatsApp, call or use the quote form. Photos of your site help us advise faster." },
+  { icon: FaWhatsapp, title: "Enquire", body: "Use our online planner, WhatsApp or call. Photos of your site help us advise faster." },
   { icon: TbRulerMeasure, title: "Site assessment", body: "From your photos or a site visit by arrangement, we measure, check access and advise on materials and layout." },
   { icon: TbFileInvoice, title: "Free quotation", body: "A free, written, itemised quote listing materials, costs and timeline — no obligation, no hidden extras." },
   { icon: TbHammer, title: "Supply & install", body: "Our own team supplies and installs, keeping your property safe and tidy." },

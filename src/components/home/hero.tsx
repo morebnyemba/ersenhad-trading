@@ -8,6 +8,7 @@ import { HeroCarousel } from "@/components/home/hero-carousel";
 import { ProductIcon } from "@/components/site/product-icon";
 import { Reveal } from "@/components/site/reveal";
 import { TypedText } from "@/components/site/typed-text";
+import { quoteHref } from "@/lib/links";
 import { products } from "@/lib/products";
 import { site, whatsappLink } from "@/lib/site";
 
@@ -51,7 +52,7 @@ export function Hero() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild className="group h-12 rounded-full bg-highlight px-7 text-base font-semibold text-ink shadow-lg shadow-highlight/20 hover:bg-highlight/90">
-              <Link href="/contact/#quote">
+              <Link href={quoteHref()}>
                 Get a free quote <TbArrowRight className="transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Button>
