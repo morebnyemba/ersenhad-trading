@@ -118,7 +118,7 @@ export function SiteFooter() {
               <TbClock className="mt-0.5 size-4 shrink-0 text-highlight" /> {site.hours}
             </p>
             <p className="flex items-start gap-2.5">
-              <TbMapPin className="mt-0.5 size-4 shrink-0 text-highlight" /> Serving {site.address.city} and surrounds
+              <TbMapPin className="mt-0.5 size-4 shrink-0 text-highlight" /> Serving clients across {site.address.country}
             </p>
           </div>
         </div>

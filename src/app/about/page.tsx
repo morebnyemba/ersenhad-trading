@@ -17,7 +17,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "About us",
-  description: `${site.name} is a ${site.address.city}-based supplier and installer of car shades, interlocking rubber tiles and seamless gutters.`,
+  description: `${site.name} is a ${site.address.country}-based supplier and installer of car shades, interlocking rubber tiles and seamless gutters.`,
   path: "/about/",
   image: "about",
 });
@@ -39,7 +39,7 @@ export default function About() {
       <PageHero
         eyebrow="About us"
         title="Practical solutions that protect, pave and drain."
-        description={`${site.name} supplies and installs car shade ports, interlocking rubber floor tiles and seamless gutters for homes, businesses, schools and institutions in ${site.address.city} and beyond.`}
+        description={`${site.name} supplies and installs car shade ports, interlocking rubber floor tiles and seamless gutters for homes, businesses, schools and institutions across ${site.address.country}.`}
         image={imageSrc("shade-4x4-bay")}
         crumbs={[{ href: "/", label: "Home" }, { label: "About" }]}
       />

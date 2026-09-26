@@ -15,7 +15,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Project gallery",
-  description: `Photos of car shade, interlocking rubber tile and seamless gutter projects by ${site.name} in ${site.address.city}. Filter by service and view full-screen.`,
+  description: `Photos of car shade, interlocking rubber tile and seamless gutter projects by ${site.name} across ${site.address.country}. Filter by service and view full-screen.`,
   path: "/gallery/",
   image: "gallery",
 });

@@ -19,7 +19,7 @@ const pages: OgCard[] = [
   {
     key: "home",
     alt: `${site.name} — car shades, rubber tiles and seamless gutters`,
-    eyebrow: `Supply & installation · ${site.address.city}`,
+    eyebrow: `Supply & installation · ${site.address.country}`,
     title: "Protect, pave and drain — built to last.",
     subtitle: "Chromadek, shade net and PVC car shades, interlocking rubber tiles and seamless gutters.",
     photo: "shade-residential-carport",
@@ -61,7 +61,7 @@ const pages: OgCard[] = [
 const productCards: OgCard[] = products.map((p) => ({
   key: p.slug,
   alt: `${p.name} by ${site.name}`,
-  eyebrow: `Supply & installation · ${site.address.city}`,
+  eyebrow: `Supply & installation · ${site.address.country}`,
   title: p.name,
   subtitle: p.short,
   photo: p.cover,

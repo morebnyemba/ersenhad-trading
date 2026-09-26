@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { OG_SIZE, ogCard, ogImagePath, type OgKey } from "@/lib/og";
 import { site } from "@/lib/site";
 
-export const homeTitle = `${site.name} — Car Shades, Rubber Tiles & Seamless Gutters in ${site.address.city}`;
+export const homeTitle = `${site.name} — Car Shades, Rubber Tiles & Seamless Gutters in ${site.address.country}`;
 
 /** Open Graph + Twitter image fields for a preview card (static /og/<key>.jpg). */
 export function ogImages(key: OgKey) {

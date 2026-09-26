@@ -43,6 +43,7 @@ const jsonLd = {
     addressLocality: site.address.city,
     addressCountry: site.address.countryCode,
   },
+  areaServed: { "@type": "Country", name: site.address.country },
   makesOffer: products.map((p) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: p.name, description: p.short } })),
 };
 

@@ -33,7 +33,7 @@ export function Hero() {
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1 pr-3 pl-1 text-xs font-medium text-white/80 backdrop-blur">
             <span className="rounded-full bg-magenta px-2 py-0.5 text-[0.65rem] font-semibold tracking-wide text-white uppercase">Free</span>
-            Quotations in {site.address.city} &amp; surrounds
+            Quotations across {site.address.country}
           </span>
 
           <h1 className="mt-6 font-heading text-[2.4rem] leading-[1.05] font-extrabold tracking-tight text-balance min-[400px]:text-[2.6rem] sm:text-6xl lg:text-[3.4rem] xl:text-[4.25rem]">
