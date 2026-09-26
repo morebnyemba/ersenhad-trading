@@ -9,8 +9,9 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Project planner",
-  description: "Estimate your car shade, rubber flooring or gutter project in a minute — layout, quantities and an indicative price range — then send it for a free quotation.",
+  description: "Estimate your car shade, rubber flooring or gutter project in a minute — layout, quantities and a price range — then send it for a free quotation.",
   path: "/estimate/",
+  image: "estimate",
 });
 
 export default function EstimatePage() {

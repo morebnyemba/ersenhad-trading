@@ -18,7 +18,7 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "Which areas do you cover?",
-    a: `We're based in ${site.address.city} and work across ${site.address.city} and surrounding areas. For projects further afield, send us the location and we'll confirm.`,
+    a: `We work across ${site.address.country}. Send us the location of your project and we'll confirm the details in your quotation.`,
   },
   {
     q: "How long does an installation take?",

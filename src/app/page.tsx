@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { TbArrowRight } from "react-icons/tb";
 import { Hero } from "@/components/home/hero";
@@ -12,6 +13,8 @@ import { FaqSection } from "@/components/site/faq-section";
 import { Process } from "@/components/site/process";
 import { Specs } from "@/components/site/specs";
 import { generalFaqs } from "@/lib/faqs";
+import { pageMeta } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
 
@@ -20,6 +23,8 @@ const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "C
 const featured = ["shade-residential-carport", "tiles-home-gym", "gutter-white-downpipe", "shade-sails-blue", "tiles-playground-red", "gutter-metal-roof"].map(
   (id) => gallery.find((g) => g.id === id)!,
 );
+
+export const metadata: Metadata = pageMeta({ title: site.name, description: site.description, path: "/", image: "home" });
 
 export default function Home() {
   return (

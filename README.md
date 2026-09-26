@@ -47,7 +47,7 @@ Generated from the supplied logo (transparent source; never recoloured):
 | `public/brand/logo-light.{webp,png}` | Same lockup with a white wordmark — dark backgrounds (footer) |
 | `public/brand/mark.{webp,png}` | Symbol only, 512² — structured data, manifest |
 | `src/app/favicon.ico`, `icon.png`, `apple-icon.png` | Browser tab, Android, iOS home-screen icons |
-| `src/app/**/opengraph-image.tsx` | Link-preview cards (WhatsApp, Facebook, LinkedIn, X), rendered at build time from `src/app/_og/` |
+| `/og/<page>.jpg` (`src/app/og/[image]/route.ts`, cards in `src/lib/og.ts`) | Link-preview cards (WhatsApp, Facebook, LinkedIn, X) rendered at build time to ~100 KB JPEGs from `src/app/_og/` |
 
 Static export writes OG images without a file extension, so `nginx.conf` and `vercel.json` force `Content-Type: image/png` for them — keep those rules if you change hosting.
 

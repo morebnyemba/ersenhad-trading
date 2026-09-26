@@ -28,7 +28,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = getProduct((await params).slug);
   if (!p) return {};
-  return pageMeta({ title: p.name, description: p.short, path: `/products/${p.slug}/` });
+  return pageMeta({ title: `${p.name} in ${site.address.country}`, description: `${p.short} Supplied and installed across ${site.address.country} — free, no-obligation quotes.`, path: `/products/${p.slug}/`, image: p.slug });
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { TopBar } from "@/components/site/top-bar";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { products } from "@/lib/products";
+import { homeTitle, ogImages } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -16,10 +17,12 @@ const heading = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700", "
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name} — ${site.tagline}`, template: `%s | ${site.name}` },
+  title: { default: homeTitle, template: `%s | ${site.name}` },
   description: site.description,
-  openGraph: { siteName: site.name, type: "website", locale: "en_ZW", title: `${site.name} — ${site.tagline}`, description: site.description, url: "/" },
-  twitter: { card: "summary_large_image" },
+  applicationName: site.name,
+  openGraph: { siteName: site.name, type: "website", locale: "en_ZW", title: homeTitle, description: site.description, url: "/", ...ogImages("home").openGraph },
+  twitter: { card: "summary_large_image", title: homeTitle, description: site.description, ...ogImages("home").twitter },
+  formatDetection: { telephone: false }, // keep our own tel: links styled; stop iOS auto-linking
 };
 
 export const viewport: Viewport = { themeColor: "#0f1d45" };
@@ -30,7 +33,7 @@ const jsonLd = {
   name: site.name,
   url: site.url,
   logo: `${site.url}/brand/mark.png`,
-  image: `${site.url}/opengraph-image`,
+  image: `${site.url}/og/home.jpg`,
   telephone: site.phone,
   email: site.email,
   description: site.description,
@@ -40,6 +43,7 @@ const jsonLd = {
     addressLocality: site.address.city,
     addressCountry: site.address.countryCode,
   },
+  areaServed: { "@type": "Country", name: site.address.country },
   makesOffer: products.map((p) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: p.name, description: p.short } })),
 };
 

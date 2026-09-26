@@ -14,8 +14,9 @@ import { site, telHref, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact",
-  description: `Contact ${site.name} for a free, no-obligation quotation.`,
+  description: `Contact ${site.name}, ${site.address.country} — WhatsApp or call ${site.phone} for a free, no-obligation quote on car shades, rubber tiles or gutters.`,
   path: "/contact/",
+  image: "contact",
 });
 
 export default function Contact() {
@@ -79,7 +80,7 @@ export default function Contact() {
               <TbMapPin className="size-5 text-highlight" /> Service area
             </p>
             <p className="mt-2 text-sm text-white/70">
-              {site.address.city} and surrounding areas — ask us about projects further afield.
+              Projects across {site.address.country} — send us the location and we'll confirm.
             </p>
           </Reveal>
       </section>
