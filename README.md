@@ -29,6 +29,8 @@ npm run build    # static site in ./out
 | Phone, WhatsApp, email, address, hours | `src/lib/site.ts` |
 | Products, features, options, FAQs, quote fields | `src/lib/products.ts` |
 | Gallery photos | `src/lib/gallery.ts` + `public/gallery/` |
+| **Planner prices** | `src/config/pricing.ts` (rates per m² / metre / piece, currency, ± spread, `status`) |
+| Planner rules of thumb | `src/lib/estimator.ts` (bay sizes, tile size, downpipe spacing…) — tests: `npm run test:estimator` |
 | Brand colours | `src/app/globals.css` (`--primary`, `--color-highlight`, `--color-ink`) |
 
 Adding a product = one entry in `products.ts`; its page, nav link, sitemap entry and quote-form fields are generated from it.
@@ -49,6 +51,12 @@ Generated from the supplied logo (transparent source; never recoloured):
 
 Static export writes OG images without a file extension, so `nginx.conf` and `vercel.json` force `Content-Type: image/png` for them — keep those rules if you change hosting.
 
+## Project planner (`/estimate`)
+
+Customers enter car count, floor size or house size/storeys/roof type and get a live drawing, quantities and an **indicative price range** (point estimate ± `spread`). Everything is labelled as an estimate, not a quotation, and the result can be sent on WhatsApp/email as a structured enquiry.
+
+Prices come only from `src/config/pricing.ts`. While `status: "sample"` every price is tagged **"Sample prices"** (on screen and in the composed message). Enter real rates and set `status: "live"` to remove the tag; set any rate to `null` to hide prices for that item.
+
 ## Quotes
 
 The quote form has no backend: it composes the enquiry and opens WhatsApp (or the visitor's email client) pre-filled. Nothing to spam, nothing storing PII. If you later need lead tracking, swap `QuoteForm` to POST to a form endpoint or CRM.
@@ -66,5 +74,6 @@ Put it behind Nginx Proxy Manager for TLS. Any static host (Cloudflare Pages, Ve
 
 - [ ] Replace placeholder contact details in `src/lib/site.ts` (search for `TODO`)
 - [ ] **Replace the placeholder gallery photos** (royalty-free Unsplash images) with real Ersenhad installations: add `<id>.webp` (≤1400px) and `<id>-sm.webp` (≤720px) to `public/gallery/` and list them in `src/lib/gallery.ts`
+- [ ] **Replace the sample planner prices** in `src/config/pricing.ts` and set `status: "live"`
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the production domain
 - [ ] Register a Google Business Profile with the same name, address and phone

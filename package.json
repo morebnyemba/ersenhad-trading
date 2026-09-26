@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "serve out",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test:estimator": "tsx src/lib/estimator.test.mts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -34,6 +35,7 @@
     "@types/react-dom": "^19",
     "serve": "^14.2.6",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

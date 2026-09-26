@@ -90,3 +90,22 @@ export const contactFaqs: Faq[] = [
     a: "It helps. We can walk through options, colours and access with you on the spot, and answer questions before we quote.",
   },
 ];
+
+export const estimatorFaqs: Faq[] = [
+  {
+    q: "How accurate is the planner?",
+    a: "It uses standard rules of thumb — bay sizes, tile counts with a cutting allowance, one downpipe per roughly 10 m of gutter — so it's a good starting point. We confirm every figure by measuring before we quote.",
+  },
+  {
+    q: "Is the estimated price what I'll pay?",
+    a: "No — it's an indicative range to help you plan. Your actual price depends on materials, site conditions and access, and is confirmed in a free, itemised quotation after we measure.",
+  },
+  {
+    q: "What happens after I send my estimate?",
+    a: "We usually reply within one business day. We may ask for a few photos or arrange to measure on site before sending your quotation.",
+  },
+  {
+    q: "My project doesn't fit the options — what now?",
+    a: "Send us the details on WhatsApp. Mixed vehicle sizes, odd-shaped floors and complex roofs are all common — the planner just covers the typical cases.",
+  },
+];

@@ -22,6 +22,7 @@ export function SiteFooter() {
               </li>
             ))}
             <li><Link href="/gallery/" className="transition-colors hover:text-white">Project gallery</Link></li>
+            <li><Link href="/estimate/" className="transition-colors hover:text-white">Project planner</Link></li>
             <li><Link href="/about/" className="transition-colors hover:text-white">About us</Link></li>
             <li><Link href="/contact/" className="transition-colors hover:text-white">Contact</Link></li>
           </ul>

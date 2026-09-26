@@ -6,14 +6,13 @@ import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "motion/react";
-import { TbArrowRight, TbShieldCheck } from "react-icons/tb";
-import { Float } from "@/components/site/float";
+import { TbArrowRight } from "react-icons/tb";
 import { ProductIcon } from "@/components/site/product-icon";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { getProduct, type ProductSlug } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
-// One slide per photo; each is tied to a service so the stat card and caption follow it.
+// One slide per photo; each is tied to a service so the caption and link follow it.
 const SLIDES: { id: string; product: ProductSlug }[] = [
   { id: "shade-residential-carport", product: "car-shades" },
   { id: "tiles-home-gym", product: "rubber-tiles" },
@@ -43,7 +42,6 @@ export function HeroCarousel() {
   const go = useCallback((i: number) => api?.scrollTo(i), [api]);
   const product = getProduct(SLIDES[index].product)!;
   const caption = gallery.find((g) => g.id === SLIDES[index].id)!;
-  const stat = product.highlights[0];
 
   return (
     <div className="relative" role="region" aria-roledescription="carousel" aria-label="Recent work">
@@ -114,36 +112,6 @@ export function HeroCarousel() {
           ))}
         </div>
       </div>
-
-      {/* floating fact cards */}
-      <Float delay={0.6} className="absolute -top-5 -left-8">
-        <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-ink/75 px-4 py-3 shadow-xl backdrop-blur-md">
-          <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-logo-cyan to-logo-blue text-white">
-            <TbShieldCheck className="size-5" />
-          </span>
-          <span className="text-sm leading-tight font-semibold">
-            Workmanship
-            <span className="block text-xs font-normal text-white/60">guarantee on every job</span>
-          </span>
-        </div>
-      </Float>
-
-      <Float delay={0.8} duration={7} className="absolute top-[30%] -right-6">
-        <div className="min-w-44 rounded-2xl border border-white/15 bg-ink/75 px-4 py-3 shadow-xl backdrop-blur-md">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div key={product.slug} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.25 }}>
-              <p className="flex items-center gap-1.5 text-xs text-white/60">
-                <ProductIcon icon={product.icon} className="size-4 text-highlight" /> {product.name}
-              </p>
-              <p className="mt-1 font-heading text-2xl font-extrabold">
-                {stat.value}
-                {stat.suffix}
-                <span className="ml-1.5 text-sm font-medium text-white/70">{stat.label}</span>
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </Float>
 
     </div>
   );
