@@ -1,5 +1,9 @@
+export type ProductSlug = "car-shades" | "rubber-tiles" | "seamless-gutters";
+
 export type Product = {
-  slug: string;
+  slug: ProductSlug;
+  cover: string;
+  highlights: { value: number; suffix: string; label: string }[];
   name: string;
   short: string;
   intro: string;
@@ -14,6 +18,8 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "car-shades",
+    cover: "shade-residential-carport",
+    highlights: [{ value: 95, suffix: "%", label: "UV block-out" }, { value: 2, suffix: " days", label: "typical install" }],
     name: "Car Shades",
     short: "UV-stabilised shade ports that protect vehicles from sun, hail and heat.",
     intro:
@@ -39,6 +45,8 @@ export const products: Product[] = [
   },
   {
     slug: "rubber-tiles",
+    cover: "tiles-home-gym",
+    highlights: [{ value: 40, suffix: "mm", label: "max. thickness" }, { value: 5, suffix: "", label: "colour options" }],
     name: "Interlocking Rubber Tiles",
     short: "Durable, shock-absorbing rubber flooring for gyms, playgrounds and walkways.",
     intro:
@@ -64,6 +72,8 @@ export const products: Product[] = [
   },
   {
     slug: "seamless-gutters",
+    cover: "gutter-white-downpipe",
+    highlights: [{ value: 150, suffix: "mm", label: "max. profile" }, { value: 1, suffix: " day", label: "typical house" }],
     name: "Seamless Gutters",
     short: "Leak-free aluminium gutters roll-formed on site to the exact length of your roof.",
     intro:
@@ -90,3 +100,4 @@ export const products: Product[] = [
 ];
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
+export const productName = (slug: ProductSlug) => getProduct(slug)!.name;

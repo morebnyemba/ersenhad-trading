@@ -2,7 +2,16 @@
 
 Marketing site for Ersenhad Trading: **car shades**, **interlocking rubber tiles** and **seamless gutters**.
 
-Next.js (App Router) + Tailwind v4, statically exported — production is plain HTML served by Nginx or any CDN. No server runtime, no database.
+Next.js 16 (App Router, TypeScript) + Tailwind v4 + shadcn/ui, statically exported — production is plain HTML served by Nginx or any CDN. No server runtime, no database.
+
+| Layer | Used for |
+|---|---|
+| shadcn/ui (Radix) | Button, Sheet (mobile nav), Dialog (lightbox), Carousel, Accordion (FAQ), Select/Input form controls — `src/components/ui` |
+| Embla (via shadcn Carousel) + autoplay | Featured-work carousel and lightbox slider |
+| Motion (Framer Motion) | Scroll reveals, gallery filter transitions — honours `prefers-reduced-motion` |
+| Magic UI | Marquee, NumberTicker, BorderBeam, DotPattern — `src/components/magicui` |
+| Aceternity UI | Hero Spotlight — `src/components/aceternity` |
+| typed.js | Rotating hero headline (first phrase is server-rendered for SEO/no-JS) |
 
 ## Develop
 
@@ -18,7 +27,8 @@ npm run build    # static site in ./out
 |---|---|
 | Phone, WhatsApp, email, address, hours | `src/lib/site.ts` |
 | Products, features, options, FAQs, quote fields | `src/lib/products.ts` |
-| Brand colours | `src/app/globals.css` (`@theme`) |
+| Gallery photos | `src/lib/gallery.ts` + `public/gallery/` |
+| Brand colours | `src/app/globals.css` (`--primary`, `--color-highlight`, `--color-ink`) |
 
 Adding a product = one entry in `products.ts`; its page, nav link, sitemap entry and quote-form fields are generated from it.
 
@@ -38,7 +48,7 @@ Put it behind Nginx Proxy Manager for TLS. Any static host (Cloudflare Pages, Ve
 ## Before launch
 
 - [ ] Replace placeholder contact details in `src/lib/site.ts` (search for `TODO`)
-- [ ] Add real project photos (the biggest conversion lever for this kind of business)
-- [ ] Add a logo and favicon to `public/` / `src/app/`
+- [ ] **Replace the placeholder gallery photos** (royalty-free Unsplash images) with real Ersenhad installations: add `<id>.webp` (≤1400px) and `<id>-sm.webp` (≤720px) to `public/gallery/` and list them in `src/lib/gallery.ts`
+- [ ] Replace the placeholder logo mark (`src/components/site/logo.tsx`, `src/app/icon.svg`) with the real logo
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the production domain
 - [ ] Register a Google Business Profile with the same name, address and phone
