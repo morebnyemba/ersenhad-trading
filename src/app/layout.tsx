@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { IntroLoader, introScript } from "@/components/site/intro-loader";
 import { Providers } from "@/components/site/providers";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -44,8 +45,13 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn("font-sans antialiased", sans.variable, heading.variable)}>
+    // suppressHydrationWarning: introScript sets data-intro on <html> before hydration
+    <html lang="en" className={cn("font-sans antialiased", sans.variable, heading.variable)} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+      </head>
       <body id="top" className="flex min-h-screen flex-col">
+        <IntroLoader />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
           <TopBar />
