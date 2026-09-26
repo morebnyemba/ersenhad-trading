@@ -45,7 +45,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={cn("font-sans antialiased", sans.variable, heading.variable)}>
-      <body className="flex min-h-screen flex-col">
+      <body id="top" className="flex min-h-screen flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
           <TopBar />
