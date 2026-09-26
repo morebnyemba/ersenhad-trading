@@ -23,6 +23,9 @@ export const site = {
   hours: "Mon–Fri 08:00–17:00 · Sat 08:00–13:00",
 } as const;
 
+/** Web agency credit shown in the footer copyright strip. */
+export const credit = { name: "Slyker Tech Web Services", url: "https://slykertech.net" };
+
 export const telHref = `tel:${site.phone.replace(/\s/g, "")}`;
 
 export function whatsappLink(message: string) {
