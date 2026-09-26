@@ -202,8 +202,8 @@ export function Estimator() {
                 <Field label="Number of storeys" hint="Sets downpipe length (≈3 m per storey)">
                   <Choice name="storeys" columns={3} value={String(storeys)} onChange={(v) => setStoreys(Number(v))} options={["1", "2", "3"].map((n) => ({ value: n, label: n === "1" ? "Single storey" : n === "2" ? "Double storey" : "Three storeys" }))} />
                 </Field>
-                <Field label="Roof type">
-                  <Choice name="roof-type" value={roof} onChange={setRoof} options={(Object.keys(roofTypes) as RoofType[]).map((k) => ({ value: k, label: roofTypes[k].label, hint: roofTypes[k].hint }))} />
+                <Field label="House roof shape" hint="Where the gutters run — not the carport roof">
+                  <Choice name="house-roof-shape" value={roof} onChange={setRoof} options={(Object.keys(roofTypes) as RoofType[]).map((k) => ({ value: k, label: roofTypes[k].label, hint: roofTypes[k].hint }))} />
                 </Field>
               </>
             )}

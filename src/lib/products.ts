@@ -43,7 +43,7 @@ export const products: Product[] = [
     ],
     quoteFields: [
       { label: "Number of vehicles", placeholder: "e.g. 2" },
-      { label: "Preferred style / material", placeholder: "e.g. double cantilever, PVC" },
+      { label: "Preferred roof & style", placeholder: "e.g. Chromadek, cantilever" },
     ],
   },
   {

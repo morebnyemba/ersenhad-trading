@@ -120,8 +120,8 @@ export const RUN_PER_DOWNPIPE = 10; // m of gutter served by one downpipe
 export const LARGE_ROOF_M2 = 150; // above this, recommend the 150 mm profile
 
 export const roofTypes: Record<RoofType, { label: string; hint: string }> = {
-  gable: { label: "Gable", hint: "Gutters on the two long sides" },
-  hip: { label: "Hip", hint: "Gutters all the way round" },
+  gable: { label: "Gable (pitched)", hint: "Two slopes — gutters on the two long sides" },
+  hip: { label: "Hip", hint: "Slopes on all four sides — gutters all the way round" },
 };
 
 export function estimateGutters(i: { length: number; width: number; roof: RoofType; storeys: number }, pricing: Pricing = defaultPricing) {

@@ -45,7 +45,7 @@ export const galleryFaqs: Faq[] = [
   },
   {
     q: "Can you match colours to my property?",
-    a: "Yes. Shade fabrics and PVC membranes, rubber tiles and pre-painted aluminium gutters all come in a range of colours — we can show you samples before you decide.",
+    a: "Yes. Chromadek sheeting, shade net and PVC membranes, rubber tiles and pre-painted aluminium gutters all come in a range of colours — we can show you samples before you decide.",
   },
   {
     q: "Do you work on commercial and school projects?",
