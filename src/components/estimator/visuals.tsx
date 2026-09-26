@@ -1,6 +1,23 @@
 // Live, schematic drawings for the planner (not to scale beyond proportions).
 
-export function CarportVisual({ rows, baysPerRow, style }: { rows: number; baysPerRow: number; style: "standard" | "cantilever" }) {
+const roofLook = {
+  chromadek: { fill: "#94a3b8", opacity: 0.55, stroke: "#475569" }, // grey steel sheeting (ribbed)
+  net: { fill: "url(#canopy)", opacity: 1, stroke: "var(--color-logo-blue)" }, // translucent shade cloth
+  pvc: { fill: "#f8fafc", opacity: 0.9, stroke: "#94a3b8" }, // white membrane
+} as const;
+
+export function CarportVisual({
+  rows,
+  baysPerRow,
+  style,
+  cover,
+}: {
+  rows: number;
+  baysPerRow: number;
+  style: "standard" | "cantilever";
+  cover: "chromadek" | "net" | "pvc";
+}) {
+  const look = roofLook[cover];
   const bayW = 56, bayD = 96, pad = 18, gap = rows === 2 ? 6 : 0;
   const W = baysPerRow * bayW + pad * 2;
   const H = rows * bayD + gap + pad * 2;
@@ -13,7 +30,7 @@ export function CarportVisual({ rows, baysPerRow, style }: { rows: number; baysP
         ? [pad + bayD + gap / 2]
         : [pad];
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="size-full" role="img" aria-label={`Top view: ${rows} row(s) of ${baysPerRow} bays`}>
+    <svg viewBox={`0 0 ${W} ${H}`} className="size-full" role="img" aria-label={`Top view: ${rows} row(s) of ${baysPerRow} bays, ${cover} roof`}>
       <defs>
         <linearGradient id="canopy" x1="0" x2="1">
           <stop offset="0" stopColor="var(--color-logo-cyan)" stopOpacity="0.28" />
@@ -24,7 +41,11 @@ export function CarportVisual({ rows, baysPerRow, style }: { rows: number; baysP
         const y = pad + r * (bayD + gap);
         return (
           <g key={r}>
-            <rect x={pad} y={y} width={baysPerRow * bayW} height={bayD} rx="6" fill="url(#canopy)" stroke="var(--color-logo-blue)" strokeWidth="1.5" />
+            <rect x={pad} y={y} width={baysPerRow * bayW} height={bayD} rx="6" fill={look.fill} fillOpacity={look.opacity} stroke={look.stroke} strokeWidth="1.5" />
+            {cover === "chromadek" &&
+              Array.from({ length: Math.floor((baysPerRow * bayW) / 8) }, (_, k) => (
+                <line key={k} x1={pad + 4 + k * 8} y1={y + 2} x2={pad + 4 + k * 8} y2={y + bayD - 2} stroke="#475569" strokeOpacity="0.25" />
+              ))}
             {Array.from({ length: baysPerRow }, (_, b) => {
               const x = pad + b * bayW;
               const carY = r === 0 ? y + 14 : y + bayD - 14 - 64;

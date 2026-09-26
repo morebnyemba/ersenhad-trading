@@ -31,13 +31,15 @@ eq("small gable -> min 2 downpipes", [g.gutter, g.downpipes], [13.2, 2]);
 
 // prices (sample rates from src/config/pricing.ts)
 eq("2 sedans net 27m2 x $35", formatPrice(estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "net" }).price!), "US$ 800 – 1,090");
-eq("10 SUVs pvc 165m2 x $55", formatPrice(estimateCarShade({ vehicles: 10, type: "suv", style: "cantilever", cover: "pvc" }).price!), "US$ 7,710 – 10,440");
+eq("10 SUVs cantilever pvc 165m2 x $64", formatPrice(estimateCarShade({ vehicles: 10, type: "suv", style: "cantilever", cover: "pvc" }).price!), "US$ 8,980 – 12,140");
+eq("2 sedans standard chromadek 27m2 x $48", formatPrice(estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "chromadek" }).price!), "US$ 1,100 – 1,490");
+eq("2 sedans cantilever chromadek 27m2 x $56", formatPrice(estimateCarShade({ vehicles: 2, type: "sedan", style: "cantilever", cover: "chromadek" }).price!), "US$ 1,290 – 1,740");
 eq("gym 24m2 x $30 no edges", formatPrice(estimateTiles({ length: 6, width: 4, use: "gym", fall: "low", edges: false }).price!), "US$ 610 – 830");
 eq("playground 25m2 x $45 + 40 ramps + 4 corners", formatPrice(estimateTiles({ length: 5, width: 5, use: "playground", fall: "mid", edges: true }).price!), "US$ 1,110 – 1,500");
 eq("playground >1.3m -> no price", estimateTiles({ length: 5, width: 5, use: "playground", fall: "high", edges: false }).price, null);
 eq("gable 31.2m x $15 + 12m dp x $9 + 4 caps", formatPrice(estimateGutters({ length: 15, width: 10, roof: "gable", storeys: 1 }).price!), "US$ 500 – 680");
 // missing rate -> null; live status -> not sample (price list passed in, no global mutation)
-const noNet = structuredClone(pricing); noNet.carShades.perM2.net = null;
+const noNet = structuredClone(pricing); noNet.carShades.perM2.standard.net = null;
 eq("null rate hides price", estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "net" }, noNet).price, null);
 const live = structuredClone(pricing); live.status = "live";
 eq("live status not sample", estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "pvc" }, live).price!.sample, false);
