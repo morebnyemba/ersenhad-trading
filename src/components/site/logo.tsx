@@ -1,21 +1,24 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
+// Official Ersenhad Trading lockup. `inverted` swaps to the white-wordmark
+// variant for dark backgrounds (the mark itself is never recoloured).
+// Intrinsic size 765×240 → aspect ≈ 3.19; set the height, width follows.
 export function Logo({ className, inverted }: { className?: string; inverted?: boolean }) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2.5 font-heading font-bold tracking-tight", className)} aria-label="Ersenhad Trading — home">
-      <span className="relative grid size-9 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-brand to-ink text-white shadow-md shadow-brand/30">
-        <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" aria-hidden>
-          <path d="M4 9 12 4l8 5" />
-          <path d="M7 13h10M7 17h7" />
-        </svg>
-      </span>
-      <span className={cn("leading-none", inverted ? "text-white" : "text-ink")}>
-        Ersenhad
-        <span className={cn("mt-0.5 block text-[0.7rem] font-medium tracking-[0.2em] uppercase", inverted ? "text-white/60" : "text-muted-foreground")}>
-          Trading
-        </span>
-      </span>
+    <Link href="/" aria-label="Ersenhad Trading — home" className={cn("inline-flex shrink-0 items-center", className)}>
+      <picture>
+        <source srcSet={inverted ? "/brand/logo-light.webp" : "/brand/logo.webp"} type="image/webp" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={inverted ? "/brand/logo-light.png" : "/brand/logo.png"}
+          alt="Ersenhad Trading"
+          width={765}
+          height={240}
+          className="h-9 w-auto lg:h-11"
+          decoding="async"
+        />
+      </picture>
     </Link>
   );
 }

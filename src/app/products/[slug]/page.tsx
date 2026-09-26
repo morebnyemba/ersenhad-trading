@@ -15,6 +15,7 @@ import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { imageSrc } from "@/lib/gallery";
 import { getProduct, products } from "@/lib/products";
+import { pageMeta } from "@/lib/seo";
 import { site, whatsappLink } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -26,12 +27,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = getProduct((await params).slug);
   if (!p) return {};
-  return {
-    title: p.name,
-    description: p.short,
-    alternates: { canonical: `/products/${p.slug}/` },
-    openGraph: { images: [imageSrc(p.cover)] },
-  };
+  return pageMeta({ title: p.name, description: p.short, path: `/products/${p.slug}/` });
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {

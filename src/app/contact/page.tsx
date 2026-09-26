@@ -4,13 +4,14 @@ import { FaWhatsapp } from "react-icons/fa";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
+import { pageMeta } from "@/lib/seo";
 import { site, telHref, whatsappLink } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Contact",
   description: `Contact ${site.name} for a free site visit and quote.`,
-  alternates: { canonical: "/contact/" },
-};
+  path: "/contact/",
+});
 
 export default function Contact() {
   const mapQuery = encodeURIComponent(`${site.address.street}, ${site.address.city}, ${site.address.country}`);
