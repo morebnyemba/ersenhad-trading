@@ -96,7 +96,7 @@ export default function About() {
 
       <FaqSection faqs={aboutFaqs} title="About working with us" />
 
-      <CtaBand title="Have a project in mind?" body="Book a free site visit and we'll send you a clear, itemised quotation." />
+      <CtaBand title="Have a project in mind?" body="Get a free, itemised quotation — with no obligation to go ahead." />
     </>
   );
 }

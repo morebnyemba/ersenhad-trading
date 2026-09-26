@@ -115,10 +115,10 @@ export function SiteHeader() {
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-transparent" />
                     <div className="relative">
                       <p className="font-heading text-lg leading-tight font-bold">Not sure what you need?</p>
-                      <p className="mt-1.5 text-sm text-white/70">We&apos;ll assess your site and advise — free of charge.</p>
+                      <p className="mt-1.5 text-sm text-white/70">Send us a few photos and we&apos;ll recommend the right option.</p>
                       <NavPrimitive.Link asChild>
                         <Link href={QUOTE_HREF} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-highlight hover:underline">
-                          Book a site visit <TbArrowRight className="size-4" />
+                          Get a free quote <TbArrowRight className="size-4" />
                         </Link>
                       </NavPrimitive.Link>
                     </div>

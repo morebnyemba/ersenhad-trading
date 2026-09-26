@@ -11,8 +11,8 @@ type Step = { icon: IconType; title: string; body: string };
 // Only commitments the site already makes elsewhere — no invented timelines.
 export const processSteps: Step[] = [
   { icon: FaWhatsapp, title: "Enquire", body: "WhatsApp, call or use the quote form. Photos of your site help us advise faster." },
-  { icon: TbRulerMeasure, title: "Free site visit", body: "We measure, check access and ground conditions, and advise on materials and layout." },
-  { icon: TbFileInvoice, title: "Itemised quotation", body: "A written quote listing materials, costs and timeline — no hidden extras." },
+  { icon: TbRulerMeasure, title: "Site assessment", body: "From your photos or a site visit by arrangement, we measure, check access and advise on materials and layout." },
+  { icon: TbFileInvoice, title: "Free quotation", body: "A free, written, itemised quote listing materials, costs and timeline — no obligation, no hidden extras." },
   { icon: TbHammer, title: "Supply & install", body: "Our own team supplies and installs, keeping your property safe and tidy." },
   { icon: TbShieldCheck, title: "Hand-over & guarantee", body: "We walk you through the finished job, backed by our written workmanship guarantee." },
 ];

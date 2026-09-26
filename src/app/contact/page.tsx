@@ -14,7 +14,7 @@ import { site, telHref, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact",
-  description: `Contact ${site.name} for a free site visit and quote.`,
+  description: `Contact ${site.name} for a free, no-obligation quotation.`,
   path: "/contact/",
 });
 
@@ -31,7 +31,7 @@ export default function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Let's talk about your project"
-        description="Free site visits and written, itemised quotations. WhatsApp is the fastest way to reach us — we usually reply within one business day."
+        description="Free, written, itemised quotations with no obligation. WhatsApp is the fastest way to reach us — we usually reply within one business day."
         image={imageSrc("gutter-white-downpipe")}
         crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]}
       >

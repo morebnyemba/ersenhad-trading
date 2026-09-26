@@ -8,7 +8,7 @@ import { site, whatsappLink } from "@/lib/site";
 
 export function CtaBand({
   title = "Ready to start your project?",
-  body = "Book a free site visit and get a clear, itemised quotation.",
+  body = "Get a free, itemised quotation — with no obligation to go ahead.",
 }: {
   title?: string;
   body?: string;

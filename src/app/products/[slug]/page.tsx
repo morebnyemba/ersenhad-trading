@@ -126,9 +126,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* QUOTE */}
       <section id="quote" className="mx-auto grid max-w-7xl scroll-mt-20 gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.3fr]">
         <div>
-          <SectionHeading eyebrow="Free quote" title={`Request a ${p.name.toLowerCase()} quote`} description="Tell us a little about the job and we'll arrange a free site visit and a written, itemised quotation." />
+          <SectionHeading eyebrow="Free quote" title={`Request a ${p.name.toLowerCase()} quote`} description="Tell us a little about the job and we'll send you a free, written, itemised quotation." />
           <ul className="mt-8 grid gap-4">
-            {["Free site visit and measurement", "Advice on materials, colours and layout", "Written quotation with a clear timeline", "Workmanship guarantee on installation"].map((t) => (
+            {["Free, no-obligation quotation", "Accurate measurement before we quote", "Advice on materials, colours and layout", "Workmanship guarantee on installation"].map((t) => (
               <Reveal as="li" key={t} className="flex items-center gap-3">
                 <span className="grid size-8 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
                   <TbCheck className="size-4" />

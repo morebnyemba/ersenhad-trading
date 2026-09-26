@@ -10,11 +10,11 @@ export type Faq = { q: string; a: string };
 export const generalFaqs: Faq[] = [
   {
     q: "How much will my project cost?",
-    a: "Every site is different, so we price after a free site visit. As a guide, car shades are priced by size and number of bays, rubber tiles per square metre and thickness, and seamless gutters per metre including downpipes and fittings. Send us rough sizes on WhatsApp for an indicative figure.",
+    a: "Every site is different, so we price once we know your site and requirements. As a guide, car shades are priced by size and number of bays, rubber tiles per square metre and thickness, and seamless gutters per metre including downpipes and fittings. Send us rough sizes on WhatsApp for an indicative figure.",
   },
   {
-    q: "Are site visits and quotations really free?",
-    a: "Yes. We visit, measure and advise at no cost, then send a written, itemised quotation. There's no obligation to go ahead.",
+    q: "Are your quotations free?",
+    a: "Yes. Quotations are free, written and itemised, and there's no obligation to go ahead. Where we need to measure on site, we'll arrange a visit with you when we reply.",
   },
   {
     q: "Which areas do you cover?",
@@ -30,7 +30,7 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "Can you handle more than one service on the same property?",
-    a: "Yes — for example a carport with seamless gutters, or rubber flooring under a shaded play area. One team, one site visit and one combined quotation.",
+    a: "Yes — for example a carport with seamless gutters, or rubber flooring under a shaded play area. One team and one combined quotation.",
   },
 ];
 
@@ -41,11 +41,11 @@ export const galleryFaqs: Faq[] = [
   },
   {
     q: "Can I send photos of my site for advice?",
-    a: "Please do. WhatsApp us a few photos and rough measurements; it helps us advise on options before the site visit.",
+    a: "Please do. WhatsApp us a few photos and rough measurements; it helps us advise on options and quote accurately.",
   },
   {
     q: "Can you match colours to my property?",
-    a: "Yes. Shade fabrics and PVC membranes, rubber tiles and pre-painted aluminium gutters all come in a range of colours — we'll bring samples to the site visit.",
+    a: "Yes. Shade fabrics and PVC membranes, rubber tiles and pre-painted aluminium gutters all come in a range of colours — we can show you samples before you decide.",
   },
   {
     q: "Do you work on commercial and school projects?",
@@ -82,11 +82,11 @@ export const contactFaqs: Faq[] = [
     a: "Your location, what you need, rough sizes (number of vehicles, floor area or roofline length) and, if possible, a few photos of the site.",
   },
   {
-    q: "When can you do a site visit?",
-    a: `Our hours are ${site.hours}. We'll agree a convenient time for the site visit when we reply.`,
+    q: "Can you come and measure my site?",
+    a: `Yes — where accurate measurements are needed we'll arrange a site visit. Our hours are ${site.hours}; we'll agree a time when we reply.`,
   },
   {
-    q: "Do I need to be there for the site visit?",
+    q: "Do I need to be there if you visit?",
     a: "It helps. We can walk through options, colours and access with you on the spot, and answer questions before we quote.",
   },
 ];

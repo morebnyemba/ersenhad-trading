@@ -45,7 +45,7 @@ export default function GalleryPage() {
 
       <FaqSection faqs={galleryFaqs} title="Planning something similar?" className="border-t" />
 
-      <CtaBand title="Like what you see?" body="Get a free site visit and an itemised quotation for your own project." />
+      <CtaBand title="Like what you see?" body="Get a free, itemised quotation for your own project." />
     </>
   );
 }

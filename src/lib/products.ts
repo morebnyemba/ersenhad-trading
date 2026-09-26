@@ -38,7 +38,7 @@ export const products: Product[] = [
       { q: "Shade net or PVC?", a: "Shade net is cooler and lets rain through; PVC is fully waterproof. We'll advise based on your site." },
       { q: "Do you need to dig foundations?", a: "Yes — columns are set in concrete footings sized for the wind load of each design." },
       { q: "Can you build shade for commercial car parks?", a: "Yes. We build everything from single-bay carports to multi-bay commercial parking structures for offices, retail, schools and dealerships." },
-      { q: "What colours are available?", a: "Shade net and PVC membranes come in a range of colours, and frames are powder-coated — we'll match your property and bring samples to the site visit." },
+      { q: "What colours are available?", a: "Shade net and PVC membranes come in a range of colours, and frames are powder-coated — we'll match your property and can show you samples before you decide." },
     ],
     quoteFields: [
       { label: "Number of vehicles", placeholder: "e.g. 2" },
