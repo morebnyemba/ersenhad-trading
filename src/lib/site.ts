@@ -4,7 +4,7 @@ export const site = {
   name: "Ersenhad Trading",
   tagline: "Car Shades · Rubber Tiles · Seamless Gutters",
   description:
-    "Ersenhad Trading supplies and installs car shade ports, interlocking rubber floor tiles and seamless gutters for homes, businesses and schools.",
+    "Ersenhad Trading supplies and installs Chromadek, shade net and PVC car shades, interlocking rubber floor tiles and seamless gutters in Harare.",
   // Absolute base for canonical/OG URLs. Set NEXT_PUBLIC_SITE_URL in production;
   // on Vercel it falls back to the project's production domain so link previews
   // work before the custom domain is live.

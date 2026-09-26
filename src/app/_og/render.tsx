@@ -2,10 +2,9 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
 
-// Shared Open Graph card (1200×630) used by every opengraph-image route.
+// Shared Open Graph card (1200×630), rendered to /og/<key>.jpg by src/app/og/[image]/route.ts.
 // Rendered at build time (static export) — assets are read from disk, no network.
-export const ogSize = { width: 1200, height: 630 };
-export const ogContentType = "image/png";
+import { OG_SIZE } from "@/lib/og";
 
 const dir = path.join(process.cwd(), "src/app/_og");
 const file = (p: string) => readFile(path.join(dir, p));
@@ -82,7 +81,7 @@ export async function renderOg({
       </div>
     ),
     {
-      ...ogSize,
+      ...OG_SIZE,
       fonts: [
         { name: "Jakarta", data: heading, weight: 800, style: "normal" },
         { name: "Geist", data: body, weight: 400, style: "normal" },

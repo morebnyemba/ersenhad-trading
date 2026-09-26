@@ -34,6 +34,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "serve": "^14.2.6",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^5"

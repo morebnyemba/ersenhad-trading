@@ -19,6 +19,7 @@ export const metadata: Metadata = pageMeta({
   title: "About us",
   description: `${site.name} is a ${site.address.city}-based supplier and installer of car shades, interlocking rubber tiles and seamless gutters.`,
   path: "/about/",
+  image: "about",
 });
 
 // TODO(owner): add verifiable facts only — year founded, number of projects, team size,

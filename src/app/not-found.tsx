@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+
+// Next.js adds <meta name="robots" content="noindex"> to not-found pages itself.
+export const metadata: Metadata = { title: "Page not found" };
 
 export default function NotFound() {
   return (

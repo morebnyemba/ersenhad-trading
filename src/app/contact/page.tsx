@@ -14,8 +14,9 @@ import { site, telHref, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact",
-  description: `Contact ${site.name} for a free, no-obligation quotation.`,
+  description: `Contact ${site.name} in ${site.address.city} — WhatsApp or call ${site.phone} for a free, no-obligation quote on car shades, rubber tiles or gutters.`,
   path: "/contact/",
+  image: "contact",
 });
 
 export default function Contact() {
