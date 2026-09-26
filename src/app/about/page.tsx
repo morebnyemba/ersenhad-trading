@@ -8,13 +8,14 @@ import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
+import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About us",
   description: `${site.name} is a ${site.address.city}-based supplier and installer of car shades, interlocking rubber tiles and seamless gutters.`,
-  alternates: { canonical: "/about/" },
-};
+  path: "/about/",
+});
 
 // TODO(owner): add verifiable facts only — year founded, number of projects, team size,
 // certifications, notable clients. Keep claims here true; customers do check.

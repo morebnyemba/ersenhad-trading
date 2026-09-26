@@ -3,13 +3,14 @@ import { GalleryGrid } from "@/components/gallery/gallery-grid";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
+import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Project gallery",
   description: `Car shades, rubber tiles and seamless gutters installed by ${site.name}.`,
-  alternates: { canonical: "/gallery/" },
-};
+  path: "/gallery/",
+});
 
 export default function GalleryPage() {
   return (

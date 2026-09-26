@@ -17,7 +17,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: `${site.name} — ${site.tagline}`, template: `%s | ${site.name}` },
   description: site.description,
-  openGraph: { siteName: site.name, type: "website", locale: "en_ZW", images: ["/gallery/shade-residential-carport.webp"] },
+  openGraph: { siteName: site.name, type: "website", locale: "en_ZW", title: `${site.name} — ${site.tagline}`, description: site.description, url: "/" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { themeColor: "#0f1d45" };
@@ -27,6 +28,8 @@ const jsonLd = {
   "@type": "HomeAndConstructionBusiness",
   name: site.name,
   url: site.url,
+  logo: `${site.url}/brand/mark.png`,
+  image: `${site.url}/opengraph-image`,
   telephone: site.phone,
   email: site.email,
   description: site.description,

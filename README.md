@@ -35,6 +35,20 @@ Adding a product = one entry in `products.ts`; its page, nav link, sitemap entry
 
 > **Adding shadcn components:** the CLI generates icon imports for its configured library. After `npx shadcn add …`, swap any generated icon imports to their `react-icons/tb` equivalents, and remove the `cn` package if the CLI re-adds it (`cn` lives in `src/lib/utils.ts`).
 
+## Brand assets
+
+Generated from the supplied logo (transparent source; never recoloured):
+
+| File | Use |
+|---|---|
+| `public/brand/logo.{webp,png}` | Full lockup, navy wordmark — light backgrounds (header, mobile menu) |
+| `public/brand/logo-light.{webp,png}` | Same lockup with a white wordmark — dark backgrounds (footer) |
+| `public/brand/mark.{webp,png}` | Symbol only, 512² — structured data, manifest |
+| `src/app/favicon.ico`, `icon.png`, `apple-icon.png` | Browser tab, Android, iOS home-screen icons |
+| `src/app/**/opengraph-image.tsx` | Link-preview cards (WhatsApp, Facebook, LinkedIn, X), rendered at build time from `src/app/_og/` |
+
+Static export writes OG images without a file extension, so `nginx.conf` and `vercel.json` force `Content-Type: image/png` for them — keep those rules if you change hosting.
+
 ## Quotes
 
 The quote form has no backend: it composes the enquiry and opens WhatsApp (or the visitor's email client) pre-filled. Nothing to spam, nothing storing PII. If you later need lead tracking, swap `QuoteForm` to POST to a form endpoint or CRM.
@@ -52,6 +66,5 @@ Put it behind Nginx Proxy Manager for TLS. Any static host (Cloudflare Pages, Ve
 
 - [ ] Replace placeholder contact details in `src/lib/site.ts` (search for `TODO`)
 - [ ] **Replace the placeholder gallery photos** (royalty-free Unsplash images) with real Ersenhad installations: add `<id>.webp` (≤1400px) and `<id>-sm.webp` (≤720px) to `public/gallery/` and list them in `src/lib/gallery.ts`
-- [ ] Replace the placeholder logo mark (`src/components/site/logo.tsx`, `src/app/icon.svg`) with the real logo
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the production domain
 - [ ] Register a Google Business Profile with the same name, address and phone
