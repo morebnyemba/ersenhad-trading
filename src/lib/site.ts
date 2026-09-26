@@ -18,6 +18,8 @@ export const site = {
   hours: "Mon–Fri 08:00–17:00 · Sat 08:00–13:00",
 } as const;
 
+export const telHref = `tel:${site.phone.replace(/\s/g, "")}`;
+
 export function whatsappLink(message: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
 }

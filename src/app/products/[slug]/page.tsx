@@ -53,7 +53,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={imageSrc(p.cover)} alt="" fetchPriority="high" className="absolute inset-0 -z-20 size-full object-cover opacity-35" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
-        <Spotlight className="-top-40 left-0 md:-top-20 md:left-40" fill="oklch(0.8 0.16 75)" />
+        <Spotlight className="-top-40 left-0 md:-top-20 md:left-40" fill="var(--color-violet)" />
         <div className="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:pt-24 lg:pb-28">
           <Reveal className="max-w-2xl">
             <nav aria-label="Breadcrumb" className="text-sm text-white/50">

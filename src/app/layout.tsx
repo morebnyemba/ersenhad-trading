@@ -4,6 +4,8 @@ import "./globals.css";
 import { Providers } from "@/components/site/providers";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
+import { TopBar } from "@/components/site/top-bar";
+import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { products } from "@/lib/products";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: { siteName: site.name, type: "website", locale: "en_ZW", images: ["/gallery/shade-residential-carport.webp"] },
 };
 
-export const viewport: Viewport = { themeColor: "#0f6e5a" };
+export const viewport: Viewport = { themeColor: "#0f1d45" };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -43,9 +45,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-screen flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
+          <TopBar />
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <WhatsAppFab />
         </Providers>
       </body>
     </html>

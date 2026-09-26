@@ -46,18 +46,18 @@ export default function Home() {
       <section className="relative isolate overflow-hidden bg-ink text-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={imageSrc("shade-residential-carport")} alt="" fetchPriority="high" className="absolute inset-0 -z-20 size-full object-cover opacity-30" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-ink via-ink/90 to-brand-dark/70" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-ink via-ink/90 to-violet/40" />
         <DotPattern className="-z-10 text-white/[0.07] [mask-image:radial-gradient(ellipse_at_top_left,black_20%,transparent_70%)]" />
-        <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="oklch(0.8 0.16 75)" />
+        <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="var(--color-violet)" />
 
         <div className="mx-auto grid max-w-7xl gap-12 px-4 pt-20 pb-24 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:pt-28 lg:pb-32">
           <Reveal>
             <Badge variant="outline" className="h-7 gap-2 rounded-full border-white/20 bg-white/5 px-3 text-white/80 backdrop-blur">
-              <span className="size-1.5 rounded-full bg-highlight" /> Supply &amp; installation · {site.address.city}
+              <span className="size-1.5 rounded-full bg-magenta" /> Supply &amp; installation · {site.address.city}
             </Badge>
             <h1 className="mt-6 font-heading text-4xl leading-[1.08] font-extrabold tracking-tight text-balance sm:text-6xl">
               We design &amp; install premium
-              <TypedText strings={typed} className="block bg-gradient-to-r from-highlight to-emerald-300 bg-clip-text text-transparent [&_.typed-cursor]:text-highlight" />
+              <TypedText strings={typed} className="block bg-gradient-to-r from-highlight via-violet to-magenta bg-clip-text text-transparent [&_.typed-cursor]:text-highlight" />
             </h1>
             <p className="mt-6 max-w-xl text-lg text-white/70 text-pretty">{site.description}</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -104,14 +104,14 @@ export default function Home() {
         <Marquee pauseOnHover className="[--duration:45s] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           {sectors.map((s) => (
             <span key={s} className="flex items-center gap-3 px-4 text-sm font-medium whitespace-nowrap text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-brand" /> {s}
+              <span className="size-1.5 rounded-full bg-magenta/80" /> {s}
             </span>
           ))}
         </Marquee>
       </section>
 
       {/* PRODUCTS — bento */}
-      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+      <section id="services" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-24 sm:px-6">
         <SectionHeading eyebrow="What we do" title="Three specialities. One accountable team." description="From the frame in the ground to the last downpipe bracket, every job is measured, supplied and installed by us." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:grid-rows-2">
           {products.map((p, i) => (
@@ -145,7 +145,7 @@ export default function Home() {
       </section>
 
       {/* NUMBERS */}
-      <section className="relative overflow-hidden bg-brand text-primary-foreground">
+      <section className="relative overflow-hidden bg-gradient-to-r from-brand-dark via-brand to-violet text-primary-foreground">
         <DotPattern className="text-white/10" />
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:grid-cols-3 sm:px-6">
           {products.map((p) => (
@@ -191,7 +191,7 @@ export default function Home() {
             {steps.map((s, i) => (
               <Reveal as="li" key={s.title} delay={i * 0.1} className="relative h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
                   <span className="font-heading text-6xl font-extrabold text-white/[0.06]">0{i + 1}</span>
-                  <span className="absolute top-7 right-7 grid size-11 place-items-center rounded-xl bg-brand/20 text-highlight ring-1 ring-brand/40">
+                  <span className="absolute top-7 right-7 grid size-11 place-items-center rounded-xl bg-violet/25 text-highlight ring-1 ring-violet/50">
                     <s.icon className="size-5" />
                   </span>
                   <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>

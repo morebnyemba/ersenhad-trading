@@ -3,7 +3,7 @@ import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
-import { site, whatsappLink } from "@/lib/site";
+import { site, telHref, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -15,7 +15,7 @@ export default function Contact() {
   const mapQuery = encodeURIComponent(`${site.address.street}, ${site.address.city}, ${site.address.country}`);
   const cards = [
     { icon: MessageCircle, label: "WhatsApp", value: "Fastest response", href: whatsappLink(`Hi ${site.name}`) },
-    { icon: Phone, label: "Call us", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
+    { icon: Phone, label: "Call us", value: site.phone, href: telHref },
     { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
     { icon: MapPin, label: "Visit", value: `${site.address.street}, ${site.address.city}`, href: `https://maps.google.com/?q=${mapQuery}` },
   ];
@@ -50,7 +50,7 @@ export default function Contact() {
             </Reveal>
           ))}
         </ul>
-        <Reveal delay={0.1}>
+        <Reveal id="quote" delay={0.1} className="scroll-mt-28">
           <QuoteForm />
         </Reveal>
       </section>
