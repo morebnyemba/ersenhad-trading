@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check, MessageCircle } from "lucide-react";
+import { TbArrowRight, TbCheck } from "react-icons/tb";
+import { FaWhatsapp } from "react-icons/fa";
 import { Spotlight } from "@/components/aceternity/spotlight";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
 import { DotPattern } from "@/components/magicui/dot-pattern";
@@ -66,11 +67,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <p className="mt-6 text-lg text-white/75 text-pretty">{p.intro}</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild className="h-12 rounded-full bg-highlight px-7 text-base text-ink hover:bg-highlight/90">
-                <a href="#quote">Get a free quote <ArrowRight /></a>
+                <a href="#quote">Get a free quote <TbArrowRight /></a>
               </Button>
               <Button asChild variant="outline" className="h-12 rounded-full border-white/25 bg-white/5 px-7 text-base text-white hover:bg-white/10 hover:text-white">
                 <a href={whatsappLink(`Hi ${site.name}, I'm interested in ${p.name.toLowerCase()}.`)} target="_blank" rel="noopener">
-                  <MessageCircle /> WhatsApp us
+                  <FaWhatsapp /> WhatsApp us
                 </a>
               </Button>
             </div>
@@ -117,7 +118,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <ul className="mt-6 grid gap-3">
                 {col.items.map((o) => (
                   <li key={o} className="flex items-start gap-3 rounded-2xl border bg-background px-5 py-4">
-                    <Check className="mt-0.5 size-5 shrink-0 text-brand" /> <span>{o}</span>
+                    <TbCheck className="mt-0.5 size-5 shrink-0 text-brand" /> <span>{o}</span>
                   </li>
                 ))}
               </ul>
@@ -169,7 +170,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   <p className="font-heading text-xl font-bold">{o.name}</p>
                   <p className="mt-1 text-sm text-white/70">{o.short}</p>
                 </div>
-                <ArrowRight className="size-5 shrink-0 text-highlight transition-transform group-hover:translate-x-1" />
+                <TbArrowRight className="size-5 shrink-0 text-highlight transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
           ))}

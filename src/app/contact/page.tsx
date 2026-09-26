@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { TbClock, TbMail, TbMapPin, TbPhone } from "react-icons/tb";
+import { FaWhatsapp } from "react-icons/fa";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
@@ -14,10 +15,10 @@ export const metadata: Metadata = {
 export default function Contact() {
   const mapQuery = encodeURIComponent(`${site.address.street}, ${site.address.city}, ${site.address.country}`);
   const cards = [
-    { icon: MessageCircle, label: "WhatsApp", value: "Fastest response", href: whatsappLink(`Hi ${site.name}`) },
-    { icon: Phone, label: "Call us", value: site.phone, href: telHref },
-    { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-    { icon: MapPin, label: "Visit", value: `${site.address.street}, ${site.address.city}`, href: `https://maps.google.com/?q=${mapQuery}` },
+    { icon: FaWhatsapp, label: "WhatsApp", value: "Fastest response", href: whatsappLink(`Hi ${site.name}`) },
+    { icon: TbPhone, label: "Call us", value: site.phone, href: telHref },
+    { icon: TbMail, label: "Email", value: site.email, href: `mailto:${site.email}` },
+    { icon: TbMapPin, label: "Visit", value: `${site.address.street}, ${site.address.city}`, href: `https://maps.google.com/?q=${mapQuery}` },
   ];
   return (
     <>
@@ -26,7 +27,7 @@ export default function Contact() {
         <Reveal className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
           <p className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">Contact</p>
           <h1 className="mt-3 font-heading text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">Let&apos;s talk about your project</h1>
-          <p className="mt-4 flex items-center gap-2 text-muted-foreground"><Clock className="size-4" /> {site.hours}</p>
+          <p className="mt-4 flex items-center gap-2 text-muted-foreground"><TbClock className="size-4" /> {site.hours}</p>
         </Reveal>
       </section>
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.4fr]">

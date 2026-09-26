@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, ChevronDown, ChevronRight, Mail, Menu, MessageCircle, Phone } from "lucide-react";
+import { TbArrowRight, TbChevronDown, TbChevronRight, TbMail, TbMenu2, TbPhone } from "react-icons/tb";
+import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { NavigationMenu as NavPrimitive } from "radix-ui";
@@ -117,7 +118,7 @@ export function SiteHeader() {
                       <p className="mt-1.5 text-sm text-white/70">We&apos;ll assess your site and advise — free of charge.</p>
                       <NavPrimitive.Link asChild>
                         <Link href={QUOTE_HREF} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-highlight hover:underline">
-                          Book a site visit <ArrowRight className="size-4" />
+                          Book a site visit <TbArrowRight className="size-4" />
                         </Link>
                       </NavPrimitive.Link>
                     </div>
@@ -148,7 +149,7 @@ export function SiteHeader() {
             <span className="sm:hidden">Quote</span>
             <span className="hidden sm:inline">Get a free quote</span>
             <span className="ml-1 grid size-7 place-items-center rounded-full bg-white/20 transition-transform group-hover/cta:translate-x-0.5 lg:size-8">
-              <ArrowRight className="size-4" />
+              <TbArrowRight className="size-4" />
             </span>
           </Link>
         </Button>
@@ -157,7 +158,7 @@ export function SiteHeader() {
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon-lg" className="-mr-1.5 size-10 rounded-full lg:hidden" aria-label="Open menu">
-              <Menu className="size-6" />
+              <TbMenu2 className="size-6" />
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-full gap-0 p-0 sm:max-w-sm">
@@ -177,7 +178,7 @@ export function SiteHeader() {
                   )}
                 >
                   Services
-                  <ChevronDown className="size-5 text-muted-foreground transition-transform duration-200 group-data-[state=open]/c:rotate-180" />
+                  <TbChevronDown className="size-5 text-muted-foreground transition-transform duration-200 group-data-[state=open]/c:rotate-180" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                   <ul className="mt-1 mb-2 ml-4 grid gap-0.5 border-l pl-3">
@@ -211,19 +212,19 @@ export function SiteHeader() {
             <div className="grid gap-3 border-t bg-muted/40 p-4">
               <SheetClose asChild>
                 <Button asChild className="h-12 rounded-full bg-gradient-to-r from-brand to-brand-dark text-base font-semibold">
-                  <Link href={QUOTE_HREF}>Get a free quote <ArrowRight /></Link>
+                  <Link href={QUOTE_HREF}>Get a free quote <TbArrowRight /></Link>
                 </Button>
               </SheetClose>
               <div className="grid grid-cols-2 gap-2">
                 <Button asChild variant="outline" className="h-11 rounded-full bg-background">
-                  <a href={telHref}><Phone /> Call</a>
+                  <a href={telHref}><TbPhone /> Call</a>
                 </Button>
                 <Button asChild variant="outline" className="h-11 rounded-full bg-background">
-                  <a href={whatsappLink(`Hi ${site.name}`)} target="_blank" rel="noopener"><MessageCircle /> WhatsApp</a>
+                  <a href={whatsappLink(`Hi ${site.name}`)} target="_blank" rel="noopener"><FaWhatsapp /> WhatsApp</a>
                 </Button>
               </div>
               <a href={`mailto:${site.email}`} className="flex items-center justify-center gap-2 pt-1 text-sm text-muted-foreground hover:text-foreground">
-                <Mail className="size-4" /> {site.email}
+                <TbMail className="size-4" /> {site.email}
               </a>
             </div>
           </SheetContent>
@@ -245,7 +246,7 @@ function MobileLink({ href, active, children }: { href: string; active: boolean;
         )}
       >
         {children}
-        <ChevronRight className={cn("size-4", active ? "text-brand" : "text-muted-foreground/60")} />
+        <TbChevronRight className={cn("size-4", active ? "text-brand" : "text-muted-foreground/60")} />
       </Link>
     </SheetClose>
   );
