@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
-import { TbArrowRight, TbArrowUpRight, TbCircleCheck, TbRulerMeasure, TbShieldCheck, TbSun } from "react-icons/tb";
+import { TbArrowRight, TbArrowUpRight, TbCircleCheck } from "react-icons/tb";
 import { Spotlight } from "@/components/aceternity/spotlight";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Button } from "@/components/ui/button";
-import { Float } from "@/components/site/float";
+import { HeroCarousel } from "@/components/home/hero-carousel";
 import { ProductIcon } from "@/components/site/product-icon";
 import { Reveal } from "@/components/site/reveal";
 import { TypedText } from "@/components/site/typed-text";
-import { imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
 import { site, whatsappLink } from "@/lib/site";
 
@@ -28,7 +27,7 @@ export function Hero() {
       </div>
       <Spotlight className="-top-40 left-0 md:-top-24 md:left-40" fill="var(--color-sky)" />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pt-14 pb-12 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-20 lg:pb-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pt-10 pb-10 sm:px-6 sm:pt-14 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-20 lg:pb-16">
         {/* ── Copy ── */}
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1 pr-3 pl-1 text-xs font-medium text-white/80 backdrop-blur">
@@ -76,56 +75,9 @@ export function Hero() {
           </ul>
         </Reveal>
 
-        {/* ── Photo collage with floating fact cards ── */}
-        <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-          <div className="grid grid-cols-5 grid-rows-6 gap-3 sm:gap-4 [aspect-ratio:5/4]">
-            <Float delay={0.1} distance={0} className="col-span-3 row-span-6 overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-2xl shadow-black/40">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageSrc("shade-residential-carport", "sm")} alt="A car shade port over a family vehicle" fetchPriority="high" className="size-full object-cover" />
-            </Float>
-            <Float delay={0.25} distance={0} className="col-span-2 row-span-3 overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-2xl shadow-black/40">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageSrc("tiles-home-gym", "sm")} alt="Interlocking rubber tiles in a gym" className="size-full object-cover" />
-            </Float>
-            <Float delay={0.4} distance={0} className="col-span-2 row-span-3 overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-2xl shadow-black/40">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageSrc("gutter-white-downpipe", "sm")} alt="Seamless gutter with downpipe" className="size-full object-cover" />
-            </Float>
-          </div>
-
-          {/* floating fact cards — only claims the site already makes */}
-          <Float delay={0.7} className="absolute -top-4 -left-3 sm:-left-8">
-            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-ink/70 px-4 py-3 shadow-xl backdrop-blur-md">
-              <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-logo-cyan to-logo-blue text-white">
-                <TbShieldCheck className="size-5" />
-              </span>
-              <span className="text-sm leading-tight font-semibold">
-                Workmanship
-                <span className="block text-xs font-normal text-white/60">guarantee on every job</span>
-              </span>
-            </div>
-          </Float>
-          <Float delay={0.9} duration={7} className="absolute top-[42%] -right-2 hidden sm:block xl:-right-6">
-            <div className="rounded-2xl border border-white/15 bg-ink/70 px-4 py-3 shadow-xl backdrop-blur-md">
-              <p className="flex items-center gap-1.5 text-xs text-white/60">
-                <TbSun className="size-4 text-highlight" /> Car shade fabric
-              </p>
-              <p className="mt-1 font-heading text-2xl font-extrabold">
-                95%<span className="ml-1 text-sm font-medium text-white/70">UV block-out</span>
-              </p>
-            </div>
-          </Float>
-          <Float delay={1.1} duration={6.5} className="absolute -bottom-5 left-4 sm:left-10">
-            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white px-4 py-3 text-ink shadow-xl">
-              <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-magenta to-logo-purple text-white">
-                <TbRulerMeasure className="size-5" />
-              </span>
-              <span className="text-sm leading-tight font-semibold">
-                Free site visit
-                <span className="block text-xs font-normal text-muted-foreground">Measure · advise · quote</span>
-              </span>
-            </div>
-          </Float>
+        {/* ── Desktop only: photo carousel. Hidden (and never downloaded) on mobile. ── */}
+        <div className="hidden lg:block lg:pr-6 lg:pl-8">
+          <HeroCarousel />
         </div>
       </div>
 
@@ -136,14 +88,14 @@ export function Hero() {
             <Reveal as="li" key={p.slug} delay={0.2 + i * 0.08}>
               <Link
                 href={`/products/${p.slug}/`}
-                className="group flex h-full items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-magenta/40 hover:bg-white/[0.07]"
+                className="group flex h-full items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur sm:p-4 transition-all hover:-translate-y-0.5 hover:border-magenta/40 hover:bg-white/[0.07]"
               >
-                <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-white/10 text-highlight ring-1 ring-white/15 transition-colors group-hover:bg-gradient-to-br group-hover:from-logo-blue group-hover:to-magenta group-hover:text-white">
+                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white/10 sm:size-12 text-highlight ring-1 ring-white/15 transition-colors group-hover:bg-gradient-to-br group-hover:from-logo-blue group-hover:to-magenta group-hover:text-white">
                   <ProductIcon icon={p.icon} className="size-6" />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold">{p.name}</span>
-                  <span className="mt-0.5 line-clamp-1 block text-sm text-white/55">{p.short}</span>
+                  <span className="mt-0.5 line-clamp-1 hidden text-sm text-white/55 sm:block">{p.short}</span>
                 </span>
                 <TbArrowUpRight className="size-5 shrink-0 text-white/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-magenta" />
               </Link>

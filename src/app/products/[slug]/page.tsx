@@ -47,8 +47,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       {/* HERO */}
       <section className="relative isolate overflow-hidden bg-ink text-white">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageSrc(p.cover)} alt="" fetchPriority="high" className="absolute inset-0 -z-20 size-full object-cover opacity-35" />
+        {/* Decorative backdrop as a CSS background: an <img> here gets preloaded by React
+            whenever this route is prefetched, i.e. on every page that links to it. */}
+        <div aria-hidden className="absolute inset-0 -z-20 bg-cover bg-center opacity-35" style={{ backgroundImage: `url(${imageSrc(p.cover)})` }} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
         <Spotlight className="-top-40 left-0 md:-top-20 md:left-40" fill="var(--color-sky)" />
         <div className="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:pt-24 lg:pb-28">
