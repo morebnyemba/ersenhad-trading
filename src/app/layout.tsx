@@ -1,16 +1,26 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { site } from "@/lib/site";
+import { Providers } from "@/components/site/providers";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
+import { TopBar } from "@/components/site/top-bar";
+import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { products } from "@/lib/products";
+import { site } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+const sans = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const heading = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-display" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: `${site.name} — ${site.tagline}`, template: `%s | ${site.name}` },
   description: site.description,
-  openGraph: { siteName: site.name, type: "website", locale: "en_ZW" },
+  openGraph: { siteName: site.name, type: "website", locale: "en_ZW", images: ["/gallery/shade-residential-carport.webp"] },
 };
+
+export const viewport: Viewport = { themeColor: "#0f1d45" };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -31,12 +41,16 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans antialiased", sans.variable, heading.variable)}>
       <body className="flex min-h-screen flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <Providers>
+          <TopBar />
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <WhatsAppFab />
+        </Providers>
       </body>
     </html>
   );
