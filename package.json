@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve out",
+    "start": "serve out",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "serve": "^14.2.6",
     "tailwindcss": "^4.3.3",
     "typescript": "^5"
   }
