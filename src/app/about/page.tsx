@@ -33,7 +33,7 @@ export default function About() {
       <section className="relative isolate overflow-hidden bg-ink text-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={imageSrc("shade-4x4-bay")} alt="" fetchPriority="high" className="absolute inset-0 -z-20 size-full object-cover opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-violet/40" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-brand/35" />
         <DotPattern className="-z-10 text-white/[0.06]" />
         <Reveal className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
           <p className="text-sm font-semibold tracking-[0.18em] text-highlight uppercase">About us</p>
@@ -97,7 +97,7 @@ export default function About() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand via-brand-dark to-violet p-10 text-white sm:p-14">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-dark via-brand to-sky p-10 text-white sm:p-14">
           <DotPattern className="text-white/10" />
           <div className="relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div>
