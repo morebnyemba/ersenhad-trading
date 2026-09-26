@@ -11,8 +11,8 @@ export const site = {
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://ersenhadtrading.co.zw"),
-  phone: "+263 77 000 0000", // TODO
-  whatsapp: "263770000000", // TODO: digits only, international format
+  phone: "+263 77 234 3581",
+  whatsapp: "263772343581", // digits only, international format (same number as phone)
   email: "sales@ersenhadtrading.co.zw", // TODO
   address: {
     street: "123 Example Road", // TODO
