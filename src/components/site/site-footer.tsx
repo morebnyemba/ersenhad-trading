@@ -7,7 +7,7 @@ import { site, telHref } from "@/lib/site";
 export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-ink text-white/70">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-brand via-sky to-highlight" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-logo-cyan via-logo-blue to-magenta" />
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
           <Logo inverted />

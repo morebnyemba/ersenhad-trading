@@ -8,12 +8,17 @@
 @theme inline {
   --color-brand: var(--primary);
   /* Palette: 60% white/light · 20% navy (ink) · 10% corporate blue (brand) + cyan (highlight)
-     + supporting sky blue (sky) & aqua (aqua) for gradients & effects. */
+     + supporting sky blue (sky) & aqua (aqua) for gradients & effects.
+     Magenta + purple are sampled from the logo mark and used only as small accents. */
   --color-brand-dark: oklch(0.42 0.17 262);
   --color-highlight: oklch(0.8 0.13 215);
   --color-ink: oklch(0.23 0.065 264);
   --color-sky: oklch(0.72 0.13 238);
   --color-aqua: oklch(0.78 0.12 190);
+  --color-magenta: #f1027d;
+  --color-logo-purple: #9808da;
+  --color-logo-cyan: #00b9f9;
+  --color-logo-blue: #006ec5;
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-border-beam: border-beam calc(var(--duration) * 1s) infinite linear;
   --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;

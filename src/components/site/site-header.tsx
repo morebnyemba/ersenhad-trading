@@ -40,7 +40,7 @@ function ActiveBar() {
     <motion.span
       layoutId="nav-active"
       transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-      className="absolute inset-x-3 -bottom-4 h-[3px] rounded-t-full bg-brand"
+      className="absolute inset-x-3 -bottom-4 h-[3px] rounded-t-full bg-gradient-to-r from-brand to-magenta"
     />
   );
 }

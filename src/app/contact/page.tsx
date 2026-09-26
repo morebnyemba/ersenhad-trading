@@ -26,7 +26,7 @@ export default function Contact() {
       <section className="relative overflow-hidden border-b bg-muted/40">
         <DotPattern className="text-ink/[0.05] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
         <Reveal className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
-          <p className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">Contact</p>
+          <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-brand uppercase"><span aria-hidden className="h-0.5 w-6 rounded-full bg-magenta" />Contact</p>
           <h1 className="mt-3 font-heading text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">Let&apos;s talk about your project</h1>
           <p className="mt-4 flex items-center gap-2 text-muted-foreground"><TbClock className="size-4" /> {site.hours}</p>
         </Reveal>

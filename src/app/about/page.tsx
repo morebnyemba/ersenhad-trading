@@ -32,12 +32,12 @@ export default function About() {
   return (
     <>
       <section className="relative isolate overflow-hidden bg-ink text-white">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageSrc("shade-4x4-bay")} alt="" fetchPriority="high" className="absolute inset-0 -z-20 size-full object-cover opacity-25" />
+        {/* Decorative backdrop as a CSS background so route prefetches don't preload it. */}
+        <div aria-hidden className="absolute inset-0 -z-20 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(${imageSrc("shade-4x4-bay")})` }} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-brand/35" />
         <DotPattern className="-z-10 text-white/[0.06]" />
         <Reveal className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
-          <p className="text-sm font-semibold tracking-[0.18em] text-highlight uppercase">About us</p>
+          <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-highlight uppercase"><span aria-hidden className="h-0.5 w-6 rounded-full bg-magenta" />About us</p>
           <h1 className="mt-4 max-w-3xl font-heading text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
             Practical solutions that protect, pave and drain.
           </h1>
