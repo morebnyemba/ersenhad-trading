@@ -8,7 +8,7 @@ export function BorderBeam({
   duration = 12,
   delay = 0,
   colorFrom = "var(--color-highlight)",
-  colorTo = "var(--color-magenta)",
+  colorTo = "var(--color-brand)",
 }: {
   className?: string;
   size?: number;
