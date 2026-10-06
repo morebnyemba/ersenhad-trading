@@ -60,7 +60,7 @@ export const aboutFaqs: Faq[] = [
   },
   {
     q: "Where are you based?",
-    a: `We're based at ${site.address.street}, ${site.address.city}. Call ahead if you'd like to visit — most of our time is spent on site.`,
+    a: `Our shop is at ${site.address.unit}, ${site.address.street}, ${site.address.city} — ${site.address.landmark}. Call ahead if you'd like to visit, as our team is often out on site.`,
   },
   {
     q: "What kinds of clients do you work with?",

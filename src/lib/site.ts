@@ -15,7 +15,9 @@ export const site = {
   whatsapp: "263772343581", // digits only, international format (same number as phone)
   email: "sales@ersenhadtrading.co.zw", // TODO
   address: {
-    street: "123 Example Road", // TODO
+    unit: "Shop 18, Avilla Mall",
+    street: "Cnr 4th Street & Kwame Nkrumah Avenue",
+    landmark: "opposite Runhare House",
     city: "Harare",
     country: "Zimbabwe",
     countryCode: "ZW",
@@ -25,6 +27,12 @@ export const site = {
 
 /** Web agency credit shown in the footer copyright strip. */
 export const credit = { name: "Slyker Tech Web Services", url: "https://slykertech.net" };
+
+/** Shop address on one line, e.g. for the footer and contact cards. */
+export const addressLine = `${site.address.unit}, ${site.address.street}, ${site.address.city}`;
+export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `Avilla Mall, ${site.address.street}, ${site.address.city}, ${site.address.country}`,
+)}`;
 
 export const telHref = `tel:${site.phone.replace(/\s/g, "")}`;
 

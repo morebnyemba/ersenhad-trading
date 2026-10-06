@@ -10,7 +10,7 @@ import { Reveal } from "@/components/site/reveal";
 import { contactFaqs } from "@/lib/faqs";
 import { imageSrc } from "@/lib/gallery";
 import { pageMeta } from "@/lib/seo";
-import { site, telHref, whatsappLink } from "@/lib/site";
+import { addressLine, mapsHref, site, telHref, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact",
@@ -20,12 +20,11 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default function Contact() {
-  const mapQuery = encodeURIComponent(`${site.address.street}, ${site.address.city}, ${site.address.country}`);
   const cards = [
     { icon: FaWhatsapp, label: "WhatsApp", value: "Fastest response", href: whatsappLink(`Hi ${site.name}`) },
     { icon: TbPhone, label: "Call us", value: site.phone, href: telHref },
     { icon: TbMail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-    { icon: TbMapPin, label: "Visit", value: `${site.address.street}, ${site.address.city}`, href: `https://maps.google.com/?q=${mapQuery}` },
+    { icon: TbMapPin, label: "Visit", value: `${addressLine} (${site.address.landmark})`, href: mapsHref },
   ];
   return (
     <>

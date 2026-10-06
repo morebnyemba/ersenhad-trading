@@ -7,7 +7,7 @@ import { Logo } from "@/components/site/logo";
 import { ProductIcon } from "@/components/site/product-icon";
 import { quoteHref } from "@/lib/links";
 import { products } from "@/lib/products";
-import { credit, site, telHref, whatsappLink } from "@/lib/site";
+import { addressLine, credit, mapsHref, site, telHref, whatsappLink } from "@/lib/site";
 
 const company = [
   { href: "/", label: "Home" },
@@ -20,12 +20,11 @@ const heading = "text-xs font-semibold tracking-[0.18em] text-white uppercase";
 const link = "text-sm text-white/65 transition-colors hover:text-white";
 
 export function SiteFooter() {
-  const mapQuery = encodeURIComponent(`${site.address.street}, ${site.address.city}, ${site.address.country}`);
   const contact: { icon: IconType; label: string; value: string; href: string; external?: boolean }[] = [
     { icon: TbPhone, label: "Call", value: site.phone, href: telHref },
     { icon: FaWhatsapp, label: "WhatsApp", value: "Chat with us", href: whatsappLink(`Hi ${site.name}`), external: true },
     { icon: TbMail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-    { icon: TbMapPin, label: "Visit", value: `${site.address.street}, ${site.address.city}`, href: `https://maps.google.com/?q=${mapQuery}`, external: true },
+    { icon: TbMapPin, label: "Visit", value: addressLine, href: mapsHref, external: true },
   ];
 
   return (
