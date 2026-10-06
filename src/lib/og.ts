@@ -22,7 +22,7 @@ const pages: OgCard[] = [
     eyebrow: `Supply & installation · ${site.address.country}`,
     title: "Protect, pave and drain — built to last.",
     subtitle: "Chromadek, shade net and PVC car shades, interlocking rubber tiles and seamless gutters.",
-    photo: "shade-residential-carport",
+    photo: "shade-cantilever-suv",
   },
   {
     key: "about",
@@ -30,7 +30,7 @@ const pages: OgCard[] = [
     eyebrow: "About us",
     title: "One accountable team, three specialities.",
     subtitle: "We measure, supply and install — from first measurement to the final hand-over.",
-    photo: "shade-4x4-bay",
+    photo: "shade-chromadek-install",
   },
   {
     key: "gallery",
@@ -38,7 +38,7 @@ const pages: OgCard[] = [
     eyebrow: "Project gallery",
     title: "Our work, up close.",
     subtitle: "Car shade, rubber flooring and guttering installations.",
-    photo: "tiles-playground-red",
+    photo: "shade-commercial-entrance",
   },
   {
     key: "contact",
@@ -54,7 +54,7 @@ const pages: OgCard[] = [
     eyebrow: "Project planner",
     title: "Estimate your project in a minute.",
     subtitle: "Car count, floor size or house size in — layout, quantities and an estimated price out.",
-    photo: "shade-4x4-bay",
+    photo: "shade-net-courtyard",
   },
 ];
 

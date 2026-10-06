@@ -27,7 +27,7 @@ export default function GalleryPage() {
         eyebrow="Gallery"
         title="Our work, up close"
         description="Browse car shade, rubber flooring and guttering projects. Filter by service and tap any photo to view it full-screen."
-        image={imageSrc("tiles-playground-red")}
+        image={imageSrc("shade-cantilever-twin")}
         crumbs={[{ href: "/", label: "Home" }, { label: "Gallery" }]}
       >
         <ul className="flex flex-wrap gap-3">

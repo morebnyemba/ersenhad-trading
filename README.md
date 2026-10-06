@@ -72,8 +72,9 @@ Put it behind Nginx Proxy Manager for TLS. Any static host (Cloudflare Pages, Ve
 
 ## Before launch
 
-- [ ] Replace placeholder contact details in `src/lib/site.ts` (search for `TODO`)
-- [ ] **Replace the placeholder gallery photos** (royalty-free Unsplash images) with real Ersenhad installations: add `<id>.webp` (≤1400px) and `<id>-sm.webp` (≤720px) to `public/gallery/` and list them in `src/lib/gallery.ts`
+- [ ] Replace the placeholder email in `src/lib/site.ts` (search for `TODO`)
+- [x] Real car shade and rubber tile photos are in the gallery
+- [ ] **Replace the placeholder gutter photos** (royalty-free Unsplash images) with real Ersenhad installations: add `<id>.webp` (≤1400px) and `<id>-sm.webp` (≤720px) to `public/gallery/` and list them in `src/lib/gallery.ts`
 - [ ] **Replace the sample planner prices** in `src/config/pricing.ts` and set `status: "live"`
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the production domain
 - [ ] Register a Google Business Profile with the same name, address and phone

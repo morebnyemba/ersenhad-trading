@@ -40,7 +40,7 @@ export default function About() {
         eyebrow="About us"
         title="Practical solutions that protect, pave and drain."
         description={`${site.name} supplies and installs car shade ports, interlocking rubber floor tiles and seamless gutters for homes, businesses, schools and institutions across ${site.address.country}.`}
-        image={imageSrc("shade-4x4-bay")}
+        image={imageSrc("shade-chromadek-carport")}
         crumbs={[{ href: "/", label: "Home" }, { label: "About" }]}
       />
 
@@ -66,7 +66,7 @@ export default function About() {
           </Reveal>
         </div>
         <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-          {["tiles-home-gym", "gutter-white-downpipe", "shade-sails-blue", "tiles-playground-red"].map((id, i) => (
+          {["shade-chromadek-install", "tiles-plant-room", "shade-cantilever-install", "tiles-stair-treads"].map((id, i) => (
             <div key={id} className={i % 2 ? "translate-y-8" : ""}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={imageSrc(id, "sm")} alt="" loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover shadow-lg shadow-ink/10" />

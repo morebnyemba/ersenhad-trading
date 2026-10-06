@@ -18,7 +18,7 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "car-shades",
-    cover: "shade-residential-carport",
+    cover: "shade-cantilever-suv",
     highlights: [{ value: 3, suffix: "", label: "roof types" }, { value: 2, suffix: " days", label: "typical install" }],
     name: "Car Shades",
     short: "Chromadek, shade net and PVC carports that protect vehicles from sun, hail and heat.",
@@ -48,7 +48,7 @@ export const products: Product[] = [
   },
   {
     slug: "rubber-tiles",
-    cover: "tiles-home-gym",
+    cover: "tiles-plant-room",
     highlights: [{ value: 40, suffix: "mm", label: "max. thickness" }, { value: 5, suffix: "", label: "colour options" }],
     name: "Interlocking Rubber Tiles",
     short: "Durable, shock-absorbing rubber flooring for gyms, playgrounds and walkways.",

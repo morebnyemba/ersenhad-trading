@@ -14,11 +14,11 @@ import { cn } from "@/lib/utils";
 
 // One slide per photo; each is tied to a service so the caption and link follow it.
 const SLIDES: { id: string; product: ProductSlug }[] = [
-  { id: "shade-residential-carport", product: "car-shades" },
-  { id: "tiles-home-gym", product: "rubber-tiles" },
+  { id: "shade-cantilever-suv", product: "car-shades" },
+  { id: "tiles-plant-room", product: "rubber-tiles" },
   { id: "gutter-white-downpipe", product: "seamless-gutters" },
-  { id: "shade-sails-blue", product: "car-shades" },
-  { id: "tiles-playground-red", product: "rubber-tiles" },
+  { id: "shade-commercial-entrance", product: "car-shades" },
+  { id: "tiles-stair-treads", product: "rubber-tiles" },
 ];
 
 const DELAY = 5000;
