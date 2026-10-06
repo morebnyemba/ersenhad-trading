@@ -4,6 +4,8 @@ export type Product = {
   slug: ProductSlug;
   cover: string;
   highlights: { value: number; suffix: string; label: string }[];
+  /** short key/value lines for the "Specs at a glance" cards */
+  specs: { label: string; value: string }[];
   name: string;
   short: string;
   intro: string;
@@ -20,6 +22,11 @@ export const products: Product[] = [
     slug: "car-shades",
     cover: "shade-cantilever-suv",
     highlights: [{ value: 3, suffix: "", label: "roof types" }, { value: 2, suffix: " days", label: "typical install" }],
+    specs: [
+      { label: "Roof", value: "Chromadek · net · PVC" },
+      { label: "Structure", value: "Standard or cantilever" },
+      { label: "Frame", value: "Galvanised steel" },
+    ],
     name: "Car Shades",
     short: "Chromadek, shade net and PVC carports that protect vehicles from sun, hail and heat.",
     intro:
@@ -49,36 +56,47 @@ export const products: Product[] = [
   {
     slug: "rubber-tiles",
     cover: "tiles-plant-room",
-    highlights: [{ value: 40, suffix: "mm", label: "max. thickness" }, { value: 5, suffix: "", label: "colour options" }],
+    highlights: [{ value: 500, suffix: "mm", label: "square tiles" }, { value: 6, suffix: "", label: "colours" }],
+    specs: [
+      { label: "Surface", value: "Raised coin top" },
+      { label: "Joints", value: "Dovetail, no glue" },
+      { label: "Stairs", value: "Aluminium nosing" },
+    ],
     name: "Interlocking Rubber Tiles",
-    short: "Durable, shock-absorbing rubber flooring for gyms, playgrounds and walkways.",
+    short: "Coin-top interlocking floor tiles for plant rooms, workshops, offices and stairs.",
     intro:
-      "Made from recycled rubber granules, our interlocking tiles clip together without glue to create a slip-resistant, cushioned surface. They are ideal where safety, drainage and durability matter.",
+      "Heavy-duty coin-top tiles with dovetail edges that lock together without glue. The raised coins give grip underfoot, the floor is comfortable to stand on all day, and most rooms are laid in a day — with no adhesive to cure before you use the space.",
     icon: "tiles",
     features: [
-      { title: "Impact absorbing", body: "Cushions falls on playgrounds and protects gym floors from dropped weights." },
-      { title: "Slip resistant", body: "Textured surface grips even when wet — perfect for pool surrounds and walkways." },
-      { title: "Glue-free install", body: "Puzzle-edge tiles lock together, so damaged tiles can be swapped individually." },
-      { title: "Eco-friendly", body: "Manufactured from recycled tyres and fully weatherproof for indoor or outdoor use." },
+      { title: "Coin-top grip", body: "Raised coins give a sure footing and channel away dust and spills, so the surface stays grippy." },
+      { title: "Glue-free dovetail joints", body: "Tiles lock together over concrete or screed. Any damaged tile can be unclipped and replaced on its own." },
+      { title: "Built for hard use", body: "Stands up to foot traffic, trolleys and equipment in plant rooms, workshops and warehouses." },
+      { title: "Floors and stairs", body: "We cut tiles to each stair tread and finish the edge with aluminium nosing for a neat, non-slip staircase." },
     ],
-    options: ["15mm, 20mm, 25mm, 30mm & 40mm thickness", "Black, red, green, blue & grey", "Edge ramps & corner pieces", "Supply only or supply & install"],
-    uses: ["Gyms & fitness studios", "Children's playgrounds & schools", "Pool surrounds & patios", "Stables, kennels & workshops"],
+    options: ["500 × 500 mm interlocking tiles", "Black, grey, yellow, red, blue & green", "Mix colours to mark walkways and zones", "Stair covering with aluminium nosing", "Edge ramps for exposed edges", "Supply only or supply & install"],
+    uses: ["Plant rooms & switch rooms", "Workshops, garages & warehouses", "Offices, shops & corridors", "Stairs, gyms & play areas"],
     faqs: [
-      { q: "What base do the tiles need?", a: "A level concrete, paving or compacted gravel base. We can prepare the base as part of the job." },
-      { q: "Which thickness should I choose?", a: "20–25mm suits gyms and walkways; 30–40mm is recommended under play equipment for fall protection." },
-      { q: "Are they suitable outdoors?", a: "Yes — they are UV and weather resistant and allow water to drain through the joints." },
-      { q: "Can I buy the tiles without installation?", a: "Yes. Rubber tiles are available supply-only, with edge ramps and corner pieces, or as a full supply-and-install job." },
-      { q: "How do I clean and maintain them?", a: "Sweep regularly and hose down when needed; a mild detergent handles stubborn marks. Damaged tiles can be unclipped and replaced individually." },
+      { q: "What floor do the tiles go on?", a: "A level, dry concrete or screed floor. We check the base when we measure and tell you if it needs any preparation first." },
+      { q: "Are the tiles glued down?", a: "No. The dovetail edges lock the tiles together, so the floor stays in place without adhesive and single tiles can be lifted and replaced." },
+      { q: "Can you cover stairs?", a: "Yes. We cut tiles to fit each tread and fix aluminium nosing along the front edge for a neat, non-slip finish." },
+      { q: "Which colours are available?", a: "Black, grey, yellow, red, blue and green. Colours can be mixed — for example to mark walkways, loading zones or play areas." },
+      { q: "Can I buy the tiles without installation?", a: "Yes. Tiles and edge ramps are available supply-only, or as a full supply-and-install job." },
+      { q: "How do I clean them?", a: "Sweep or vacuum regularly and mop with a mild detergent. The coins lift dirt off the walking surface, so the floor is easy to keep looking clean." },
     ],
     quoteFields: [
-      { label: "Area (m²)", placeholder: "e.g. 60" },
-      { label: "Thickness / colour", placeholder: "e.g. 25mm, green" },
+      { label: "Area (m²)", placeholder: "e.g. 30" },
+      { label: "Room / colour", placeholder: "e.g. plant room, black" },
     ],
   },
   {
     slug: "seamless-gutters",
     cover: "gutter-white-downpipe",
     highlights: [{ value: 150, suffix: "mm", label: "max. profile" }, { value: 1, suffix: " day", label: "typical house" }],
+    specs: [
+      { label: "Material", value: "Pre-painted aluminium" },
+      { label: "Profiles", value: "125 & 150 mm" },
+      { label: "Downpipes", value: "Round or square" },
+    ],
     name: "Seamless Gutters",
     short: "Leak-free aluminium gutters roll-formed on site to the exact length of your roof.",
     intro:

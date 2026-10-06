@@ -19,7 +19,7 @@ export type Pricing = {
   currency: string;
   spread: number;
   carShades: { perM2: Record<"standard" | "cantilever", Record<"chromadek" | "net" | "pvc", Rate>> };
-  rubberTiles: { perM2: Record<15 | 20 | 25 | 30 | 40, Rate>; perRamp: Rate; perCorner: Rate };
+  rubberTiles: { perM2: Rate; perRamp: Rate; perCorner: Rate };
   gutters: { perMetre: Record<125 | 150, Rate>; downpipePerMetre: Rate; perCorner: Rate; perEndCap: Rate };
 };
 
@@ -39,8 +39,8 @@ export const pricing: Pricing = {
   },
 
   rubberTiles: {
-    /** per m² by thickness (mm), supplied and laid */
-    perM2: { 15: 22, 20: 26, 25: 30, 30: 36, 40: 45 },
+    /** per m² of 500 × 500 mm coin-top tiles, supplied and laid */
+    perM2: 30,
     /** each edge ramp / corner piece */
     perRamp: 4,
     perCorner: 5,
