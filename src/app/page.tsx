@@ -18,7 +18,7 @@ import { site } from "@/lib/site";
 import { gallery, imageSrc } from "@/lib/gallery";
 import { products } from "@/lib/products";
 
-const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Playgrounds", "Warehouses", "Hotels & lodges", "Retail centres"];
+const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Plant rooms", "Warehouses", "Hotels & lodges", "Retail centres"];
 
 const featured = ["shade-cantilever-suv", "tiles-plant-room", "gutter-white-downpipe", "shade-commercial-entrance", "tiles-stair-treads", "shade-chromadek-carport"].map(
   (id) => gallery.find((g) => g.id === id)!,

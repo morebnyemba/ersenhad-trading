@@ -10,7 +10,7 @@ export type Faq = { q: string; a: string };
 export const generalFaqs: Faq[] = [
   {
     q: "How much will my project cost?",
-    a: "Every site is different, so we price once we know your site and requirements. As a guide, car shades are priced by size, roof type and structure style, rubber tiles per square metre and thickness, and seamless gutters per metre including downpipes and fittings. Send us rough sizes on WhatsApp for an indicative figure.",
+    a: "Every site is different, so we price once we know your site and requirements. As a guide, car shades are priced by size, roof type and structure style, rubber tiles per square metre, and seamless gutters per metre including downpipes and fittings. Send us rough sizes on WhatsApp for an indicative figure.",
   },
   {
     q: "Are your quotations free?",

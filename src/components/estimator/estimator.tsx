@@ -12,16 +12,16 @@ import {
   estimateCarShade,
   estimateGutters,
   estimateTiles,
-  fallHeights,
   formatPrice,
   roofTypes,
   shadeCovers,
+  tileColours,
   tileUses,
   vehicleBays,
-  type FallHeight,
   type RoofType,
   type ShadeCover,
   type ShadeStyle,
+  type TileColour,
   type TileUse,
   type VehicleType,
 } from "@/lib/estimator";
@@ -57,8 +57,8 @@ export function Estimator() {
   // tiles
   const [tLen, setTLen] = useState(6);
   const [tWid, setTWid] = useState(4);
-  const [use, setUse] = useState<TileUse>("gym");
-  const [fall, setFall] = useState<FallHeight>("low");
+  const [use, setUse] = useState<TileUse>("plant");
+  const [colour, setColour] = useState<TileColour>("black");
   const [edges, setEdges] = useState(true);
   // gutters
   const [gLen, setGLen] = useState(15);
@@ -87,20 +87,19 @@ export function Estimator() {
       return { rows, summary, key: { label: "Covered area", value: fmt(r.area, " m²") }, price: r.price, visual: <CarportVisual rows={r.rows} baysPerRow={r.baysPerRow} style={style} cover={cover} />, note: null as string | null };
     }
     if (service === "rubber-tiles") {
-      const r = estimateTiles({ length: tLen, width: tWid, use, fall, edges });
+      const r = estimateTiles({ length: tLen, width: tWid, edges });
       const rows: Row[] = [
         { label: "Floor area", value: fmt(r.area, " m²"), strong: true },
-        { label: "Recommended thickness", value: r.thickness ? `${r.thickness} mm` : "Specialist system — talk to us", strong: true },
-        { label: "Tiles (500 × 500 mm)", value: `≈ ${fmt(r.tiles)} incl. 5% cutting allowance` },
+        { label: "Tiles (500 × 500 mm)", value: `≈ ${fmt(r.tiles)} incl. 5% cutting allowance`, strong: true },
+        { label: "Colour", value: tileColours[colour].label },
         ...(edges ? [{ label: "Edge ramps / corners", value: `≈ ${r.ramps} ramps · ${r.corners} corners` }] : []),
       ];
       const summary = [
         `Area: ${r.length} m × ${r.width} m (${r.area} m²)`,
-        `Use: ${tileUses[use].label}${use === "playground" ? `, fall height ${fallHeights[fall].label}` : ""}`,
-        `Est. ${r.thickness ? `${r.thickness} mm` : "specialist thickness"}, ≈${r.tiles} tiles${edges ? `, ≈${r.ramps} edge ramps + ${r.corners} corners` : ""}`,
+        `Room: ${tileUses[use].label}, colour: ${tileColours[colour].label.toLowerCase()}`,
+        `Est. ≈${r.tiles} coin-top tiles${edges ? `, ≈${r.ramps} edge ramps + ${r.corners} corners` : ""}`,
       ];
-      const note = r.thickness == null ? "Fall heights over 1.3 m need a thicker, specified safety surface — we'll advise on the right system." : null;
-      return { rows, summary, key: { label: "Tiles needed", value: `≈ ${fmt(r.tiles)}` }, price: r.price, visual: <TilesVisual length={r.length} width={r.width} />, note };
+      return { rows, summary, key: { label: "Tiles needed", value: `≈ ${fmt(r.tiles)}` }, price: r.price, visual: <TilesVisual length={r.length} width={r.width} />, note: null as string | null };
     }
     const r = estimateGutters({ length: gLen, width: gWid, roof, storeys });
     const rows: Row[] = [
@@ -115,7 +114,7 @@ export function Estimator() {
       `Est. ${r.gutter} m of ${r.profile} mm gutter, ${r.downpipes} downpipes (≈${r.downpipeLength} m)`,
     ];
     return { rows, summary, key: { label: "Gutter length", value: fmt(r.gutter, " m") }, price: r.price, visual: <GutterVisual storeys={r.storeys} roof={roof} downpipes={r.downpipes} />, note: null };
-  }, [service, vehicles, vType, style, cover, tLen, tWid, use, fall, edges, gLen, gWid, roof, storeys]);
+  }, [service, vehicles, vType, style, cover, tLen, tWid, use, colour, edges, gLen, gWid, roof, storeys]);
 
   const priceText = result.price ? formatPrice(result.price) : null;
   const message = [
@@ -176,14 +175,12 @@ export function Estimator() {
                     <Stepper label="width" value={tWid} onChange={setTWid} min={0.5} max={200} step={0.5} unit="m" />
                   </Field>
                 </div>
-                <Field label="What's the floor for?" hint="Sets the recommended thickness">
-                  <Choice name="tile-use" columns={3} value={use} onChange={setUse} options={(Object.keys(tileUses) as TileUse[]).map((k) => ({ value: k, label: tileUses[k].label, hint: tileUses[k].hint }))} />
+                <Field label="Where are the tiles going?">
+                  <Choice name="tile-use" value={use} onChange={setUse} options={(Object.keys(tileUses) as TileUse[]).map((k) => ({ value: k, label: tileUses[k].label, hint: tileUses[k].hint }))} />
                 </Field>
-                {use === "playground" && (
-                  <Field label="Highest fall point of the equipment" hint="Platform or swing seat height">
-                    <Choice name="fall-height" columns={3} value={fall} onChange={setFall} options={(Object.keys(fallHeights) as FallHeight[]).map((k) => ({ value: k, label: fallHeights[k].label }))} />
-                  </Field>
-                )}
+                <Field label="Colour" hint="Mix colours to mark walkways or zones">
+                  <Choice name="tile-colour" columns={3} value={colour} onChange={setColour} options={(Object.keys(tileColours) as TileColour[]).map((k) => ({ value: k, label: tileColours[k].label }))} />
+                </Field>
                 <Field label="Exposed edges?" hint="Ramps give a trip-free edge where the floor meets open ground">
                   <Choice name="edges" value={edges ? "yes" : "no"} onChange={(v) => setEdges(v === "yes")} options={[{ value: "yes", label: "Yes, add edge ramps" }, { value: "no", label: "No, wall to wall" }]} />
                 </Field>

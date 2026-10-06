@@ -69,32 +69,26 @@ export function estimateCarShade(i: { vehicles: number; type: VehicleType; style
 
 /* ───────────────────────── Rubber tiles ───────────────────────── */
 
-export type TileUse = "gym" | "walkway" | "playground";
-export type TileThickness = 15 | 20 | 25 | 30 | 40;
-export type FallHeight = "low" | "mid" | "high";
+export type TileUse = "plant" | "workshop" | "office" | "gym";
+export type TileColour = "black" | "grey" | "mixed";
 
-export const TILE_SIZE = 0.5; // 500 × 500 mm interlocking tiles
+export const TILE_SIZE = 0.5; // 500 × 500 mm coin-top interlocking tiles
 export const TILE_WASTE = 0.05; // cutting allowance
 
 export const tileUses: Record<TileUse, { label: string; hint: string }> = {
-  gym: { label: "Gym / fitness", hint: "Weights, machines, studios" },
-  walkway: { label: "Walkway / patio", hint: "Paths, pool surrounds, patios" },
-  playground: { label: "Playground", hint: "Under play equipment" },
+  plant: { label: "Plant / switch room", hint: "Generators, switchgear, pumps" },
+  workshop: { label: "Workshop / garage", hint: "Warehouses, stores, garages" },
+  office: { label: "Office / shop", hint: "Corridors, reception, retail" },
+  gym: { label: "Gym / play area", hint: "Studios, schools, kids' rooms" },
 };
 
-export const fallHeights: Record<FallHeight, { label: string; thickness: TileThickness | null }> = {
-  low: { label: "Up to 1.0 m", thickness: 30 },
-  mid: { label: "1.0 – 1.3 m", thickness: 40 },
-  high: { label: "Over 1.3 m", thickness: null }, // needs a thicker, specified system — talk to us
+export const tileColours: Record<TileColour, { label: string }> = {
+  black: { label: "Black" },
+  grey: { label: "Grey" },
+  mixed: { label: "Colours / mixed" },
 };
 
-export function recommendedThickness(use: TileUse, fall: FallHeight): TileThickness | null {
-  if (use === "gym") return 25;
-  if (use === "walkway") return 20;
-  return fallHeights[fall].thickness;
-}
-
-export function estimateTiles(i: { length: number; width: number; use: TileUse; fall: FallHeight; edges: boolean }, pricing: Pricing = defaultPricing) {
+export function estimateTiles(i: { length: number; width: number; edges: boolean }, pricing: Pricing = defaultPricing) {
   const length = Math.max(0.5, Math.min(200, i.length));
   const width = Math.max(0.5, Math.min(200, i.width));
   const area = round1(length * width);
@@ -103,10 +97,9 @@ export function estimateTiles(i: { length: number; width: number; use: TileUse; 
   const perimeter = round1(2 * (length + width));
   const ramps = i.edges ? Math.ceil(perimeter / TILE_SIZE) : 0;
   const corners = i.edges ? 4 : 0;
-  const thickness = recommendedThickness(i.use, i.fall);
   const t = pricing.rubberTiles;
-  const price = thickness ? priceRange(cost([t.perM2[thickness], area], [t.perRamp, ramps], [t.perCorner, corners]), pricing) : null;
-  return { length, width, area, tiles, perimeter, ramps, corners, thickness, price };
+  const price = priceRange(cost([t.perM2, area], [t.perRamp, ramps], [t.perCorner, corners]), pricing);
+  return { length, width, area, tiles, perimeter, ramps, corners, price };
 }
 
 /* ───────────────────────── Seamless gutters ───────────────────────── */

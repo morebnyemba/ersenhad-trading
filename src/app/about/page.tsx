@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { TbContract, TbRecycle, TbShieldCheck, TbTarget, TbTrafficCone, TbUsersGroup } from "react-icons/tb";
+import { TbContract, TbHammer, TbShieldCheck, TbTarget, TbTrafficCone, TbUsersGroup } from "react-icons/tb";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { ProductIcon } from "@/components/site/product-icon";
 import { Reveal } from "@/components/site/reveal";
@@ -30,7 +30,7 @@ const values = [
   { icon: TbContract, title: "Straight-talking quotes", body: "Itemised, written quotations with clear timelines. If a cheaper option will do the job, we'll tell you." },
   { icon: TbShieldCheck, title: "Workmanship guarantee", body: "We stand behind every installation with a written workmanship guarantee." },
   { icon: TbTrafficCone, title: "Safe, tidy sites", body: "Proper equipment, careful work around your property and a clean site at hand-over." },
-  { icon: TbRecycle, title: "Built to last", body: "Durable, weather-appropriate materials — including rubber tiles made from recycled tyres." },
+  { icon: TbHammer, title: "Built to last", body: "Durable, weather-appropriate materials — galvanised steel, pre-painted aluminium and heavy-duty floor tiles." },
 ];
 
 export default function About() {
