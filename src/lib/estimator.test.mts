@@ -14,9 +14,12 @@ eq("6 cars cantilever: 2 triples", [estimateCarShade({ vehicles: 6, type: "canti
 c = estimateCarShade({ vehicles: 4, type: "chromadek" });
 eq("4 cars chromadek: triple+single ($2,530) beat 2 doubles ($2,600)", [c.units, c.price!.low, c.layout], [[3, 1], 2530, "1 triple + 1 single shades"]);
 eq("chromadek double $1,300", estimateCarShade({ vehicles: 2, type: "chromadek" }).price!.low, 1300);
-c = estimateCarShade({ vehicles: 5, type: "curved" });
-eq("curved (no prices yet): fewest shades, no price", [c.units, c.price], [[3, 2], null]);
-eq("curved 4: evenly split", estimateCarShade({ vehicles: 4, type: "curved" }).units, [2, 2]);
+eq("curved single/double/triple $550/$680/$760", [1, 2, 3].map((n) => estimateCarShade({ vehicles: n, type: "curved" }).price!.low), [550, 680, 760]);
+eq("4 cars curved: triple+single ($1,310) beat 2 doubles ($1,360)", [estimateCarShade({ vehicles: 4, type: "curved" }).units, estimateCarShade({ vehicles: 4, type: "curved" }).price!.low], [[3, 1], 1310]);
+const unpriced = structuredClone(pricing); unpriced.carShades.packages.curved = { 1: null, 2: null, 3: null };
+c = estimateCarShade({ vehicles: 5, type: "curved" }, unpriced);
+eq("unpriced type: fewest shades, no price", [c.units, c.price], [[3, 2], null]);
+eq("unpriced 4: evenly split", estimateCarShade({ vehicles: 4, type: "curved" }, unpriced).units, [2, 2]);
 eq("vehicles clamped low", estimateCarShade({ vehicles: 0, type: "cantilever" }).vehicles, 1);
 eq("vehicles clamped high", estimateCarShade({ vehicles: 99, type: "cantilever" }).vehicles, 20);
 eq("packages always cover every car", [1, 2, 3, 4, 5, 7, 11, 20].every((n) => (["cantilever", "curved", "chromadek"] as const).every((t) => estimateCarShade({ vehicles: n, type: t }).units.reduce((a, b) => a + b, 0) === n)), true);

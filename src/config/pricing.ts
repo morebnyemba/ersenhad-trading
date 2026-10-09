@@ -38,7 +38,7 @@ export const pricing: Pricing = {
      *  Four or more cars are quoted as the cheapest mix of these packages. */
     packages: {
       cantilever: { 1: 480, 2: 550, 3: 650 },
-      curved: { 1: null, 2: null, 3: null }, // TODO(owner): curved shade prices
+      curved: { 1: 550, 2: 680, 3: 760 },
       chromadek: { 1: 680, 2: 1300, 3: 1850 },
     },
     /** typical footprint of each package (m) — from the cantilever price list */
