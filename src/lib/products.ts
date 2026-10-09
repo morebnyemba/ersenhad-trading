@@ -48,7 +48,7 @@ export const products: Product[] = [
     faqs: [
       {
         q: "How much does a car shade cost?",
-        a: `Cantilever shades are ${pricing.currency} ${from("cantilever")} for a single, ${pricing.currency} ${from("cantilever", 2)} for a double and ${pricing.currency} ${from("cantilever", 3)} for a triple. Chromadek shades are ${pricing.currency} ${from("chromadek")}, ${pricing.currency} ${from("chromadek", 2)} and ${pricing.currency} ${from("chromadek", 3)}. Use the project planner for a quick estimate — we confirm the price in a free quotation.`,
+        a: `Cantilever shades are ${pricing.currency} ${from("cantilever")} for a single, ${pricing.currency} ${from("cantilever", 2)} for a double and ${pricing.currency} ${from("cantilever", 3)} for a triple. Curved shades are ${pricing.currency} ${from("curved")}, ${pricing.currency} ${from("curved", 2)} and ${pricing.currency} ${from("curved", 3)}, and Chromadek shades ${pricing.currency} ${from("chromadek")}, ${pricing.currency} ${from("chromadek", 2)} and ${pricing.currency} ${from("chromadek", 3)}. Use the project planner for a quick estimate — we confirm the price in a free quotation.`,
       },
       { q: "Which type should I choose?", a: "Cantilever shades are the most affordable and give cool, breathable shade. Curved shades have a modern, sweeping look. Chromadek gives a solid roof that keeps out rain and hail. We'll advise based on your site and budget." },
       { q: "What's the difference between cantilever and curved shades?", a: "A cantilever shade has shade net stretched over a frame of straight steel posts. A curved shade uses curved steel arms that sweep over the parking bay. Both use shade net; Chromadek shades use a flat steel-sheet roof instead." },
