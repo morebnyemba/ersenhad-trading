@@ -20,7 +20,7 @@ import { products } from "@/lib/products";
 
 const sectors = ["Homes", "Townhouse complexes", "Schools", "Gyms & studios", "Churches", "Offices", "Car dealerships", "Hospitals", "Plant rooms", "Warehouses", "Hotels & lodges", "Retail centres"];
 
-const featured = ["shade-cantilever-suv", "tiles-plant-room", "gutter-white-downpipe", "shade-commercial-entrance", "tiles-stair-treads", "shade-chromadek-carport"].map(
+const featured = ["shade-curved-suv", "tiles-plant-room", "gutter-white-downpipe", "shade-cantilever-garage", "tiles-stair-treads", "shade-chromadek-veranda"].map(
   (id) => gallery.find((g) => g.id === id)!,
 );
 

@@ -1,3 +1,4 @@
+import { pricing } from "@/config/pricing";
 import { site } from "@/lib/site";
 
 export type Faq = { q: string; a: string };
@@ -10,7 +11,7 @@ export type Faq = { q: string; a: string };
 export const generalFaqs: Faq[] = [
   {
     q: "How much will my project cost?",
-    a: "Every site is different, so we price once we know your site and requirements. As a guide, car shades are priced by size, roof type and structure style, rubber tiles per square metre, and seamless gutters per metre including downpipes and fittings. Send us rough sizes on WhatsApp for an indicative figure.",
+    a: `Car shades have set prices for single, double and triple sizes — a cantilever single starts at ${pricing.currency} ${pricing.carShades.packages.cantilever[1]}. Rubber tiles are priced per square metre, and seamless gutters per metre including downpipes and fittings. Try the project planner or send us rough sizes on WhatsApp, and we'll confirm everything in a free quotation.`,
   },
   {
     q: "Are your quotations free?",
@@ -45,7 +46,7 @@ export const galleryFaqs: Faq[] = [
   },
   {
     q: "Can you match colours to my property?",
-    a: "Yes. Chromadek sheeting, shade net and PVC membranes, rubber tiles and pre-painted aluminium gutters all come in a range of colours — we can show you samples before you decide.",
+    a: "Yes. Chromadek sheeting, shade net, rubber tiles and pre-painted aluminium gutters all come in a range of colours — we can show you samples before you decide.",
   },
   {
     q: "Do you work on commercial and school projects?",

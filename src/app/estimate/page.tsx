@@ -21,7 +21,7 @@ export default function EstimatePage() {
         eyebrow="Project planner"
         title="Estimate your project in a minute"
         description="Tell us how many cars, how big the floor, or the size and height of your house — see the layout, quantities and an estimated price range instantly, then send it to us for a free quotation."
-        image={imageSrc("shade-net-courtyard")}
+        image={imageSrc("shade-cantilever-courtyard")}
         crumbs={[{ href: "/", label: "Home" }, { label: "Project planner" }]}
       />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">

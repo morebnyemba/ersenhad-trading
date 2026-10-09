@@ -2,65 +2,68 @@
 
 const roofLook = {
   chromadek: { fill: "#94a3b8", opacity: 0.55, stroke: "#475569" }, // grey steel sheeting (ribbed)
-  net: { fill: "url(#canopy)", opacity: 1, stroke: "var(--color-logo-blue)" }, // translucent shade cloth
-  pvc: { fill: "#f8fafc", opacity: 0.9, stroke: "#94a3b8" }, // white membrane
+  cantilever: { fill: "url(#canopy)", opacity: 1, stroke: "var(--color-logo-blue)" }, // shade net
+  curved: { fill: "url(#canopy)", opacity: 1, stroke: "var(--color-logo-blue)" }, // shade net
 } as const;
 
-export function CarportVisual({
-  rows,
-  baysPerRow,
-  style,
-  cover,
-}: {
-  rows: number;
-  baysPerRow: number;
-  style: "standard" | "cantilever";
-  cover: "chromadek" | "net" | "pvc";
-}) {
-  const look = roofLook[cover];
-  const bayW = 56, bayD = 96, pad = 18, gap = rows === 2 ? 6 : 0;
-  const W = baysPerRow * bayW + pad * 2;
-  const H = rows * bayD + gap + pad * 2;
-  const postsPerLine = Math.ceil(baysPerRow / 2) + 1;
-  const postXs = Array.from({ length: postsPerLine }, (_, i) => pad + (i * (baysPerRow * bayW)) / (postsPerLine - 1));
-  const lines: number[] =
-    style === "standard"
-      ? Array.from({ length: rows }, (_, r) => [pad + r * (bayD + gap), pad + r * (bayD + gap) + bayD]).flat()
-      : rows === 2
-        ? [pad + bayD + gap / 2]
-        : [pad];
+// Top view of the shades side by side, drawn to scale (1 m = 20 units):
+// cantilever = hip net on corner posts, curved = arms rising from the back edge,
+// chromadek = ribbed flat sheeting on front and back posts.
+export function CarportVisual({ units, sizes, type }: { units: number[]; sizes: [number, number][]; type: "cantilever" | "curved" | "chromadek" }) {
+  const look = roofLook[type];
+  const m = 20, pad = 18, gap = 10;
+  const depth = Math.max(...sizes.map(([, d]) => d)) * m;
+  const W = sizes.reduce((s, [w]) => s + w * m, 0) + gap * (sizes.length - 1) + pad * 2;
+  const H = depth + pad * 2;
+  const xs = sizes.reduce<number[]>((acc, [w], i) => [...acc, i === 0 ? pad : acc[i - 1] + sizes[i - 1][0] * m + gap], []);
+  const post = (cx: number, cy: number, key: string) => <circle key={key} cx={cx} cy={cy} r="4.5" fill="var(--color-magenta)" stroke="white" strokeWidth="1.5" />;
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="size-full" role="img" aria-label={`Top view: ${rows} row(s) of ${baysPerRow} bays, ${cover} roof`}>
+    <svg viewBox={`0 0 ${W} ${H}`} className="size-full" role="img" aria-label={`Top view: ${units.length} ${type} shade${units.length > 1 ? "s" : ""} covering ${units.reduce((a, b) => a + b, 0)} cars`}>
       <defs>
         <linearGradient id="canopy" x1="0" x2="1">
           <stop offset="0" stopColor="var(--color-logo-cyan)" stopOpacity="0.28" />
           <stop offset="1" stopColor="var(--color-logo-blue)" stopOpacity="0.28" />
         </linearGradient>
       </defs>
-      {Array.from({ length: rows }, (_, r) => {
-        const y = pad + r * (bayD + gap);
+      {units.map((cars, u) => {
+        const x = xs[u], y = pad, w = sizes[u][0] * m, d = sizes[u][1] * m;
+        const slot = w / cars;
+        const carW = Math.min(slot - 12, 44);
         return (
-          <g key={r}>
-            <rect x={pad} y={y} width={baysPerRow * bayW} height={bayD} rx="6" fill={look.fill} fillOpacity={look.opacity} stroke={look.stroke} strokeWidth="1.5" />
-            {cover === "chromadek" &&
-              Array.from({ length: Math.floor((baysPerRow * bayW) / 8) }, (_, k) => (
-                <line key={k} x1={pad + 4 + k * 8} y1={y + 2} x2={pad + 4 + k * 8} y2={y + bayD - 2} stroke="#475569" strokeOpacity="0.25" />
+          <g key={u}>
+            <rect x={x} y={y} width={w} height={d} rx="6" fill={look.fill} fillOpacity={look.opacity} stroke={look.stroke} strokeWidth="1.5" />
+            {type === "chromadek" &&
+              Array.from({ length: Math.floor(w / 8) }, (_, k) => <line key={k} x1={x + 4 + k * 8} y1={y + 2} x2={x + 4 + k * 8} y2={y + d - 2} stroke="#475569" strokeOpacity="0.25" />)}
+            {type === "cantilever" && (
+              <g stroke="var(--color-logo-blue)" strokeOpacity="0.45">
+                <line x1={x} y1={y} x2={x + d / 2} y2={y + d / 2} />
+                <line x1={x} y1={y + d} x2={x + d / 2} y2={y + d / 2} />
+                <line x1={x + w} y1={y} x2={x + w - d / 2} y2={y + d / 2} />
+                <line x1={x + w} y1={y + d} x2={x + w - d / 2} y2={y + d / 2} />
+                {w > d && <line x1={x + d / 2} y1={y + d / 2} x2={x + w - d / 2} y2={y + d / 2} />}
+              </g>
+            )}
+            {type === "curved" &&
+              Array.from({ length: cars + 1 }, (_, k) => (
+                <path key={k} d={`M ${x + k * slot} ${y + d} Q ${x + k * slot + 10} ${y + d / 2} ${x + k * slot} ${y + 4}`} fill="none" stroke="var(--color-ink)" strokeOpacity="0.45" strokeWidth="2" />
               ))}
-            {Array.from({ length: baysPerRow }, (_, b) => {
-              const x = pad + b * bayW;
-              const carY = r === 0 ? y + 14 : y + bayD - 14 - 64;
+            {Array.from({ length: cars }, (_, c) => {
+              const cx = x + c * slot + (slot - carW) / 2;
               return (
-                <g key={b}>
-                  {b > 0 && <line x1={x} y1={y + 6} x2={x} y2={y + bayD - 6} stroke="var(--color-logo-blue)" strokeOpacity="0.35" strokeDasharray="4 4" />}
-                  <rect x={x + 12} y={carY} width={bayW - 24} height={64} rx="9" fill="var(--color-ink)" fillOpacity="0.85" />
-                  <rect x={x + 16} y={r === 0 ? carY + 10 : carY + 40} width={bayW - 32} height={14} rx="3" fill="white" fillOpacity="0.35" />
+                <g key={c}>
+                  <rect x={cx} y={y + 16} width={carW} height={64} rx="9" fill="var(--color-ink)" fillOpacity="0.85" />
+                  <rect x={cx + 4} y={y + 26} width={carW - 8} height={14} rx="3" fill="white" fillOpacity="0.35" />
                 </g>
               );
             })}
+            {type === "curved"
+              ? Array.from({ length: cars + 1 }, (_, k) => post(x + k * slot, y + d, `p${k}`))
+              : type === "cantilever"
+                ? [post(x, y, "a"), post(x + w, y, "b"), post(x, y + d, "c"), post(x + w, y + d, "d")]
+                : Array.from({ length: cars + 1 }, (_, k) => [post(x + k * slot, y, `f${k}`), post(x + k * slot, y + d, `b${k}`)]).flat()}
           </g>
         );
       })}
-      {lines.map((ly, li) => postXs.map((px, pi) => <circle key={`${li}-${pi}`} cx={px} cy={ly} r="4.5" fill="var(--color-magenta)" stroke="white" strokeWidth="1.5" />))}
     </svg>
   );
 }

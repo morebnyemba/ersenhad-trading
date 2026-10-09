@@ -2,18 +2,24 @@
 import { pricing } from "../config/pricing.ts";
 import { estimateCarShade, estimateGutters, estimateTiles, formatPrice } from "./estimator.ts";
 const eq = (name: string, got: unknown, want: unknown) => { const ok = JSON.stringify(got) === JSON.stringify(want); console.log(ok ? "PASS" : "FAIL", name, ok ? "" : `got ${JSON.stringify(got)} want ${JSON.stringify(want)}`); if (!ok) process.exitCode = 1; };
-// car shades
-let c = estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "net" });
-eq("2 sedans: 1 row x2", [c.rows, c.baysPerRow, c.width, c.depth, c.area], [1, 2, 5.4, 5, 27]);
-eq("2 sedans standard posts", c.posts, 4);
-c = estimateCarShade({ vehicles: 2, type: "sedan", style: "cantilever", cover: "net" });
-eq("2 sedans cantilever posts", c.posts, 2);
-c = estimateCarShade({ vehicles: 10, type: "suv", style: "cantilever", cover: "pvc" });
-eq("10 SUVs: 2 rows x5, double cantilever", [c.rows, c.baysPerRow, c.width, c.depth, c.area, c.posts], [2, 5, 15, 11, 165, 4]);
-c = estimateCarShade({ vehicles: 7, type: "sedan", style: "standard", cover: "net" });
-eq("7 sedans: 2 rows x4, standard posts", [c.rows, c.baysPerRow, c.posts], [2, 4, 12]);
-eq("7 sedans net 108m2 x $35", c.price && [c.price.low, c.price.high, c.price.sample], [3210, 4350, true]);
-eq("vehicles clamped", estimateCarShade({ vehicles: 0, type: "sedan", style: "standard", cover: "net" }).vehicles, 1);
+// car shades — packages from the owner's price list
+let c = estimateCarShade({ vehicles: 1, type: "cantilever" });
+eq("1 car cantilever: single 3x5", [c.units, c.width, c.depth, c.area, c.layout], [[1], 3, 5, 15, "1 single shade"]);
+eq("cantilever single $480", [c.price!.low, c.price!.high, c.price!.fixed, c.price!.sample], [480, 480, true, false]);
+eq("cantilever double $550", estimateCarShade({ vehicles: 2, type: "cantilever" }).price!.low, 550);
+eq("cantilever triple $650", estimateCarShade({ vehicles: 3, type: "cantilever" }).price!.low, 650);
+c = estimateCarShade({ vehicles: 4, type: "cantilever" });
+eq("4 cars cantilever: 2 doubles ($1,100) beat triple+single ($1,130)", [c.units, c.width, c.area, c.price!.low, c.layout], [[2, 2], 10, 50, 1100, "2 × double shades"]);
+eq("6 cars cantilever: 2 triples", [estimateCarShade({ vehicles: 6, type: "cantilever" }).units, estimateCarShade({ vehicles: 6, type: "cantilever" }).price!.low], [[3, 3], 1300]);
+c = estimateCarShade({ vehicles: 4, type: "chromadek" });
+eq("4 cars chromadek: triple+single ($2,530) beat 2 doubles ($2,600)", [c.units, c.price!.low, c.layout], [[3, 1], 2530, "1 triple + 1 single shades"]);
+eq("chromadek double $1,300", estimateCarShade({ vehicles: 2, type: "chromadek" }).price!.low, 1300);
+c = estimateCarShade({ vehicles: 5, type: "curved" });
+eq("curved (no prices yet): fewest shades, no price", [c.units, c.price], [[3, 2], null]);
+eq("curved 4: evenly split", estimateCarShade({ vehicles: 4, type: "curved" }).units, [2, 2]);
+eq("vehicles clamped low", estimateCarShade({ vehicles: 0, type: "cantilever" }).vehicles, 1);
+eq("vehicles clamped high", estimateCarShade({ vehicles: 99, type: "cantilever" }).vehicles, 20);
+eq("packages always cover every car", [1, 2, 3, 4, 5, 7, 11, 20].every((n) => (["cantilever", "curved", "chromadek"] as const).every((t) => estimateCarShade({ vehicles: n, type: t }).units.reduce((a, b) => a + b, 0) === n)), true);
 // tiles
 let t = estimateTiles({ length: 6, width: 4, edges: false });
 eq("24 m2 floor", [t.area, t.tiles, t.ramps, t.corners], [24, 101, 0, 0]);
@@ -28,18 +34,16 @@ eq("hip 12x8 double", [g.gutter, g.downpipes, g.eaveHeight, g.downpipeLength, g.
 g = estimateGutters({ length: 6, width: 5, roof: "gable", storeys: 1 });
 eq("small gable -> min 2 downpipes", [g.gutter, g.downpipes], [13.2, 2]);
 
-// prices (sample rates from src/config/pricing.ts)
-eq("2 sedans net 27m2 x $35", formatPrice(estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "net" }).price!), "US$ 800 – 1,090");
-eq("10 SUVs cantilever pvc 165m2 x $64", formatPrice(estimateCarShade({ vehicles: 10, type: "suv", style: "cantilever", cover: "pvc" }).price!), "US$ 8,980 – 12,140");
-eq("2 sedans standard chromadek 27m2 x $48", formatPrice(estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "chromadek" }).price!), "US$ 1,100 – 1,490");
-eq("2 sedans cantilever chromadek 27m2 x $56", formatPrice(estimateCarShade({ vehicles: 2, type: "sedan", style: "cantilever", cover: "chromadek" }).price!), "US$ 1,290 – 1,740");
+// prices
+eq("list price formats as a single figure", formatPrice(estimateCarShade({ vehicles: 2, type: "chromadek" }).price!), "US$ 1,300");
 eq("tiles 24m2 x $30 no edges", formatPrice(estimateTiles({ length: 6, width: 4, edges: false }).price!), "US$ 610 – 830");
 eq("tiles 25m2 x $30 + 40 ramps + 4 corners", formatPrice(estimateTiles({ length: 5, width: 5, edges: true }).price!), "US$ 790 – 1,070");
 eq("gable 31.2m x $15 + 12m dp x $9 + 4 caps", formatPrice(estimateGutters({ length: 15, width: 10, roof: "gable", storeys: 1 }).price!), "US$ 500 – 680");
-// missing rate -> null; live status -> not sample (price list passed in, no global mutation)
-const noNet = structuredClone(pricing); noNet.carShades.perM2.standard.net = null;
-eq("null rate hides price", estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "net" }, noNet).price, null);
-const live = structuredClone(pricing); live.status = "live";
-eq("live status not sample", estimateCarShade({ vehicles: 2, type: "sedan", style: "standard", cover: "pvc" }, live).price!.sample, false);
+// missing rate -> null; per-service status (price list passed in, no global mutation)
+const noNet = structuredClone(pricing); noNet.carShades.packages.cantilever[2] = null;
+eq("null rate hides price", estimateCarShade({ vehicles: 2, type: "cantilever" }, noNet).price, null);
+eq("tiles still sample", estimateTiles({ length: 6, width: 4, edges: false }).price!.sample, true);
+const sample = structuredClone(pricing); sample.carShades.status = "sample";
+eq("sample status flags car shades", estimateCarShade({ vehicles: 2, type: "cantilever" }, sample).price!.sample, true);
 const zar = structuredClone(pricing); zar.currency = "ZiG";
 eq("currency from price list", formatPrice(estimateTiles({ length: 6, width: 4, edges: false }, zar).price!, zar), "ZiG 610 – 830");

@@ -29,7 +29,7 @@ npm run build    # static site in ./out
 | Phone, WhatsApp, email, address, hours | `src/lib/site.ts` |
 | Products, features, options, FAQs, quote fields | `src/lib/products.ts` |
 | Gallery photos | `src/lib/gallery.ts` + `public/gallery/` |
-| **Planner prices** | `src/config/pricing.ts` (rates per m² / metre / piece, currency, ± spread, `status`) |
+| **Planner prices** | `src/config/pricing.ts` (car shade package prices, rates per m² / metre / piece, currency, ± spread, per-service `status`) |
 | Planner rules of thumb | `src/lib/estimator.ts` (bay sizes, tile size, downpipe spacing…) — tests: `npm run test:estimator` |
 | Brand colours | `src/app/globals.css` (`--primary`, `--color-highlight`, `--color-ink`) |
 
@@ -53,9 +53,9 @@ Static export writes OG images without a file extension, so `nginx.conf` and `ve
 
 ## Project planner (`/estimate`)
 
-Customers enter car count, floor size or house size/storeys/roof type and get a live drawing, quantities and an **indicative price range** (point estimate ± `spread`). Everything is labelled as an estimate, not a quotation, and the result can be sent on WhatsApp/email as a structured enquiry.
+Customers enter car count, floor size or house size/storeys/roof type and get a live drawing, quantities and a price: car shades use the single/double/triple **list prices** (four or more cars = the cheapest mix of packages); tiles and gutters show an **indicative range** (point estimate ± `spread`). Everything is labelled as an estimate, not a quotation, and the result can be sent on WhatsApp/email as a structured enquiry.
 
-Prices come only from `src/config/pricing.ts`. While `status: "sample"` every price is tagged **"Sample prices"** (on screen and in the composed message). Enter real rates and set `status: "live"` to remove the tag; set any rate to `null` to hide prices for that item.
+Prices come only from `src/config/pricing.ts`. Each service has its own `status`: while it is `"sample"` that service's prices are tagged **"Sample prices"** (on screen and in the composed message). Enter real rates and set it to `"live"` to remove the tag; set any rate to `null` to hide prices for that item.
 
 ## Quotes
 
@@ -75,6 +75,7 @@ Put it behind Nginx Proxy Manager for TLS. Any static host (Cloudflare Pages, Ve
 - [ ] Replace the placeholder email in `src/lib/site.ts` (search for `TODO`)
 - [x] Real car shade and rubber tile photos are in the gallery
 - [ ] **Replace the placeholder gutter photos** (royalty-free Unsplash images) with real Ersenhad installations: add `<id>.webp` (≤1400px) and `<id>-sm.webp` (≤720px) to `public/gallery/` and list them in `src/lib/gallery.ts`
-- [ ] **Replace the sample planner prices** in `src/config/pricing.ts` and set `status: "live"`
+- [x] Car shade prices (cantilever, Chromadek) are live
+- [ ] Add curved shade prices, and replace the sample tile and gutter rates in `src/config/pricing.ts` (then set their `status: "live"`)
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the production domain
 - [ ] Register a Google Business Profile with the same name, address and phone

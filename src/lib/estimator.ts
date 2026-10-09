@@ -1,17 +1,26 @@
 // Project planner maths — indicative ESTIMATES from rules of thumb. Every figure
 // is confirmed by measurement in the free, itemised quotation.
 // Prices come from src/config/pricing.ts (the owner's price list).
-import { pricing as defaultPricing, type Pricing } from "@/config/pricing";
+import { pricing as defaultPricing, type Pricing, type PricingStatus, type ShadePackage, type ShadeType } from "@/config/pricing";
+
+export type { ShadePackage, ShadeType };
 
 const round1 = (n: number) => Math.round(n * 10) / 10;
 
-export type PriceEstimate = { low: number; high: number; sample: boolean };
+/** `fixed`: a list price (low === high); otherwise an indicative ± range. */
+export type PriceEstimate = { low: number; high: number; sample: boolean; fixed: boolean };
 
 /** Round a point estimate into a ± band; null when any required rate is missing. */
-export function priceRange(point: number | null, pricing: Pricing = defaultPricing): PriceEstimate | null {
+export function priceRange(point: number | null, pricing: Pricing, status: PricingStatus): PriceEstimate | null {
   if (point == null || !Number.isFinite(point)) return null;
   const r = (n: number) => Math.round(n / 10) * 10;
-  return { low: r(point * (1 - pricing.spread)), high: r(point * (1 + pricing.spread)), sample: pricing.status === "sample" };
+  return { low: r(point * (1 - pricing.spread)), high: r(point * (1 + pricing.spread)), sample: status === "sample", fixed: false };
+}
+
+/** A price straight from the price list; null when it isn't set. */
+export function listPrice(point: number | null, status: PricingStatus): PriceEstimate | null {
+  if (point == null || !Number.isFinite(point)) return null;
+  return { low: point, high: point, sample: status === "sample", fixed: true };
 }
 
 /** Sum rate × quantity pairs; null if any rate is null. */
@@ -25,46 +34,63 @@ function cost(...items: [rate: number | null, qty: number][]): number | null {
   return total;
 }
 
-export const formatPrice = (p: PriceEstimate, pricing: Pricing = defaultPricing) => `${pricing.currency} ${p.low.toLocaleString("en-US")} – ${p.high.toLocaleString("en-US")}`;
+export const formatPrice = (p: PriceEstimate, pricing: Pricing = defaultPricing) =>
+  p.low === p.high ? `${pricing.currency} ${p.low.toLocaleString("en-US")}` : `${pricing.currency} ${p.low.toLocaleString("en-US")} – ${p.high.toLocaleString("en-US")}`;
 
 /* ───────────────────────── Car shades ───────────────────────── */
 
-export type VehicleType = "sedan" | "suv" | "large";
-export type ShadeStyle = "standard" | "cantilever";
-export type ShadeCover = "chromadek" | "net" | "pvc";
-
-export const shadeCovers: Record<ShadeCover, { label: string; hint: string; detail: string }> = {
-  chromadek: { label: "Chromadek", hint: "Steel roof sheeting — waterproof & hail-proof", detail: "Chromadek steel sheeting (waterproof)" },
-  net: { label: "Shade net", hint: "Cooler, lets rain through", detail: "Shade net (80–95% UV block)" },
-  pvc: { label: "PVC membrane", hint: "Waterproof, smooth fabric finish", detail: "PVC membrane (waterproof)" },
+export const shadeTypes: Record<ShadeType, { label: string; hint: string; detail: string }> = {
+  cantilever: { label: "Cantilever", hint: "Shade net on a steel post frame — best value", detail: "Cantilever — shade net on a steel post frame" },
+  curved: { label: "Curved", hint: "Curved steel arms with shade net — a modern look", detail: "Curved — curved steel arms with shade net" },
+  chromadek: { label: "Chromadek", hint: "Flat steel-sheet roof — waterproof & hail-proof", detail: "Chromadek — flat steel-sheet roof, waterproof" },
 };
 
-export const vehicleBays: Record<VehicleType, { label: string; hint: string; width: number; depth: number }> = {
-  sedan: { label: "Sedan / hatchback", hint: "Most family cars", width: 2.7, depth: 5.0 },
-  suv: { label: "SUV / double cab", hint: "Bakkies, 4×4s, 7-seaters", width: 3.0, depth: 5.5 },
-  large: { label: "Minibus / truck", hint: "Kombis, light trucks", width: 3.5, depth: 7.0 },
-};
+export const packageNames: Record<ShadePackage, string> = { 1: "single", 2: "double", 3: "triple" };
 
-export const MAX_BAYS_PER_ROW = 6;
+export const MAX_VEHICLES = 20;
+const PACKAGES: ShadePackage[] = [3, 2, 1];
 
-export function estimateCarShade(i: { vehicles: number; type: VehicleType; style: ShadeStyle; cover: ShadeCover }, pricing: Pricing = defaultPricing) {
-  const vehicles = Math.max(1, Math.min(40, Math.round(i.vehicles)));
-  const bay = vehicleBays[i.type];
-  const rows = vehicles <= MAX_BAYS_PER_ROW ? 1 : 2; // beyond 6 bays, two facing rows
-  const baysPerRow = Math.ceil(vehicles / rows);
-  const width = round1(baysPerRow * bay.width);
-  const depth = round1(rows * bay.depth);
-  const area = round1(width * depth);
-  // posts roughly every two bays; standard = both sides of each row, cantilever = one line
-  // (two facing cantilever rows share one central line = double cantilever)
-  const postsPerLine = Math.ceil(baysPerRow / 2) + 1;
-  const posts = i.style === "standard" ? postsPerLine * 2 * rows : postsPerLine; // cantilever: one line, shared by facing rows
-  const layout =
-    rows === 1
-      ? `Single row of ${baysPerRow} bay${baysPerRow > 1 ? "s" : ""}`
-      : `Two facing rows of ${baysPerRow} bays${i.style === "cantilever" ? " (double cantilever)" : ""}`;
-  const price = priceRange(cost([pricing.carShades.perM2[i.style][i.cover], area]), pricing);
-  return { vehicles, rows, baysPerRow, width, depth, area, posts, layout, bay, price };
+/**
+ * Split `n` cars into single/double/triple shades. With prices: the cheapest mix
+ * (ties → fewer shades). Without: the fewest shades, cars spread as evenly as possible.
+ */
+export function packageMix(n: number, prices: Record<ShadePackage, number | null>): ShadePackage[] {
+  if (PACKAGES.every((p) => prices[p] != null)) {
+    const best: { cost: number; units: ShadePackage[] }[] = [{ cost: 0, units: [] }];
+    for (let k = 1; k <= n; k++) {
+      let pick: { cost: number; units: ShadePackage[] } | null = null;
+      for (const p of PACKAGES) {
+        if (p > k) continue;
+        const prev = best[k - p];
+        const c = prev.cost + prices[p]!;
+        if (!pick || c < pick.cost || (c === pick.cost && prev.units.length + 1 < pick.units.length)) pick = { cost: c, units: [...prev.units, p] };
+      }
+      best[k] = pick!;
+    }
+    return [...best[n].units].sort((a, b) => b - a);
+  }
+  const count = Math.ceil(n / 3);
+  return Array.from({ length: count }, (_, i) => (Math.floor(n / count) + (i < n % count ? 1 : 0)) as ShadePackage);
+}
+
+export function describeMix(units: ShadePackage[]) {
+  const counts = PACKAGES.map((p) => [p, units.filter((u) => u === p).length] as const).filter(([, c]) => c > 0);
+  return counts.map(([p, c]) => (c === 1 ? `1 ${packageNames[p]}` : `${c} × ${packageNames[p]}`)).join(" + ");
+}
+
+export function estimateCarShade(i: { vehicles: number; type: ShadeType }, pricing: Pricing = defaultPricing) {
+  const vehicles = Math.max(1, Math.min(MAX_VEHICLES, Math.round(i.vehicles)));
+  const cs = pricing.carShades;
+  const prices = cs.packages[i.type];
+  const units = packageMix(vehicles, prices);
+  const sizes = units.map((u) => cs.sizes[u]);
+  const width = round1(sizes.reduce((s, [w]) => s + w, 0));
+  const depth = Math.max(...sizes.map(([, d]) => d));
+  const area = round1(sizes.reduce((s, [w, d]) => s + w * d, 0));
+  const total = units.reduce<number | null>((s, u) => (s == null || prices[u] == null ? null : s + prices[u]!), 0);
+  const price = listPrice(total, cs.status);
+  const layout = `${describeMix(units)} shade${units.length > 1 ? "s" : ""}`;
+  return { vehicles, units, sizes, width, depth, area, layout, price };
 }
 
 /* ───────────────────────── Rubber tiles ───────────────────────── */
@@ -98,7 +124,7 @@ export function estimateTiles(i: { length: number; width: number; edges: boolean
   const ramps = i.edges ? Math.ceil(perimeter / TILE_SIZE) : 0;
   const corners = i.edges ? 4 : 0;
   const t = pricing.rubberTiles;
-  const price = priceRange(cost([t.perM2, area], [t.perRamp, ramps], [t.perCorner, corners]), pricing);
+  const price = priceRange(cost([t.perM2, area], [t.perRamp, ramps], [t.perCorner, corners]), pricing, t.status);
   return { length, width, area, tiles, perimeter, ramps, corners, price };
 }
 
@@ -133,6 +159,6 @@ export function estimateGutters(i: { length: number; width: number; roof: RoofTy
   const corners = i.roof === "hip" ? 4 : 0;
   const endCaps = i.roof === "gable" ? 4 : 0;
   const g = pricing.gutters;
-  const price = priceRange(cost([g.perMetre[profile], gutter], [g.downpipePerMetre, downpipeLength], [g.perCorner, corners], [g.perEndCap, endCaps]), pricing);
+  const price = priceRange(cost([g.perMetre[profile], gutter], [g.downpipePerMetre, downpipeLength], [g.perCorner, corners], [g.perEndCap, endCaps]), pricing, g.status);
   return { length, width, storeys, gutter, downpipes, eaveHeight, downpipeLength, roofArea, profile, corners, endCaps, price };
 }
