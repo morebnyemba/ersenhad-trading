@@ -21,8 +21,8 @@ const pages: OgCard[] = [
     alt: `${site.name} — car shades, rubber tiles and seamless gutters`,
     eyebrow: `Supply & installation · ${site.address.country}`,
     title: "Protect, pave and drain — built to last.",
-    subtitle: "Chromadek, shade net and PVC car shades, interlocking rubber tiles and seamless gutters.",
-    photo: "shade-cantilever-suv",
+    subtitle: "Cantilever, curved and Chromadek car shades, interlocking rubber tiles and seamless gutters.",
+    photo: "shade-curved-suv",
   },
   {
     key: "about",
@@ -38,7 +38,7 @@ const pages: OgCard[] = [
     eyebrow: "Project gallery",
     title: "Our work, up close.",
     subtitle: "Car shade, rubber flooring and guttering installations.",
-    photo: "shade-commercial-entrance",
+    photo: "shade-cantilever-entrance",
   },
   {
     key: "contact",
@@ -54,7 +54,7 @@ const pages: OgCard[] = [
     eyebrow: "Project planner",
     title: "Estimate your project in a minute.",
     subtitle: "Car count, floor size or house size in — layout, quantities and an estimated price out.",
-    photo: "shade-net-courtyard",
+    photo: "shade-cantilever-courtyard",
   },
 ];
 

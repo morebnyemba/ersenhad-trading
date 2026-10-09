@@ -14,16 +14,14 @@ import {
   estimateTiles,
   formatPrice,
   roofTypes,
-  shadeCovers,
+  MAX_VEHICLES,
+  shadeTypes,
   tileColours,
   tileUses,
-  vehicleBays,
   type RoofType,
-  type ShadeCover,
-  type ShadeStyle,
+  type ShadeType,
   type TileColour,
   type TileUse,
-  type VehicleType,
 } from "@/lib/estimator";
 import { pricing } from "@/config/pricing";
 import { getProduct, products, type ProductSlug } from "@/lib/products";
@@ -51,9 +49,7 @@ export function Estimator() {
 
   // car shades
   const [vehicles, setVehicles] = useState(2);
-  const [vType, setVType] = useState<VehicleType>("sedan");
-  const [style, setStyle] = useState<ShadeStyle>("standard");
-  const [cover, setCover] = useState<ShadeCover>("chromadek");
+  const [shade, setShade] = useState<ShadeType>("cantilever");
   // tiles
   const [tLen, setTLen] = useState(6);
   const [tWid, setTWid] = useState(4);
@@ -70,21 +66,21 @@ export function Estimator() {
 
   const result = useMemo(() => {
     if (service === "car-shades") {
-      const r = estimateCarShade({ vehicles, type: vType, style, cover });
+      const r = estimateCarShade({ vehicles, type: shade });
+      const size = r.sizes.map(([w, d]) => `${w} m × ${d} m`).join(" + ");
       const rows: Row[] = [
-        { label: "Layout", value: r.layout },
-        { label: "Overall size", value: `${r.width} m × ${r.depth} m` },
-        { label: "Covered area", value: fmt(r.area, " m²"), strong: true },
-        { label: "Support posts", value: `≈ ${r.posts}` },
-        { label: "Roof", value: shadeCovers[cover].detail },
+        { label: "Shade type", value: shadeTypes[shade].detail },
+        { label: "Made up of", value: r.layout, strong: true },
+        { label: r.units.length > 1 ? "Typical sizes" : "Typical size", value: size },
+        { label: "Covered area", value: fmt(r.area, " m²") },
       ];
       const summary = [
-        `Vehicles: ${r.vehicles} × ${vehicleBays[vType].label}`,
-        `Style: ${style === "standard" ? "Standard (posts both sides)" : "Cantilever (posts one side)"}`,
-        `Roof: ${shadeCovers[cover].label}`,
-        `Est. size: ${r.width} m × ${r.depth} m (${r.area} m²), ${r.layout.toLowerCase()}, ≈${r.posts} posts`,
+        `Vehicles: ${r.vehicles}`,
+        `Type: ${shadeTypes[shade].label} car shade`,
+        `Est. ${r.layout} (${size}, ${r.area} m²)`,
       ];
-      return { rows, summary, key: { label: "Covered area", value: fmt(r.area, " m²") }, price: r.price, visual: <CarportVisual rows={r.rows} baysPerRow={r.baysPerRow} style={style} cover={cover} />, note: null as string | null };
+      const note = r.price ? null : `${shadeTypes[shade].label} shades are priced on request — send us your estimate for a free quotation.`;
+      return { rows, summary, key: { label: "Shades", value: r.layout }, price: r.price, visual: <CarportVisual units={r.units} sizes={r.sizes} type={shade} />, note };
     }
     if (service === "rubber-tiles") {
       const r = estimateTiles({ length: tLen, width: tWid, edges });
@@ -114,7 +110,7 @@ export function Estimator() {
       `Est. ${r.gutter} m of ${r.profile} mm gutter, ${r.downpipes} downpipes (≈${r.downpipeLength} m)`,
     ];
     return { rows, summary, key: { label: "Gutter length", value: fmt(r.gutter, " m") }, price: r.price, visual: <GutterVisual storeys={r.storeys} roof={roof} downpipes={r.downpipes} />, note: null };
-  }, [service, vehicles, vType, style, cover, tLen, tWid, use, colour, edges, gLen, gWid, roof, storeys]);
+  }, [service, vehicles, shade, tLen, tWid, use, colour, edges, gLen, gWid, roof, storeys]);
 
   const priceText = result.price ? formatPrice(result.price) : null;
   const message = [
@@ -151,17 +147,11 @@ export function Estimator() {
           <motion.div key={service} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="mt-7 grid gap-7">
             {service === "car-shades" && (
               <>
-                <Field label="How many vehicles?" hint="Bays to cover">
-                  <Stepper label="vehicles" value={vehicles} onChange={setVehicles} min={1} max={40} unit="cars" />
+                <Field label="How many vehicles?" hint="Cars to cover">
+                  <Stepper label="vehicles" value={vehicles} onChange={setVehicles} min={1} max={MAX_VEHICLES} unit="cars" />
                 </Field>
-                <Field label="Vehicle type" hint="Sets the bay size">
-                  <Choice name="vehicle-type" columns={3} value={vType} onChange={setVType} options={(Object.keys(vehicleBays) as VehicleType[]).map((k) => ({ value: k, label: vehicleBays[k].label, hint: vehicleBays[k].hint }))} />
-                </Field>
-                <Field label="Roof type" hint="Three options — any can be standard or cantilever">
-                  <Choice name="shade-cover" columns={3} value={cover} onChange={setCover} options={(Object.keys(shadeCovers) as ShadeCover[]).map((k) => ({ value: k, label: shadeCovers[k].label, hint: shadeCovers[k].hint }))} />
-                </Field>
-                <Field label="Structure style" hint="Works with any roof type">
-                  <Choice name="shade-style" value={style} onChange={setStyle} options={[{ value: "standard", label: "Standard", hint: "Posts on both sides" }, { value: "cantilever", label: "Cantilever", hint: "Posts on one side — easier parking" }]} />
+                <Field label="Shade type">
+                  <Choice name="shade-type" columns={3} value={shade} onChange={setShade} options={(Object.keys(shadeTypes) as ShadeType[]).map((k) => ({ value: k, label: shadeTypes[k].label, hint: shadeTypes[k].hint }))} />
                 </Field>
               </>
             )}
@@ -237,7 +227,7 @@ export function Estimator() {
               <div className="flex items-start justify-between gap-4 pt-4 pb-1">
                 <dt className="text-sm text-white/60">
                   Estimated price
-                  <span className="block text-xs text-white/40">indicative range, ±{Math.round(pricingSpread * 100)}%</span>
+                  <span className="block text-xs text-white/40">{result.price?.fixed ? "from our price list, supply & install" : `indicative range, ±${Math.round(pricingSpread * 100)}%`}</span>
                 </dt>
                 <dd className="text-right">
                   {result.price ? (

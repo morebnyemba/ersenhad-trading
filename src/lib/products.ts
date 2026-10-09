@@ -1,3 +1,8 @@
+import { pricing, type ShadePackage, type ShadeType } from "@/config/pricing";
+
+/** list price of a car shade package, formatted (e.g. "1,300") */
+const from = (type: ShadeType, size: ShadePackage = 1) => (pricing.carShades.packages[type][size] ?? 0).toLocaleString("en-US");
+
 export type ProductSlug = "car-shades" | "rubber-tiles" | "seamless-gutters";
 
 export type Product = {
@@ -20,37 +25,41 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "car-shades",
-    cover: "shade-cantilever-suv",
-    highlights: [{ value: 3, suffix: "", label: "roof types" }, { value: 2, suffix: " days", label: "typical install" }],
+    cover: "shade-curved-suv",
+    highlights: [{ value: 3, suffix: "", label: "shade types" }, { value: 2, suffix: " days", label: "typical install" }],
     specs: [
-      { label: "Roof", value: "Chromadek · net · PVC" },
-      { label: "Structure", value: "Standard or cantilever" },
-      { label: "Frame", value: "Galvanised steel" },
+      { label: "Types", value: "Cantilever · curved · Chromadek" },
+      { label: "Sizes", value: "Single, double, triple" },
+      { label: "Single from", value: `${pricing.currency} ${from("cantilever")}` },
     ],
     name: "Car Shades",
-    short: "Chromadek, shade net and PVC carports that protect vehicles from sun, hail and heat.",
+    short: "Cantilever, curved and Chromadek car shades that protect vehicles from sun, hail and heat.",
     intro:
-      "Choose from three roof types — Chromadek steel sheeting, high-density shade net or PVC membrane — on a galvanised steel frame, built as a standard or cantilever structure. We design, fabricate and install single-bay carports through to multi-bay commercial parking structures.",
+      "Choose from three types of car shade: cantilever shades with shade net on a steel post frame, curved shades with sweeping steel arms, and Chromadek shades with a flat, waterproof steel-sheet roof. Each comes as a single, double or triple shade, and we combine them for bigger parking areas — designed, fabricated and installed by our team.",
     icon: "shade",
     features: [
-      { title: "Three roof types", body: "Chromadek steel sheeting for a solid, waterproof roof; shade net for cool, breathable shade with up to 95% UV block; or a smooth, waterproof PVC membrane." },
-      { title: "Hail & weather resistant", body: "Chromadek roofs, tensioned membranes and engineered steel frames stand up to hail, wind and heavy rain." },
-      { title: "Standard or cantilever", body: "Posts on both sides, or cantilever with posts on one side for easier parking — available with any roof type, including double cantilever." },
+      { title: "Three shade types", body: "Cantilever for the best value, curved for a modern look, or Chromadek for a solid, waterproof roof." },
+      { title: "Single, double or triple", body: "Standard sizes for one, two or three cars, placed side by side for bigger car parks." },
+      { title: "Hail & weather resistant", body: "Chromadek roofs and tensioned shade net on steel frames stand up to hail, wind and heavy rain." },
       { title: "Corrosion-proof frames", body: "Hot-dip galvanised and powder-coated steel for a long, maintenance-free life." },
     ],
-    options: ["Chromadek steel roof sheeting (waterproof)", "Shade net (80–95% UV block-out)", "PVC membrane (100% waterproof)", "Standard, cantilever or double cantilever", "Single, double & multi-bay", "Colours to match your property"],
+    options: ["Cantilever shades — shade net on steel posts", "Curved shades — curved steel arms with shade net", "Chromadek shades — flat, waterproof steel roof", "Single, double & triple sizes", "Multi-bay layouts for car parks", "Net and frame colours to match your property"],
     uses: ["Homes & townhouse complexes", "Offices & retail parking", "Schools & churches", "Hospitals & car dealerships"],
     faqs: [
-      { q: "How long does installation take?", a: "Most residential carports are installed in 1–2 days once the frame is fabricated." },
-      { q: "Which roof type should I choose?", a: "Chromadek steel sheeting gives a solid, fully waterproof and hail-proof roof. Shade net is the coolest option and lets rain through. PVC membrane is waterproof with a smooth fabric finish. We'll advise based on your site and budget." },
-      { q: "What is a cantilever carport?", a: "A cantilever carport has posts on one side only, with the roof overhanging the parking bays, so there are no posts to drive around. It can be built with any of our three roof types." },
-      { q: "Do you need to dig foundations?", a: "Yes — columns are set in concrete footings sized for the wind load of each design." },
-      { q: "Can you build shade for commercial car parks?", a: "Yes. We build everything from single-bay carports to multi-bay commercial parking structures for offices, retail, schools and dealerships." },
-      { q: "What colours are available?", a: "Chromadek sheeting, shade net and PVC membranes all come in a range of colours, and frames are powder-coated — we'll match your property and can show you samples before you decide." },
+      {
+        q: "How much does a car shade cost?",
+        a: `Cantilever shades are ${pricing.currency} ${from("cantilever")} for a single, ${pricing.currency} ${from("cantilever", 2)} for a double and ${pricing.currency} ${from("cantilever", 3)} for a triple. Chromadek shades are ${pricing.currency} ${from("chromadek")}, ${pricing.currency} ${from("chromadek", 2)} and ${pricing.currency} ${from("chromadek", 3)}. Use the project planner for a quick estimate — we confirm the price in a free quotation.`,
+      },
+      { q: "Which type should I choose?", a: "Cantilever shades are the most affordable and give cool, breathable shade. Curved shades have a modern, sweeping look. Chromadek gives a solid roof that keeps out rain and hail. We'll advise based on your site and budget." },
+      { q: "What's the difference between cantilever and curved shades?", a: "A cantilever shade has shade net stretched over a frame of straight steel posts. A curved shade uses curved steel arms that sweep over the parking bay. Both use shade net; Chromadek shades use a flat steel-sheet roof instead." },
+      { q: "How long does installation take?", a: "Most residential car shades are installed in 1–2 days once the frame is fabricated." },
+      { q: "Do you need to dig foundations?", a: "Yes — posts are set in concrete footings sized for the wind load of each design." },
+      { q: "Can you build shade for commercial car parks?", a: "Yes. We combine single, double and triple shades into multi-bay layouts for offices, retail, schools and dealerships." },
+      { q: "What colours are available?", a: "Shade net and Chromadek sheeting come in a range of colours, and frames are powder-coated — we'll match your property and can show you samples before you decide." },
     ],
     quoteFields: [
       { label: "Number of vehicles", placeholder: "e.g. 2" },
-      { label: "Preferred roof & style", placeholder: "e.g. Chromadek, cantilever" },
+      { label: "Preferred type", placeholder: "e.g. cantilever" },
     ],
   },
   {

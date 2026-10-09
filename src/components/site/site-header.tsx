@@ -112,7 +112,7 @@ export function SiteHeader() {
                   </ul>
                   <div className="relative m-2 flex flex-col justify-end overflow-hidden rounded-xl bg-ink p-5 text-white">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imageSrc("shade-cantilever-twin", "sm")} alt="" className="absolute inset-0 size-full object-cover opacity-40" />
+                    <img src={imageSrc("shade-curved-twin", "sm")} alt="" className="absolute inset-0 size-full object-cover opacity-40" />
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-transparent" />
                     <div className="relative">
                       <p className="font-heading text-lg leading-tight font-bold">Not sure what you need?</p>

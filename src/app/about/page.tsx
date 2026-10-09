@@ -66,7 +66,7 @@ export default function About() {
           </Reveal>
         </div>
         <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-          {["shade-chromadek-install", "tiles-plant-room", "shade-cantilever-install", "tiles-stair-treads"].map((id, i) => (
+          {["shade-chromadek-install", "tiles-plant-room", "shade-curved-install", "tiles-stair-treads"].map((id, i) => (
             <div key={id} className={i % 2 ? "translate-y-8" : ""}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={imageSrc(id, "sm")} alt="" loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover shadow-lg shadow-ink/10" />
