@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 const SLIDES: { id: string; product: ProductSlug }[] = [
   { id: "shade-curved-suv", product: "car-shades" },
   { id: "tiles-plant-room", product: "rubber-tiles" },
-  { id: "gutter-white-downpipe", product: "seamless-gutters" },
+  { id: "gutter-brick-corner", product: "seamless-gutters" },
   { id: "shade-cantilever-garage", product: "car-shades" },
   { id: "tiles-stair-treads", product: "rubber-tiles" },
 ];

@@ -32,7 +32,7 @@ export default function Contact() {
         eyebrow="Contact"
         title="Let's talk about your project"
         description="Free, written, itemised quotations with no obligation. WhatsApp is the fastest way to reach us — we usually reply within one business day."
-        image={imageSrc("gutter-white-downpipe")}
+        image={imageSrc("gutter-brick-corner")}
         crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
