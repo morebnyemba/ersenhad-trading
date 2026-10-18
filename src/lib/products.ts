@@ -99,7 +99,7 @@ export const products: Product[] = [
   },
   {
     slug: "seamless-gutters",
-    cover: "gutter-white-downpipe",
+    cover: "gutter-brick-corner",
     highlights: [{ value: 150, suffix: "mm", label: "max. profile" }, { value: 1, suffix: " day", label: "typical house" }],
     specs: [
       { label: "Material", value: "Pre-painted aluminium" },

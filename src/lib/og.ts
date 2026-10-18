@@ -46,7 +46,7 @@ const pages: OgCard[] = [
     eyebrow: "Free quotation",
     title: "Let's talk about your project.",
     subtitle: "WhatsApp, call or email us for a free, itemised quotation.",
-    photo: "gutter-white-downpipe",
+    photo: "gutter-brick-corner",
   },
   {
     key: "estimate",
