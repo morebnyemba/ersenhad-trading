@@ -268,3 +268,13 @@ html[data-intro="done"] #intro-loader .intro-stage { transform: scale(1.06); }
   #intro-loader .intro-ring { opacity: 0.6; }
   #intro-loader .intro-bar span { transform: scaleX(1); }
 }
+
+/* AutoWhats chat launcher (injected by the widget with inline styles, hence !important).
+   The widget only renders on domains allowed in the AutoWhats dashboard; until it does,
+   our own WhatsApp button stays as the fallback. */
+body:has(#autowhats-launcher) [data-whatsapp-fab] { display: none; }
+html[data-intro="show"] #autowhats-launcher { display: none !important; } /* not over the first-visit intro */
+@media (max-width: 1023.98px) {
+  /* the planner pins its estimate bar to the bottom on phones/tablets — sit above it */
+  body:has([data-planner-bar]) #autowhats-launcher { bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
+}

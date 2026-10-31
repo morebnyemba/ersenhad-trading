@@ -34,6 +34,9 @@ export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encod
   `Avilla Mall, ${site.address.street}, ${site.address.city}, ${site.address.country}`,
 )}`;
 
+/** AutoWhats website chat (src/app/layout.tsx). The key is public — it only identifies the widget. */
+export const chatWidget = { src: "https://autowhats.co.zw/widget.js", key: "wk_dnvIHP2R8vBQOENUZ7LnTSPp" };
+
 export const telHref = `tel:${site.phone.replace(/\s/g, "")}`;
 
 export function whatsappLink(message: string) {
