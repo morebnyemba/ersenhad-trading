@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { IntroLoader, introScript } from "@/components/site/intro-loader";
@@ -9,7 +10,7 @@ import { TopBar } from "@/components/site/top-bar";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { products } from "@/lib/products";
 import { homeTitle, ogImages } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { chatWidget, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -64,6 +65,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SiteFooter />
           <WhatsAppFab />
         </Providers>
+        {/* AutoWhats chat: draws its own launcher and opens the chat in an iframe from autowhats.co.zw.
+            Loaded once the page is idle so it never competes with first paint. Positioning tweaks: globals.css */}
+        <Script src={chatWidget.src} data-key={chatWidget.key} strategy="lazyOnload" />
       </body>
     </html>
   );

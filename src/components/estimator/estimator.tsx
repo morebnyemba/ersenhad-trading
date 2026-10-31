@@ -278,7 +278,7 @@ export function Estimator() {
 
       {/* Mobile: live key figure pinned to the bottom so input changes are visible without scrolling */}
       <div className="h-16 lg:hidden" aria-hidden />
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink/95 px-4 py-3 text-white backdrop-blur-lg lg:hidden">
+      <div data-planner-bar className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink/95 px-4 py-3 text-white backdrop-blur-lg lg:hidden">
         <div className="mx-auto flex max-w-xl items-center gap-3">
           <a href="#estimate-result" className="min-w-0 flex-1">
             <span className="block text-xs text-white/60">{result.key.label}</span>

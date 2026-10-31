@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { site, whatsappLink } from "@/lib/site";
 
 // Floating WhatsApp button — mobile only, where most enquiries start.
+// Fallback for the AutoWhats chat: hidden via CSS once its launcher is on the page (globals.css).
 export function WhatsAppFab() {
   // The planner has its own mobile bar with a WhatsApp action; avoid stacking two.
   if (usePathname().startsWith("/estimate")) return null;
@@ -13,6 +14,7 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener"
       aria-label="Chat with us on WhatsApp"
+      data-whatsapp-fab
       className="fixed right-4 bottom-4 z-40 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-xl shadow-black/20 transition-transform hover:scale-105 active:scale-95 sm:hidden"
     >
       <svg viewBox="0 0 24 24" className="size-7" fill="currentColor" aria-hidden>
